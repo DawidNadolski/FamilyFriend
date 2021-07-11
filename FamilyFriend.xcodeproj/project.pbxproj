@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		034A2D9F8B26D56F58B39B10 /* Pods_FamilyFriendTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C75A0B6685B3363BA38BC1 /* Pods_FamilyFriendTests.framework */; };
 		4B577FC00F167FDC9B738397 /* Pods_FamilyFriend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3AEDCC8F866F3DB92A0AFA /* Pods_FamilyFriend.framework */; };
+		6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F19F7CC2698ACF500C2FD61 /* TileView.swift */; };
 		6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22C2696489300371FF7 /* AppDelegate.swift */; };
 		6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22E2696489300371FF7 /* SceneDelegate.swift */; };
 		6F3EF2362696489400371FF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3EF2352696489400371FF7 /* Assets.xcassets */; };
@@ -16,8 +17,9 @@
 		6F3EF2442696489400371FF7 /* FamilyFriendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF2432696489400371FF7 /* FamilyFriendTests.swift */; };
 		6F3EF24F2696489400371FF7 /* FamilyFriendUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */; };
 		6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FF06C2698992500BB185D /* MainViewController.swift */; };
-		6F8FF0722698997900BB185D /* FamilySummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FF0712698997900BB185D /* FamilySummaryViewController.swift */; };
-		6F8FF08426989C3300BB185D /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FF08326989C3300BB185D /* TileView.swift */; };
+		6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281BE2698BF04000EFCF7 /* Assets.swift */; };
+		6FF281D42698C23E000EFCF7 /* FamilySummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281D32698C23E000EFCF7 /* FamilySummaryViewController.swift */; };
+		6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */; };
 		C7237366D386CFC1EBC0B79C /* Pods_FamilyFriend_FamilyFriendUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D65117536FC88EF023C61BA /* Pods_FamilyFriend_FamilyFriendUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,7 @@
 		23A26098ED33FE9925EE13A1 /* Pods-FamilyFriendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriendTests.release.xcconfig"; path = "Target Support Files/Pods-FamilyFriendTests/Pods-FamilyFriendTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C3AEDCC8F866F3DB92A0AFA /* Pods_FamilyFriend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FamilyFriend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAD75E9B77372D5975F7F40 /* Pods-FamilyFriendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriendTests.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriendTests/Pods-FamilyFriendTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F19F7CC2698ACF500C2FD61 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		6F3EF2292696489300371FF7 /* FamilyFriend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFriend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3EF22C2696489300371FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F3EF22E2696489300371FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,8 +59,9 @@
 		6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFriendUITests.swift; sourceTree = "<group>"; };
 		6F3EF2502696489400371FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8FF06C2698992500BB185D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		6F8FF0712698997900BB185D /* FamilySummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySummaryViewController.swift; sourceTree = "<group>"; };
-		6F8FF08326989C3300BB185D /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		6FF281BE2698BF04000EFCF7 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		6FF281D32698C23E000EFCF7 /* FamilySummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FamilySummaryViewController.swift; path = ../../../../../../Desktop/FamilySummaryViewController.swift; sourceTree = "<group>"; };
+		6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewControllers.swift"; sourceTree = "<group>"; };
 		8090F1FD6FF563240A032683 /* Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriend-FamilyFriendUITests/Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C7C49298D20C6F4AA0ECF0D /* Pods-FamilyFriend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend.release.xcconfig"; path = "Target Support Files/Pods-FamilyFriend/Pods-FamilyFriend.release.xcconfig"; sourceTree = "<group>"; };
 		8D7B48A2AF8E657E42DB1873 /* Pods-FamilyFriend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriend/Pods-FamilyFriend.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +107,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6F19F7CA2698ACE300C2FD61 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6FF281D82698C3DA000EFCF7 /* Extensions */,
+				6F19F7CB2698ACEA00C2FD61 /* Reusable Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6F19F7CB2698ACEA00C2FD61 /* Reusable Views */ = {
+			isa = PBXGroup;
+			children = (
+				6F19F7CC2698ACF500C2FD61 /* TileView.swift */,
+			);
+			path = "Reusable Views";
+			sourceTree = "<group>";
+		};
 		6F3EF2202696489300371FF7 = {
 			isa = PBXGroup;
 			children = (
@@ -128,8 +149,8 @@
 		6F3EF22B2696489300371FF7 /* FamilyFriend */ = {
 			isa = PBXGroup;
 			children = (
+				6F19F7CA2698ACE300C2FD61 /* Common */,
 				6F8FF0972698A56200BB185D /* Resources */,
-				6F8FF07626989BF800BB185D /* Common */,
 				6F3EF26926988E5300371FF7 /* Views */,
 				6F3EF22C2696489300371FF7 /* AppDelegate.swift */,
 				6F3EF22E2696489300371FF7 /* SceneDelegate.swift */,
@@ -168,34 +189,27 @@
 		6F3EF26926988E5300371FF7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6FF281D32698C23E000EFCF7 /* FamilySummaryViewController.swift */,
 				6F8FF06C2698992500BB185D /* MainViewController.swift */,
-				6F8FF0712698997900BB185D /* FamilySummaryViewController.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		6F8FF07626989BF800BB185D /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				6F8FF08226989C2800BB185D /* Reusable Views */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		6F8FF08226989C2800BB185D /* Reusable Views */ = {
-			isa = PBXGroup;
-			children = (
-				6F8FF08326989C3300BB185D /* TileView.swift */,
-			);
-			path = "Reusable Views";
 			sourceTree = "<group>";
 		};
 		6F8FF0972698A56200BB185D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FF281BE2698BF04000EFCF7 /* Assets.swift */,
 				6F3EF2352696489400371FF7 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6FF281D82698C3DA000EFCF7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		FF95C1356F139AE9BF9514D4 /* Pods */ = {
@@ -449,9 +463,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */,
-				6F8FF0722698997900BB185D /* FamilySummaryViewController.swift in Sources */,
 				6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */,
-				6F8FF08426989C3300BB185D /* TileView.swift in Sources */,
+				6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */,
+				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
+				6FF281D42698C23E000EFCF7 /* FamilySummaryViewController.swift in Sources */,
+				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
 				6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -605,7 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
