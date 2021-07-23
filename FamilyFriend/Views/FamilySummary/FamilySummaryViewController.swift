@@ -110,6 +110,7 @@ final class FamilySummaryViewController: UIViewController {
 			make.top.equalTo(familyImageView.snp.bottom).offset(16.0)
 			make.left.right.equalToSuperview().inset(16.0)
 			make.centerX.equalTo(familyImageView.snp.centerX)
+			make.bottom.equalToSuperview().inset(16.0)
 		}
 		
 //		containerView.addSubview(label2)

@@ -17,9 +17,18 @@
 		6F3EF2442696489400371FF7 /* FamilyFriendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF2432696489400371FF7 /* FamilyFriendTests.swift */; };
 		6F3EF24F2696489400371FF7 /* FamilyFriendUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */; };
 		6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FF06C2698992500BB185D /* MainViewController.swift */; };
+		6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF04F8126AB1AE80019B38C /* MainConnector.swift */; };
 		6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281BE2698BF04000EFCF7 /* Assets.swift */; };
 		6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */; };
 		6FF28204269B42DC000EFCF7 /* FamilySummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */; };
+		6FF28223269B4387000EFCF7 /* FamilyFeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28222269B4387000EFCF7 /* FamilyFeaturesViewController.swift */; };
+		6FF28228269B486B000EFCF7 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28227269B486B000EFCF7 /* RankingViewController.swift */; };
+		6FFDE46B269B4B3B00AC8428 /* MembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE46A269B4B3B00AC8428 /* MembersViewController.swift */; };
+		6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE46F269B52F500AC8428 /* TasksViewController.swift */; };
+		6FFDE475269B53CA00AC8428 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE474269B53CA00AC8428 /* ShoppingListViewController.swift */; };
+		6FFDE47A269B54CA00AC8428 /* FeatureTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE479269B54CA00AC8428 /* FeatureTileView.swift */; };
+		6FFDE487269E04DF00AC8428 /* Rx+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE486269E04DF00AC8428 /* Rx+Extensions.swift */; };
+		6FFDE48C26AB138F00AC8428 /* FamilyFeaturesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE48B26AB138F00AC8428 /* FamilyFeaturesPresenter.swift */; };
 		C7237366D386CFC1EBC0B79C /* Pods_FamilyFriend_FamilyFriendUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D65117536FC88EF023C61BA /* Pods_FamilyFriend_FamilyFriendUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,9 +68,18 @@
 		6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFriendUITests.swift; sourceTree = "<group>"; };
 		6F3EF2502696489400371FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8FF06C2698992500BB185D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		6FF04F8126AB1AE80019B38C /* MainConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConnector.swift; sourceTree = "<group>"; };
 		6FF281BE2698BF04000EFCF7 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewControllers.swift"; sourceTree = "<group>"; };
 		6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySummaryViewController.swift; sourceTree = "<group>"; };
+		6FF28222269B4387000EFCF7 /* FamilyFeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeaturesViewController.swift; sourceTree = "<group>"; };
+		6FF28227269B486B000EFCF7 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
+		6FFDE46A269B4B3B00AC8428 /* MembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewController.swift; sourceTree = "<group>"; };
+		6FFDE46F269B52F500AC8428 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		6FFDE474269B53CA00AC8428 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
+		6FFDE479269B54CA00AC8428 /* FeatureTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTileView.swift; sourceTree = "<group>"; };
+		6FFDE486269E04DF00AC8428 /* Rx+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extensions.swift"; sourceTree = "<group>"; };
+		6FFDE48B26AB138F00AC8428 /* FamilyFeaturesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeaturesPresenter.swift; sourceTree = "<group>"; };
 		8090F1FD6FF563240A032683 /* Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriend-FamilyFriendUITests/Pods-FamilyFriend-FamilyFriendUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C7C49298D20C6F4AA0ECF0D /* Pods-FamilyFriend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend.release.xcconfig"; path = "Target Support Files/Pods-FamilyFriend/Pods-FamilyFriend.release.xcconfig"; sourceTree = "<group>"; };
 		8D7B48A2AF8E657E42DB1873 /* Pods-FamilyFriend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriend.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriend/Pods-FamilyFriend.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,8 +207,9 @@
 		6F3EF26926988E5300371FF7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6F8FF06C2698992500BB185D /* MainViewController.swift */,
-				6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */,
+				6FF04F8026AB1ADA0019B38C /* MainView */,
+				6FF2822C269B4888000EFCF7 /* FamilyFeatures */,
+				6FF04F7F26AB1ACC0019B38C /* FamilySummary */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,12 +223,76 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6FF04F7F26AB1ACC0019B38C /* FamilySummary */ = {
+			isa = PBXGroup;
+			children = (
+				6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */,
+			);
+			path = FamilySummary;
+			sourceTree = "<group>";
+		};
+		6FF04F8026AB1ADA0019B38C /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				6F8FF06C2698992500BB185D /* MainViewController.swift */,
+				6FF04F8126AB1AE80019B38C /* MainConnector.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		6FF281D82698C3DA000EFCF7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */,
+				6FFDE486269E04DF00AC8428 /* Rx+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6FF2822C269B4888000EFCF7 /* FamilyFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				6FFDE49226AB13BA00AC8428 /* Members */,
+				6FFDE49026AB13AC00AC8428 /* Ranking */,
+				6FFDE49426AB13D800AC8428 /* ShoppingList */,
+				6FFDE49326AB13C000AC8428 /* Tasks */,
+				6FF28222269B4387000EFCF7 /* FamilyFeaturesViewController.swift */,
+				6FFDE48B26AB138F00AC8428 /* FamilyFeaturesPresenter.swift */,
+				6FFDE479269B54CA00AC8428 /* FeatureTileView.swift */,
+			);
+			path = FamilyFeatures;
+			sourceTree = "<group>";
+		};
+		6FFDE49026AB13AC00AC8428 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				6FF28227269B486B000EFCF7 /* RankingViewController.swift */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		6FFDE49226AB13BA00AC8428 /* Members */ = {
+			isa = PBXGroup;
+			children = (
+				6FFDE46A269B4B3B00AC8428 /* MembersViewController.swift */,
+			);
+			path = Members;
+			sourceTree = "<group>";
+		};
+		6FFDE49326AB13C000AC8428 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				6FFDE46F269B52F500AC8428 /* TasksViewController.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		6FFDE49426AB13D800AC8428 /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				6FFDE474269B53CA00AC8428 /* ShoppingListViewController.swift */,
+			);
+			path = ShoppingList;
 			sourceTree = "<group>";
 		};
 		FF95C1356F139AE9BF9514D4 /* Pods */ = {
@@ -463,11 +546,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */,
+				6FF28228269B486B000EFCF7 /* RankingViewController.swift in Sources */,
+				6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */,
+				6FFDE487269E04DF00AC8428 /* Rx+Extensions.swift in Sources */,
+				6FFDE46B269B4B3B00AC8428 /* MembersViewController.swift in Sources */,
+				6FF28223269B4387000EFCF7 /* FamilyFeaturesViewController.swift in Sources */,
 				6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */,
 				6FF28204269B42DC000EFCF7 /* FamilySummaryViewController.swift in Sources */,
 				6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */,
+				6FFDE475269B53CA00AC8428 /* ShoppingListViewController.swift in Sources */,
+				6FFDE48C26AB138F00AC8428 /* FamilyFeaturesPresenter.swift in Sources */,
+				6FFDE47A269B54CA00AC8428 /* FeatureTileView.swift in Sources */,
 				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
 				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
+				6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */,
 				6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
