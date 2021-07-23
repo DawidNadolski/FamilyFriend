@@ -59,7 +59,6 @@ final class FamilyFeaturesViewController: UIViewController {
 	}
 	
 	private func setupBindings() {
-		
 		let input = FamilyFeaturesPresenterInput(
 			membersFeatureSelected: ControlEvent(events: membersFeatureTileView.tapRecognizer.rx.event.mapToVoid()),
 			rankingFeatureSelected: ControlEvent(events: rankingFeatureTileView.tapRecognizer.rx.event.mapToVoid()),

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		034A2D9F8B26D56F58B39B10 /* Pods_FamilyFriendTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C75A0B6685B3363BA38BC1 /* Pods_FamilyFriendTests.framework */; };
 		4B577FC00F167FDC9B738397 /* Pods_FamilyFriend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3AEDCC8F866F3DB92A0AFA /* Pods_FamilyFriend.framework */; };
+		6F05BAF126AB2F260013FCF8 /* FamilySummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F05BAF026AB2F260013FCF8 /* FamilySummaryPresenter.swift */; };
+		6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F05BAFB26AB3D770013FCF8 /* Protocols.swift */; };
 		6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F19F7CC2698ACF500C2FD61 /* TileView.swift */; };
 		6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22C2696489300371FF7 /* AppDelegate.swift */; };
 		6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22E2696489300371FF7 /* SceneDelegate.swift */; };
@@ -54,6 +56,8 @@
 		23A26098ED33FE9925EE13A1 /* Pods-FamilyFriendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriendTests.release.xcconfig"; path = "Target Support Files/Pods-FamilyFriendTests/Pods-FamilyFriendTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C3AEDCC8F866F3DB92A0AFA /* Pods_FamilyFriend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FamilyFriend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAD75E9B77372D5975F7F40 /* Pods-FamilyFriendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyFriendTests.debug.xcconfig"; path = "Target Support Files/Pods-FamilyFriendTests/Pods-FamilyFriendTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F05BAF026AB2F260013FCF8 /* FamilySummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySummaryPresenter.swift; sourceTree = "<group>"; };
+		6F05BAFB26AB3D770013FCF8 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		6F19F7CC2698ACF500C2FD61 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		6F3EF2292696489300371FF7 /* FamilyFriend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFriend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3EF22C2696489300371FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,10 +129,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6F05BAFA26AB3CC80013FCF8 /* Reusable Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6F05BAFB26AB3D770013FCF8 /* Protocols.swift */,
+			);
+			path = "Reusable Classes";
+			sourceTree = "<group>";
+		};
 		6F19F7CA2698ACE300C2FD61 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				6FF281D82698C3DA000EFCF7 /* Extensions */,
+				6F05BAFA26AB3CC80013FCF8 /* Reusable Classes */,
 				6F19F7CB2698ACEA00C2FD61 /* Reusable Views */,
 			);
 			path = Common;
@@ -227,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */,
+				6F05BAF026AB2F260013FCF8 /* FamilySummaryPresenter.swift */,
 			);
 			path = FamilySummary;
 			sourceTree = "<group>";
@@ -545,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F05BAF126AB2F260013FCF8 /* FamilySummaryPresenter.swift in Sources */,
 				6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */,
 				6FF28228269B486B000EFCF7 /* RankingViewController.swift in Sources */,
 				6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */,
@@ -560,6 +575,7 @@
 				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
 				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
 				6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */,
+				6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */,
 				6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
