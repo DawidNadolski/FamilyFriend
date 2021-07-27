@@ -31,7 +31,6 @@ final class FamilySummaryPresenter: FamilySummaryPresenting {
 	}
 	
 	func transform(input: FamilySummaryPresenterInput) {
-		
 		input.moreButtonTapped
 			.asDriver()
 			.drive(moreButtonBinder)
