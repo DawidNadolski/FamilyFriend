@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class FamilySummaryViewController: UIViewController {
 	
+	private let presenter: FamilySummaryPresenting
 	private let containerView = TileView()
 	
 	private let moreButton: UIButton = {
@@ -43,33 +46,12 @@ final class FamilySummaryViewController: UIViewController {
 		return label
 	}()
 	
-	private let label2: UILabel = {
-		let label = UILabel()
-		label.textAlignment = .center
-		label.text = "Some info: 5"
-		label.font = UIFont(name: "SFProText", size: 17.0)
-		return label
-	}()
-	
-	private let label3: UILabel = {
-		let label = UILabel()
-		label.textAlignment = .center
-		label.text = "Some info: 5"
-		label.font = UIFont(name: "SFProText", size: 17.0)
-		return label
-	}()
-	
-	private let label4: UILabel = {
-		let label = UILabel()
-		label.textAlignment = .center
-		label.text = "Some info: 5"
-		label.font = UIFont(name: "SFProText", size: 17.0)
-		return label
-	}()
-	
-	init() {
+	init(presenter: FamilySummaryPresenting) {
+		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
+		
 		setupUI()
+		setupBindings()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -112,26 +94,14 @@ final class FamilySummaryViewController: UIViewController {
 			make.centerX.equalTo(familyImageView.snp.centerX)
 			make.bottom.equalToSuperview().inset(16.0)
 		}
+	}
+	
+	private func setupBindings() {
+		let input = FamilySummaryPresenterInput(
+			moreButtonTapped: moreButton.rx.tap,
+			settingsButtonTapped: settingsButton.rx.tap
+		)
 		
-//		containerView.addSubview(label2)
-//		label2.snp.makeConstraints { make in
-//			make.top.equalTo(familyImageView.snp.bottom).offset(16.0)
-//			make.left.equalTo(familyImageView.snp.centerX).offset(8.0)
-//			make.right.equalToSuperview().inset(16.0)
-//		}
-//
-//		containerView.addSubview(label3)
-//		label3.snp.makeConstraints { make in
-//			make.top.equalTo(label1.snp.bottom).offset(16.0)
-//			make.left.equalToSuperview().offset(16.0)
-//			make.right.equalTo(familyImageView.snp.centerX).inset(8.0)
-//		}
-//
-//		containerView.addSubview(label4)
-//		label4.snp.makeConstraints { make in
-//			make.top.equalTo(label2.snp.bottom).offset(16.0)
-//			make.left.equalTo(familyImageView.snp.centerX).offset(8.0)
-//			make.right.equalToSuperview().inset(16.0)
-//		}
+		presenter.transform(input: input)
 	}
 }

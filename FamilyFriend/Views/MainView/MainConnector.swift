@@ -12,14 +12,15 @@ protocol MainComponentsConnecting {
 	func connectFamilySummary() -> UIViewController
 }
 
-final class MainConnector: MainComponentsConnecting {
+final class MainConnector: Connecting, MainComponentsConnecting {
 	
 	func connect() -> UIViewController {
 		return MainViewController(mainComponentsConnector: self)
 	}
 	
 	func connectFamilySummary() -> UIViewController {
-		FamilySummaryViewController()
+		let presenter = FamilySummaryPresenter(context: .init())
+		return FamilySummaryViewController(presenter: presenter)
 	}
 	
 	func connectFamilyFeatures() -> UIViewController {
