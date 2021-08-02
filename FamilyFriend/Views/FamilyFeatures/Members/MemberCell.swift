@@ -17,7 +17,7 @@ final class MemberCell: UITableViewCell {
 		return imageView
 	}()
 	
-	private let label: UILabel = {
+	private let nameLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = Assets.Colors.textPrimary.color
 		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
@@ -34,7 +34,7 @@ final class MemberCell: UITableViewCell {
 	}
 	
 	func update(with member: Member) {
-		label.text = member.name
+		nameLabel.text = member.name
 	}
 	
 	private func setupUI() {
@@ -53,8 +53,8 @@ final class MemberCell: UITableViewCell {
 			make.top.left.bottom.equalToSuperview().inset(8.0)
 		}
 		
-		containerView.addSubview(label)
-		label.snp.makeConstraints { make in
+		containerView.addSubview(nameLabel)
+		nameLabel.snp.makeConstraints { make in
 			make.left.equalTo(avatarImageView.snp.right).offset(8.0)
 			make.right.equalToSuperview().inset(8.0)
 			make.centerY.equalToSuperview()
