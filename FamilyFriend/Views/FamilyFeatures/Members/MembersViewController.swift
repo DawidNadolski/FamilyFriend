@@ -6,37 +6,89 @@
 //
 
 import UIKit
+import RxCocoa
 
 final class MembersViewController: UIViewController {
+		
+	// TODO: Get rid of mock data
+	private let members: [Member] = [
+		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
+		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
+		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
+		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
+		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
+	]
 	
-	let containerView = TileView()
+	private let tableView = UITableView()
+	private let selectedMember = BehaviorRelay<Member?>(value: nil)
 	
-	private let imageView: UIImageView = {
-		let imageView = UIImageView(image: UIImage(systemName: "person"))
-		return imageView
-	}()
+	private let presenter: MembersPresenting
 	
-	init() {
+	init(presenter: MembersPresenting) {
+		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
+		
 		setupUI()
+		setupBindings()
+		setupTableView()
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		setupNavigationBar()
+	}
+	
 	private func setupUI() {
-		view.addSubview(containerView)
-		containerView.backgroundColor = .white
-		containerView.snp.makeConstraints { make in
-			make.top.bottom.equalToSuperview()
-			make.left.right.equalToSuperview().inset(16.0)
-		}
+		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
-		containerView.addSubview(imageView)
-		imageView.snp.makeConstraints { make in
-			make.top.left.bottom.equalToSuperview().inset(8.0)
-			make.size.equalTo(64.0)
+		view.addSubview(tableView)
+		tableView.snp.makeConstraints { make in
+			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8.0)
+			make.left.bottom.right.equalToSuperview()
 		}
+	}
+	
+	private func setupBindings() {
+		let input = MembersPresenterInput(
+			memberSelected: selectedMember.asDriver()
+		)
+		
+		presenter.transform(input: input)
+	}
+	
+	private func setupTableView() {
+		tableView.dataSource = self
+		tableView.delegate = self
+		tableView.separatorStyle = .none
+		tableView.backgroundColor = Assets.Colors.backgroundWarm.color
+		tableView.register(MemberCell.self)
+	}
+	
+	private func setupNavigationBar() {
+		navigationItem.title = "Members"
+		navigationController?.isNavigationBarHidden = false
+	}
+}
+
+extension MembersViewController: UITableViewDataSource, UITableViewDelegate {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		members.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(for: indexPath) as MemberCell
+		let member = members[indexPath.row]
+		
+		cell.update(with: member)
+		
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let member = members[indexPath.row]
+		selectedMember.accept(member)
 	}
 }

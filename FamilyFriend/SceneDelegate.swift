@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
 		// TODO: Move this to factory
 		let rootConnector = MainConnector()
-		let rootViewController = rootConnector.connect()
+		let rootViewController = UINavigationController(rootViewController: rootConnector.connect())
 				
 		window.rootViewController = rootViewController
 		window.makeKeyAndVisible()
