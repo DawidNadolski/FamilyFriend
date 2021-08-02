@@ -39,10 +39,10 @@ final class FamilyFeaturesViewController: UIViewController {
 	}
 	
 	private func setupUI() {
-		view.backgroundColor = Assets.Colors.backgroundCool.color
+		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
 		view.addSubview(featuresStackView)
-		featuresStackView.backgroundColor = Assets.Colors.backgroundCool.color
+		featuresStackView.backgroundColor = Assets.Colors.backgroundWarm.color
 		featuresStackView.snp.makeConstraints { make in
 			make.top.bottom.equalToSuperview()
 			make.left.right.equalToSuperview().inset(16.0)

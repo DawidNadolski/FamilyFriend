@@ -10,3 +10,7 @@ import UIKit
 protocol Connecting {
 	func connect() -> UIViewController
 }
+
+protocol ReusableView: AnyObject {
+	static var defaultReuseIdentifier: String { get }
+}

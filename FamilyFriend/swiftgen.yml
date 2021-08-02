@@ -6,3 +6,10 @@ xcassets:
       output: Resources/Assets.swift
       params:
         enumName: Assets
+        
+fonts:
+  inputs:
+    - Resources/Fonts
+  outputs:
+    - templateName: swift5
+      output: Resources/Fonts.swift

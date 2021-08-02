@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import RxCocoa
 
-protocol MainComponentsConnecting {
+protocol MainComponentsConnecting: Connecting {
 	func connectFamilyFeatures() -> UIViewController
 	func connectFamilySummary() -> UIViewController
 }
 
-final class MainConnector: Connecting, MainComponentsConnecting {
+protocol MainViewRoutes {
+	var toMembersFeature: Binder<Void> { get }
+	var toRankingFeature: Binder<Void> { get }
+	var toShoppingListFeature: Binder<Void> { get }
+	var toTasksFeature: Binder<Void> { get }
+}
+
+final class MainConnector: MainComponentsConnecting {
+	
+	private weak var mainViewController: MainViewController!
 	
 	func connect() -> UIViewController {
-		return MainViewController(mainComponentsConnector: self)
+		let mainViewController = MainViewController(mainComponentsConnector: self)
+		self.mainViewController = mainViewController
+		return mainViewController
 	}
 	
 	func connectFamilySummary() -> UIViewController {
@@ -24,7 +36,52 @@ final class MainConnector: Connecting, MainComponentsConnecting {
 	}
 	
 	func connectFamilyFeatures() -> UIViewController {
-		let presenter = FamilyFeaturesPresenter(context: .init())
+		let presenter = FamilyFeaturesPresenter(
+			context: .init(mainViewRoutes: self)
+		)
 		return FamilyFeaturesViewController(presenter: presenter)
+	}
+	
+	private func push(viewController: UIViewController, completion: @escaping () -> Void = {}) {
+		guard let navigationController = mainViewController.navigationController else {
+			assertionFailure("Couldn't find navigation controller")
+			return
+		}
+		
+		navigationController.pushViewController(viewController, animated: true)
+	}
+}
+
+extension MainConnector: MainViewRoutes {
+	var toMembersFeature: Binder<Void> {
+		return Binder(self) { connector, _ in
+			let presenter = MembersPresenter(
+				context: .init(
+					toMemberDetails: Binder(connector) { connector, member in
+						let viewController = MemberDetailsViewController()
+						connector.push(viewController: viewController)
+					}
+				))
+			let viewController = MembersViewController(presenter: presenter)
+			connector.push(viewController: viewController)
+		}
+	}
+	
+	var toRankingFeature: Binder<Void> {
+		return Binder(self) { connector, _ in
+			
+		}
+	}
+	
+	var toShoppingListFeature: Binder<Void> {
+		return Binder(self) { connector, _ in
+			
+		}
+	}
+	
+	var toTasksFeature: Binder<Void> {
+		return Binder(self) { connector, _ in
+			
+		}
 	}
 }

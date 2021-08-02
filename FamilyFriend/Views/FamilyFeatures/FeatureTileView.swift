@@ -34,20 +34,23 @@ final class FeatureTileView: UIView {
 	
 	private lazy var imageView: UIImageView = {
 		let imageView = UIImageView(image: image)
+		imageView.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 		return imageView
 	}()
 	
 	private lazy var primaryTextLabel: UILabel = {
 		let label = UILabel()
-		// TODO: Apply SF ProText font
 		label.text = primaryText
+		label.textColor = Assets.Colors.textPrimary.color
+		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
 	}()
 	
 	private lazy var secondaryTextLabel: UILabel = {
 		let label = UILabel()
-		// TODO: Apply SF ProText font
 		label.text = secondaryText
+		label.textColor = Assets.Colors.textSecondary.color
+		label.font = FontFamily.SFProText.regular.font(size: 13.0)
 		return label
 	}()
 	

@@ -26,7 +26,7 @@ struct FamilyFeaturesPresenterOutput {
 final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	
 	struct Context {
-		
+		let mainViewRoutes: MainViewRoutes
 	}
 	
 	private let context: Context
@@ -61,7 +61,7 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	
 	private var membersFeatureBinder: Binder<Void> {
 		Binder(self) { presenter, _ in
-			print("Members feature selected!")
+			presenter.context.mainViewRoutes.toMembersFeature.onNext(())
 		}
 	}
 	

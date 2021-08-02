@@ -30,13 +30,17 @@ class MainViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		setupNavigationBar()
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
 	}
 	
 	private func setupUI() {
-		view.backgroundColor = Assets.Colors.backgroundCool.color
+		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
 		view.addSubview(scrollView)
 		
@@ -57,6 +61,10 @@ class MainViewController: UIViewController {
 		
 		stackView.addViewController(familySummaryViewController, parent: self)
 		stackView.addViewController(familyFeaturesViewController, parent: self)
+	}
+	
+	private func setupNavigationBar() {
+		navigationController?.isNavigationBarHidden = true
 	}
 }
 

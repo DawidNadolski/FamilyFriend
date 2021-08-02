@@ -42,7 +42,8 @@ final class FamilySummaryViewController: UIViewController {
 		let label = UILabel()
 		label.textAlignment = .center
 		label.text = "Nadolscy Family"
-		label.font = UIFont(name: "SFProText", size: 24.0)
+		label.textColor = Assets.Colors.textPrimary.color
+		label.font = FontFamily.SFProText.bold.font(size: 20.0)
 		return label
 	}()
 	
@@ -59,7 +60,7 @@ final class FamilySummaryViewController: UIViewController {
 	}
 	
 	private func setupUI() {
-		view.backgroundColor = Assets.Colors.backgroundCool.color
+		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
 		view.addSubview(containerView)
 		containerView.backgroundColor = .white
