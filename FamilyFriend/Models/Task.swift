@@ -12,4 +12,8 @@ struct Task {
 	let name: String
 	let description: String?
 	let xpPoints: Int
+	let executingMemberID: Int? = nil
+	let assignmentDate: Date? = Date()
+	let dueDate: Date? = nil
+	let completed: Bool = false
 }
