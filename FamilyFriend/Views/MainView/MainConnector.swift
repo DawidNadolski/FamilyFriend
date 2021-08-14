@@ -16,7 +16,7 @@ protocol MainComponentsConnecting: Connecting {
 protocol MainViewRoutes {
 	var toMembersFeature: Binder<Void> { get }
 	var toRankingFeature: Binder<Void> { get }
-	var toShoppingListFeature: Binder<Void> { get }
+	var toShoppingListsFeature: Binder<Void> { get }
 	var toTasksFeature: Binder<Void> { get }
 }
 
@@ -58,12 +58,13 @@ extension MainConnector: MainViewRoutes {
 			let presenter = MembersPresenter(
 				context: .init(
 					toMemberDetails: Binder(connector) { connector, member in
-						let viewController = MemberDetailsViewController()
-						connector.push(viewController: viewController)
+						let memberDetailsViewController = MemberDetailsViewController()
+						connector.push(viewController: memberDetailsViewController)
 					}
-				))
-			let viewController = MembersViewController(presenter: presenter)
-			connector.push(viewController: viewController)
+				)
+			)
+			let membersViewController = MembersViewController(presenter: presenter)
+			connector.push(viewController: membersViewController)
 		}
 	}
 	
@@ -73,15 +74,47 @@ extension MainConnector: MainViewRoutes {
 		}
 	}
 	
-	var toShoppingListFeature: Binder<Void> {
+	var toShoppingListsFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			
+			let presenter = ShoppingListsPresenter(
+				context: .init(
+					toShoppingList: Binder(connector) { connector, shoppingList in
+						let presenter = ShoppingListPresenter()
+						let shoppingListViewController = ShoppingListViewController(
+							presenter: presenter,
+							shoppingList: shoppingList
+						)
+						connector.push(viewController: shoppingListViewController)
+					},
+					toAddList: Binder(connector) { connector, _ in
+//						let onCancel: Binder<Void> {
+//							Binder(connector) { connector, _ in
+//
+//							}
+//						}
+					}
+				)
+			)
+			let shoppingListsViewController = ShoppingListsViewController(presenter: presenter)
+			connector.push(viewController: shoppingListsViewController)
 		}
 	}
 	
 	var toTasksFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			
+			let presenter = TasksPresenter(
+				context: .init(
+					toAddTask: Binder(connector) { connector, _ in
+						let addTaskViewController = AddTaskViewController()
+						addTaskViewController.modalPresentationStyle = .overCurrentContext
+						addTaskViewController.modalTransitionStyle = .crossDissolve
+						let modal = DraggableModal(embeddedViewController: addTaskViewController)
+						connector.mainViewController.present(modal, animated: true)
+					}
+				)
+			)
+			let tasksViewController = TasksViewController(presenter: presenter)
+			connector.push(viewController: tasksViewController)
 		}
 	}
 }
