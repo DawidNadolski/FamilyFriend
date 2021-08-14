@@ -34,6 +34,7 @@ internal enum Assets {
 		internal static let metabolism = ColorAsset(name: "Metabolism")
 		internal static let mossGreen = ColorAsset(name: "MossGreen")
 		internal static let movement = ColorAsset(name: "Movement")
+		internal static let pickerViewGrey = ColorAsset(name: "PickerViewGrey")
 		internal static let puertoRico = ColorAsset(name: "PuertoRico")
 		internal static let splash = ColorAsset(name: "Splash")
 		internal static let streakBackgroundColor = ColorAsset(name: "StreakBackgroundColor")
