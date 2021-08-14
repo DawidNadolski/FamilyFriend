@@ -73,13 +73,13 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	
 	private var shoppingListFeatureBinder: Binder<Void> {
 		Binder(self) { presenter, _ in
-			print("Shopping list feature selected!")
+			presenter.context.mainViewRoutes.toShoppingListsFeature.onNext(())
 		}
 	}
 	
 	private var tasksFeatureBinder: Binder<Void> {
 		Binder(self) { presenter, _ in
-			print("Tasks feature selected!")
+			presenter.context.mainViewRoutes.toTasksFeature.onNext(())
 		}
 	}
 }

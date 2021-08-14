@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let window = window else { return }
 		
 		// TODO: Move this to factory
-		let rootConnector = MainConnector()
+		let rootConnector = RootConnector(context: .init())
 		let rootViewController = UINavigationController(rootViewController: rootConnector.connect())
 				
 		window.rootViewController = rootViewController

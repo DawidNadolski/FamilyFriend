@@ -13,7 +13,7 @@ protocol MembersPresenting {
 }
 
 struct MembersPresenterInput {
-	let memberSelected: Driver<Member?>
+	let memberSelected: ControlEvent<Member?>
 }
 
 struct MembersPresenterOutput {
@@ -36,6 +36,7 @@ final class MembersPresenter: MembersPresenting {
 	func transform(input: MembersPresenterInput) -> MembersPresenterOutput {
 		input.memberSelected
 			.compactMap { $0 }
+			.asDriverOnErrorJustComplete()
 			.drive(context.toMemberDetails)
 			.disposed(by: disposeBag)
 		
