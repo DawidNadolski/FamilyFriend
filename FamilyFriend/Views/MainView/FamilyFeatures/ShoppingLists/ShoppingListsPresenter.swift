@@ -20,8 +20,7 @@ struct ShoppingListsPresentingInput {
 final class ShoppingListsPresenter: ShoppingListsPresenting {
 	
 	struct Context {
-		let toShoppingList: Binder<ShoppingList>
-		let toAddList: Binder<Void>
+		let shoppingListsViewRoutes: ShoppingListsViewRoutes
 	}
 	
 	private let disposeBag = DisposeBag()
@@ -35,12 +34,12 @@ final class ShoppingListsPresenter: ShoppingListsPresenting {
 		input.listSelected
 			.compactMap { $0 }
 			.asDriverOnErrorJustComplete()
-			.drive(context.toShoppingList)
+			.drive(context.shoppingListsViewRoutes.toShoppingList)
 			.disposed(by: disposeBag)
 		
 		input.addListPressed
 			.asDriverOnErrorJustComplete()
-			.drive(context.toAddList)
+			.drive(context.shoppingListsViewRoutes.toAddList)
 			.disposed(by: disposeBag)
 	}
 }
