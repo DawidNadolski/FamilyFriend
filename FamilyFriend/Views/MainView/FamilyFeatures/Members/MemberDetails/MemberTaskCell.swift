@@ -11,14 +11,14 @@ final class MemberTaskCell: UITableViewCell {
 	
 	private let containerView = TileView()
 	
-	private lazy var nameLabel: UILabel = {
+	private let nameLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = Assets.Colors.textPrimary.color
 		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
 	}()
 	
-	private lazy var xpPointsLabel: UILabel = {
+	private let xpPointsLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = Assets.Colors.textSecondary.color
 		label.font = FontFamily.SFProText.regular.font(size: 13.0)
