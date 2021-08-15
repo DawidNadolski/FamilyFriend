@@ -76,27 +76,8 @@ extension MainConnector: MainViewRoutes {
 	
 	var toShoppingListsFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			let presenter = ShoppingListsPresenter(
-				context: .init(
-					toShoppingList: Binder(connector) { connector, shoppingList in
-						let presenter = ShoppingListPresenter()
-						let shoppingListViewController = ShoppingListViewController(
-							presenter: presenter,
-							shoppingList: shoppingList
-						)
-						connector.push(viewController: shoppingListViewController)
-					},
-					toAddList: Binder(connector) { connector, _ in
-//						let onCancel: Binder<Void> {
-//							Binder(connector) { connector, _ in
-//
-//							}
-//						}
-					}
-				)
-			)
-			let shoppingListsViewController = ShoppingListsViewController(presenter: presenter)
-			connector.push(viewController: shoppingListsViewController)
+			let shoppingListsConnector = ShoppingListsConnector()
+			connector.push(viewController: shoppingListsConnector.connect())
 		}
 	}
 	
