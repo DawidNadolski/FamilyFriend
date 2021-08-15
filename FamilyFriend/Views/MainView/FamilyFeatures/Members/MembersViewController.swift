@@ -53,7 +53,7 @@ final class MembersViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = MembersPresenterInput(
-			memberSelected: selectedMember.asDriver()
+			memberSelected: ControlEvent(events: selectedMember)
 		)
 		
 		presenter.transform(input: input)
