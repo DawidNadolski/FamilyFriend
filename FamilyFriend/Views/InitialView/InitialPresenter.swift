@@ -41,10 +41,7 @@ final class InitialPresenter: InitialPresenting {
 		input.signUpButtonPressed
 			.asDriver()
 			.debug()
-			.drive(onNext: { [context] _ in
-				print("Co jest kurwa")
-				context.initialViewRoutes.toSignUp.onNext(())
-			})
+			.drive(context.initialViewRoutes.toSignUp)
 			.disposed(by: disposeBag)
 	}
 }

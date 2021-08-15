@@ -12,7 +12,6 @@
 		6F05BAF126AB2F260013FCF8 /* FamilySummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F05BAF026AB2F260013FCF8 /* FamilySummaryPresenter.swift */; };
 		6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F05BAFB26AB3D770013FCF8 /* Protocols.swift */; };
 		6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F19F7CC2698ACF500C2FD61 /* TileView.swift */; };
-		6F3BAA5026BC991A0036E4D6 /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3BAA4F26BC991A0036E4D6 /* ComponentCell.swift */; };
 		6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22C2696489300371FF7 /* AppDelegate.swift */; };
 		6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF22E2696489300371FF7 /* SceneDelegate.swift */; };
 		6F3EF2362696489400371FF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3EF2352696489400371FF7 /* Assets.xcassets */; };
@@ -20,12 +19,13 @@
 		6F3EF2442696489400371FF7 /* FamilyFriendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF2432696489400371FF7 /* FamilyFriendTests.swift */; };
 		6F3EF24F2696489400371FF7 /* FamilyFriendUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */; };
 		6F4F987A26C7CA2700B79890 /* RootConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F987926C7CA2700B79890 /* RootConnector.swift */; };
-		6F4F988C26C7CD0100B79890 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F988B26C7CD0100B79890 /* InitialViewController.swift */; };
-		6F4F989126C7CD1400B79890 /* InitialConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F989026C7CD1400B79890 /* InitialConnector.swift */; };
-		6F4F98A326C7CE9100B79890 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98A226C7CE9100B79890 /* SignInViewController.swift */; };
-		6F4F98AB26C7CF3F00B79890 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98AA26C7CF3F00B79890 /* SignUpViewController.swift */; };
-		6F4F98B026C7D7DC00B79890 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98AF26C7D7DC00B79890 /* InitialPresenter.swift */; };
 		6F4F98B526C7F4A900B79890 /* UINavigationBar+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98B426C7F4A900B79890 /* UINavigationBar+Appearance.swift */; };
+		6F4F98D226C91CF900B79890 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98D126C91CF900B79890 /* SignInViewController.swift */; };
+		6F4F98D726C91D1400B79890 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98D626C91D1400B79890 /* SignUpViewController.swift */; };
+		6F4F98DE26C91D2400B79890 /* InitialConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98DB26C91D2400B79890 /* InitialConnector.swift */; };
+		6F4F98DF26C91D2400B79890 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98DC26C91D2400B79890 /* InitialPresenter.swift */; };
+		6F4F98E026C91D2400B79890 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98DD26C91D2400B79890 /* InitialViewController.swift */; };
+		6F4F98E526C91D4300B79890 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F98E426C91D4300B79890 /* RankingViewController.swift */; };
 		6F51F36A26B0AB8A0026B9E0 /* MembersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F36926B0AB8A0026B9E0 /* MembersPresenter.swift */; };
 		6F51F37026B0AF890026B9E0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F36F26B0AF890026B9E0 /* Member.swift */; };
 		6F51F37526B0B0EB0026B9E0 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F37426B0B0EB0026B9E0 /* MemberCell.swift */; };
@@ -63,22 +63,14 @@
 		6F51F42426B9E1390026B9E0 /* UIViewController+ChildViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F42326B9E1390026B9E0 /* UIViewController+ChildViewControllers.swift */; };
 		6F51F42C26B9E4300026B9E0 /* AddTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F42B26B9E4300026B9E0 /* AddTaskPresenter.swift */; };
 		6F51F43726BC5A8A0026B9E0 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F43626BC5A8A0026B9E0 /* Views.swift */; };
-		6F51F43C26BC855B0026B9E0 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F43B26BC855B0026B9E0 /* ShoppingList.swift */; };
-		6F51F44126BC85AE0026B9E0 /* ShoppingListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F44026BC85AE0026B9E0 /* ShoppingListComponent.swift */; };
-		6F51F44626BC87320026B9E0 /* ShoppingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F44526BC87320026B9E0 /* ShoppingListCell.swift */; };
-		6F51F44B26BC879B0026B9E0 /* ShoppingListsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F44A26BC879B0026B9E0 /* ShoppingListsPresenter.swift */; };
-		6F51F45726BC95290026B9E0 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F45626BC95290026B9E0 /* ShoppingListViewController.swift */; };
-		6F51F45C26BC95630026B9E0 /* ShoppingListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F51F45B26BC95630026B9E0 /* ShoppingListPresenter.swift */; };
 		6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FF06C2698992500BB185D /* MainViewController.swift */; };
 		6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF04F8126AB1AE80019B38C /* MainConnector.swift */; };
 		6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281BE2698BF04000EFCF7 /* Assets.swift */; };
 		6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */; };
 		6FF28204269B42DC000EFCF7 /* FamilySummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */; };
 		6FF28223269B4387000EFCF7 /* FamilyFeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28222269B4387000EFCF7 /* FamilyFeaturesViewController.swift */; };
-		6FF28228269B486B000EFCF7 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF28227269B486B000EFCF7 /* RankingViewController.swift */; };
 		6FFDE46B269B4B3B00AC8428 /* MembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE46A269B4B3B00AC8428 /* MembersViewController.swift */; };
 		6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE46F269B52F500AC8428 /* TasksViewController.swift */; };
-		6FFDE475269B53CA00AC8428 /* ShoppingListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE474269B53CA00AC8428 /* ShoppingListsViewController.swift */; };
 		6FFDE47A269B54CA00AC8428 /* FeatureTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE479269B54CA00AC8428 /* FeatureTileView.swift */; };
 		6FFDE487269E04DF00AC8428 /* Rx+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE486269E04DF00AC8428 /* Rx+Extensions.swift */; };
 		6FFDE48C26AB138F00AC8428 /* FamilyFeaturesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDE48B26AB138F00AC8428 /* FamilyFeaturesPresenter.swift */; };
@@ -110,7 +102,6 @@
 		6F05BAF026AB2F260013FCF8 /* FamilySummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySummaryPresenter.swift; sourceTree = "<group>"; };
 		6F05BAFB26AB3D770013FCF8 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		6F19F7CC2698ACF500C2FD61 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
-		6F3BAA4F26BC991A0036E4D6 /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		6F3EF2292696489300371FF7 /* FamilyFriend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFriend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3EF22C2696489300371FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F3EF22E2696489300371FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,12 +115,13 @@
 		6F3EF24E2696489400371FF7 /* FamilyFriendUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFriendUITests.swift; sourceTree = "<group>"; };
 		6F3EF2502696489400371FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F4F987926C7CA2700B79890 /* RootConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootConnector.swift; sourceTree = "<group>"; };
-		6F4F988B26C7CD0100B79890 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		6F4F989026C7CD1400B79890 /* InitialConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConnector.swift; sourceTree = "<group>"; };
-		6F4F98A226C7CE9100B79890 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		6F4F98AA26C7CF3F00B79890 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		6F4F98AF26C7D7DC00B79890 /* InitialPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialPresenter.swift; sourceTree = "<group>"; };
 		6F4F98B426C7F4A900B79890 /* UINavigationBar+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Appearance.swift"; sourceTree = "<group>"; };
+		6F4F98D126C91CF900B79890 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		6F4F98D626C91D1400B79890 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		6F4F98DB26C91D2400B79890 /* InitialConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialConnector.swift; sourceTree = "<group>"; };
+		6F4F98DC26C91D2400B79890 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialPresenter.swift; sourceTree = "<group>"; };
+		6F4F98DD26C91D2400B79890 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		6F4F98E426C91D4300B79890 /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		6F51F36926B0AB8A0026B9E0 /* MembersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersPresenter.swift; sourceTree = "<group>"; };
 		6F51F36F26B0AF890026B9E0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		6F51F37426B0B0EB0026B9E0 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
@@ -167,22 +159,14 @@
 		6F51F42326B9E1390026B9E0 /* UIViewController+ChildViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewControllers.swift"; sourceTree = "<group>"; };
 		6F51F42B26B9E4300026B9E0 /* AddTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskPresenter.swift; sourceTree = "<group>"; };
 		6F51F43626BC5A8A0026B9E0 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		6F51F43B26BC855B0026B9E0 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
-		6F51F44026BC85AE0026B9E0 /* ShoppingListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListComponent.swift; sourceTree = "<group>"; };
-		6F51F44526BC87320026B9E0 /* ShoppingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListCell.swift; sourceTree = "<group>"; };
-		6F51F44A26BC879B0026B9E0 /* ShoppingListsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListsPresenter.swift; sourceTree = "<group>"; };
-		6F51F45626BC95290026B9E0 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
-		6F51F45B26BC95630026B9E0 /* ShoppingListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListPresenter.swift; sourceTree = "<group>"; };
 		6F8FF06C2698992500BB185D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6FF04F8126AB1AE80019B38C /* MainConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConnector.swift; sourceTree = "<group>"; };
 		6FF281BE2698BF04000EFCF7 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		6FF281D92698C3EA000EFCF7 /* StackView+ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewControllers.swift"; sourceTree = "<group>"; };
 		6FF28203269B42DC000EFCF7 /* FamilySummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySummaryViewController.swift; sourceTree = "<group>"; };
 		6FF28222269B4387000EFCF7 /* FamilyFeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeaturesViewController.swift; sourceTree = "<group>"; };
-		6FF28227269B486B000EFCF7 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		6FFDE46A269B4B3B00AC8428 /* MembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewController.swift; sourceTree = "<group>"; };
 		6FFDE46F269B52F500AC8428 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
-		6FFDE474269B53CA00AC8428 /* ShoppingListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListsViewController.swift; sourceTree = "<group>"; };
 		6FFDE479269B54CA00AC8428 /* FeatureTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTileView.swift; sourceTree = "<group>"; };
 		6FFDE486269E04DF00AC8428 /* Rx+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extensions.swift"; sourceTree = "<group>"; };
 		6FFDE48B26AB138F00AC8428 /* FamilyFeaturesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeaturesPresenter.swift; sourceTree = "<group>"; };
@@ -345,9 +329,9 @@
 			children = (
 				6F4F989526C7CE6B00B79890 /* SignInView */,
 				6F4F98A126C7CE8100B79890 /* SignUpView */,
-				6F4F988B26C7CD0100B79890 /* InitialViewController.swift */,
-				6F4F989026C7CD1400B79890 /* InitialConnector.swift */,
-				6F4F98AF26C7D7DC00B79890 /* InitialPresenter.swift */,
+				6F4F98DB26C91D2400B79890 /* InitialConnector.swift */,
+				6F4F98DC26C91D2400B79890 /* InitialPresenter.swift */,
+				6F4F98DD26C91D2400B79890 /* InitialViewController.swift */,
 			);
 			path = InitialView;
 			sourceTree = "<group>";
@@ -355,7 +339,7 @@
 		6F4F989526C7CE6B00B79890 /* SignInView */ = {
 			isa = PBXGroup;
 			children = (
-				6F4F98A226C7CE9100B79890 /* SignInViewController.swift */,
+				6F4F98D126C91CF900B79890 /* SignInViewController.swift */,
 			);
 			path = SignInView;
 			sourceTree = "<group>";
@@ -363,7 +347,7 @@
 		6F4F98A126C7CE8100B79890 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
-				6F4F98AA26C7CF3F00B79890 /* SignUpViewController.swift */,
+				6F4F98D626C91D1400B79890 /* SignUpViewController.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -373,8 +357,6 @@
 			children = (
 				6F51F36F26B0AF890026B9E0 /* Member.swift */,
 				6F51F39D26B5AC220026B9E0 /* Task.swift */,
-				6F51F43B26BC855B0026B9E0 /* ShoppingList.swift */,
-				6F51F44026BC85AE0026B9E0 /* ShoppingListComponent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -427,9 +409,6 @@
 			isa = PBXGroup;
 			children = (
 				6F3BAA5426BC9BB60036E4D6 /* AddComponent */,
-				6F51F45626BC95290026B9E0 /* ShoppingListViewController.swift */,
-				6F51F45B26BC95630026B9E0 /* ShoppingListPresenter.swift */,
-				6F3BAA4F26BC991A0036E4D6 /* ComponentCell.swift */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -495,7 +474,7 @@
 		6FFDE49026AB13AC00AC8428 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
-				6FF28227269B486B000EFCF7 /* RankingViewController.swift */,
+				6F4F98E426C91D4300B79890 /* RankingViewController.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -527,9 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				6F51F45526BC951A0026B9E0 /* ShoppingList */,
-				6FFDE474269B53CA00AC8428 /* ShoppingListsViewController.swift */,
-				6F51F44526BC87320026B9E0 /* ShoppingListCell.swift */,
-				6F51F44A26BC879B0026B9E0 /* ShoppingListsPresenter.swift */,
 			);
 			path = ShoppingLists;
 			sourceTree = "<group>";
@@ -805,53 +781,45 @@
 				6F51F3EC26B609480026B9E0 /* Fonts.swift in Sources */,
 				6F05BAF126AB2F260013FCF8 /* FamilySummaryPresenter.swift in Sources */,
 				6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */,
+				6F4F98E026C91D2400B79890 /* InitialViewController.swift in Sources */,
 				6F51F39E26B5AC220026B9E0 /* Task.swift in Sources */,
-				6FF28228269B486B000EFCF7 /* RankingViewController.swift in Sources */,
+				6F4F98DF26C91D2400B79890 /* InitialPresenter.swift in Sources */,
 				6F51F3F126B60BC50026B9E0 /* HeaderLabelView.swift in Sources */,
 				6F51F37F26B1E6270026B9E0 /* MembersConnector.swift in Sources */,
 				6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */,
 				6F51F37526B0B0EB0026B9E0 /* MemberCell.swift in Sources */,
-				6F3BAA5026BC991A0036E4D6 /* ComponentCell.swift in Sources */,
+				6F4F98DE26C91D2400B79890 /* InitialConnector.swift in Sources */,
 				6F51F3A326B5AE2B0026B9E0 /* MemberTaskCell.swift in Sources */,
-				6F51F44B26BC879B0026B9E0 /* ShoppingListsPresenter.swift in Sources */,
+				6F4F98E526C91D4300B79890 /* RankingViewController.swift in Sources */,
 				6FFDE487269E04DF00AC8428 /* Rx+Extensions.swift in Sources */,
-				6F4F988C26C7CD0100B79890 /* InitialViewController.swift in Sources */,
 				6FFDE46B269B4B3B00AC8428 /* MembersViewController.swift in Sources */,
 				6F51F42426B9E1390026B9E0 /* UIViewController+ChildViewControllers.swift in Sources */,
 				6F51F40426B997AC0026B9E0 /* TaskCell.swift in Sources */,
 				6F4F98B526C7F4A900B79890 /* UINavigationBar+Appearance.swift in Sources */,
-				6F51F45C26BC95630026B9E0 /* ShoppingListPresenter.swift in Sources */,
 				6F51F40926B9B9A60026B9E0 /* TasksPresenter.swift in Sources */,
 				6F51F43726BC5A8A0026B9E0 /* Views.swift in Sources */,
 				6F51F41F26B9E0FD0026B9E0 /* UIView+RoundCorners.swift in Sources */,
-				6F4F98B026C7D7DC00B79890 /* InitialPresenter.swift in Sources */,
 				6F51F3F626B6182A0026B9E0 /* MemberDetailsSummaryView.swift in Sources */,
 				6FF28223269B4387000EFCF7 /* FamilyFeaturesViewController.swift in Sources */,
 				6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */,
-				6F4F989126C7CD1400B79890 /* InitialConnector.swift in Sources */,
 				6FF28204269B42DC000EFCF7 /* FamilySummaryViewController.swift in Sources */,
 				6F51F39426B5A1980026B9E0 /* MemberDetailsViewController.swift in Sources */,
 				6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */,
-				6F51F43C26BC855B0026B9E0 /* ShoppingList.swift in Sources */,
-				6FFDE475269B53CA00AC8428 /* ShoppingListsViewController.swift in Sources */,
 				6F51F36A26B0AB8A0026B9E0 /* MembersPresenter.swift in Sources */,
 				6FFDE48C26AB138F00AC8428 /* FamilyFeaturesPresenter.swift in Sources */,
 				6F4F987A26C7CA2700B79890 /* RootConnector.swift in Sources */,
 				6FFDE47A269B54CA00AC8428 /* FeatureTileView.swift in Sources */,
-				6F51F44126BC85AE0026B9E0 /* ShoppingListComponent.swift in Sources */,
-				6F51F44626BC87320026B9E0 /* ShoppingListCell.swift in Sources */,
-				6F4F98AB26C7CF3F00B79890 /* SignUpViewController.swift in Sources */,
 				6F51F42C26B9E4300026B9E0 /* AddTaskPresenter.swift in Sources */,
 				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
 				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
 				6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */,
 				6F51F41526B9DF280026B9E0 /* AddTaskViewController.swift in Sources */,
+				6F4F98D226C91CF900B79890 /* SignInViewController.swift in Sources */,
 				6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */,
 				6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */,
-				6F51F45726BC95290026B9E0 /* ShoppingListViewController.swift in Sources */,
-				6F4F98A326C7CE9100B79890 /* SignInViewController.swift in Sources */,
 				6F51F37026B0AF890026B9E0 /* Member.swift in Sources */,
 				6F51F37A26B1D0E80026B9E0 /* UITableView+ReusableView.swift in Sources */,
+				6F4F98D726C91D1400B79890 /* SignUpViewController.swift in Sources */,
 				6F51F41A26B9E0BA0026B9E0 /* DraggableModal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
