@@ -32,14 +32,14 @@ final class InitialViewController: UIViewController {
 	}()
 	
 	private let signInButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedPrimaryButton()
 		button.setTitle("Sign in", for: .normal)
 		button.backgroundColor = Assets.Colors.action.color
 		return button
 	}()
 	
 	private let signUpButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedSecondaryButton()
 		button.setTitle("Sign up", for: .normal)
 		button.setTitleColor(Assets.Colors.action.color, for: .normal)
 		button.backgroundColor = Assets.Colors.backgroundInteractive.color

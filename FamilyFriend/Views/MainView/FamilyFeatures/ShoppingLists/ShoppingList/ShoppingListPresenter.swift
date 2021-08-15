@@ -19,7 +19,23 @@ struct ShoppingListPresenterInput {
 
 final class ShoppingListPresenter: ShoppingListPresenting {
 	
+	struct Context {
+		let shoppingListViewRoutes: ShoppingListViewRoutes
+	}
+	
+	private let context: Context
+	
+	private let disposeBag = DisposeBag()
+	
+	init(context: Context) {
+		self.context = context
+	}
+	
 	func transform(input: ShoppingListPresenterInput) {
-		
+		input
+			.addComponentButtonPressed
+			.asDriverOnErrorJustComplete()
+			.drive(context.shoppingListViewRoutes.toAddComponent)
+			.disposed(by: disposeBag)
 	}
 }

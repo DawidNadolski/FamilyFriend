@@ -67,7 +67,7 @@ final class ShoppingListsViewController: UIViewController {
 	}
 	
 	private func setupNavigationBar() {
-		navigationItem.title = "Shopping lists"
+		navigationItem.title = "Lists"
 		navigationItem.rightBarButtonItem = addListBarButton
 		navigationController?.isNavigationBarHidden = false
 	}
