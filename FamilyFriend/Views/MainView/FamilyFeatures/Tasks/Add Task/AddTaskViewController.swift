@@ -63,7 +63,7 @@ final class AddTaskViewController: UIViewController {
 	}()
 	
 	private let doneButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedPrimaryButton()
 		button.setTitle("Done", for: .normal)
 		return button
 	}()

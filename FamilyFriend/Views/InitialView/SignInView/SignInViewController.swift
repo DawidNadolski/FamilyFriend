@@ -23,7 +23,7 @@ final class SignInViewController: UIViewController {
 	}()
 
 	private let signInButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedPrimaryButton()
 		button.setTitle("Sign in", for: .normal)
 		return button
 	}()
