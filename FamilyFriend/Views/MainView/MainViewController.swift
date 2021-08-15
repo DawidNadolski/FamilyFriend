@@ -64,6 +64,7 @@ class MainViewController: UIViewController {
 	}
 	
 	private func setupNavigationBar() {
+		navigationItem.title = "Home"
 		navigationController?.isNavigationBarHidden = true
 	}
 }
