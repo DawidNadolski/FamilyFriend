@@ -73,7 +73,7 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	
 	private var shoppingListFeatureBinder: Binder<Void> {
 		Binder(self) { presenter, _ in
-			presenter.context.mainViewRoutes.toShoppingListFeature.onNext(())
+			presenter.context.mainViewRoutes.toShoppingListsFeature.onNext(())
 		}
 	}
 	
