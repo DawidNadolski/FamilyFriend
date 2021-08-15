@@ -91,7 +91,7 @@ final class MemberDetailsViewController: UIViewController {
 		tableView.delegate = self
 		tableView.separatorStyle = .none
 		tableView.backgroundColor = Assets.Colors.backgroundWarm.color
-		tableView.register(TaskCell.self)
+		tableView.register(MemberTaskCell.self)
 	}
 	
 	private func setupBindings() {
@@ -110,10 +110,10 @@ extension MemberDetailsViewController: UITableViewDelegate, UITableViewDataSourc
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(for: indexPath) as TaskCell
+		let cell = tableView.dequeueReusableCell(for: indexPath) as MemberTaskCell
 		let task = memberActiveTasks[indexPath.row]
 		
-		cell.update(with: task, for: member)
+		cell.update(with: task)
 		
 		return cell
 	}
