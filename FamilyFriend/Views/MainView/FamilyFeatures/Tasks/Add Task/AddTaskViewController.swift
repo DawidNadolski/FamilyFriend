@@ -5,9 +5,25 @@
 //  Created by Dawid Nadolski on 03/08/2021.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 final class AddTaskViewController: UIViewController {
+	
+	private let presenter: AddTaskPresenting
+	
+	private let nameTextField = makeTextField()
+	private let xpPointsTextField = makeTextField()
+	private let disposeBag = DisposeBag()
+	
+	// TODO: Get rid of mock data
+	private let members: [Member] = [
+		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
+		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
+		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
+		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
+		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
+	]
 	
 	private let titleLabel: UILabel = {
 		let label = UILabel()
@@ -26,26 +42,12 @@ final class AddTaskViewController: UIViewController {
 		return label
 	}()
 	
-	private let nameTextfield: UITextField = {
-		let textfield = UITextField()
-		textfield.layer.cornerRadius = 12.0
-		textfield.backgroundColor = Assets.Colors.pickerViewGrey.color
-		return textfield
-	}()
-	
 	private let setXPPointsLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = Assets.Colors.textPrimary.color
 		label.text = "XP points"
 		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
-	}()
-	
-	private let xpPointsTextfield: UITextField = {
-		let textfield = UITextField()
-		textfield.layer.cornerRadius = 12.0
-		textfield.backgroundColor = Assets.Colors.pickerViewGrey.color
-		return textfield
 	}()
 	
 	private let pickAssigneeLabel: UILabel = {
@@ -68,10 +70,17 @@ final class AddTaskViewController: UIViewController {
 		return button
 	}()
 	
-	init() {
+	private let cancelButton: UIButton = {
+		let button = makeRoundedSecondaryButton()
+		button.setTitle("Cancel", for: .normal)
+		return button
+	}()
+	
+	init(presenter: AddTaskPresenting) {
+		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
-		
 		setupUI()
+		setupBindings()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -94,29 +103,29 @@ final class AddTaskViewController: UIViewController {
 			make.right.left.equalToSuperview().inset(16.0)
 		}
 		
-		view.addSubview(nameTextfield)
-		nameTextfield.snp.makeConstraints { make in
+		view.addSubview(nameTextField)
+		nameTextField.snp.makeConstraints { make in
 			make.top.equalTo(setNameLabel.snp.bottom).offset(6.0)
-			make.height.equalTo(42.0)
+			make.height.equalTo(48.0)
 			make.right.left.equalToSuperview().inset(16.0)
 		}
 		
 		view.addSubview(setXPPointsLabel)
 		setXPPointsLabel.snp.makeConstraints { make in
-			make.top.equalTo(nameTextfield.snp.bottom).offset(12.0)
+			make.top.equalTo(nameTextField.snp.bottom).offset(12.0)
 			make.right.left.equalToSuperview().inset(16.0)
 		}
 		
-		view.addSubview(xpPointsTextfield)
-		xpPointsTextfield.snp.makeConstraints { make in
+		view.addSubview(xpPointsTextField)
+		xpPointsTextField.snp.makeConstraints { make in
 			make.top.equalTo(setXPPointsLabel.snp.bottom).offset(6.0)
-			make.height.equalTo(42.0)
+			make.height.equalTo(48.0)
 			make.left.right.equalToSuperview().inset(16.0)
 		}
 		
 		view.addSubview(pickAssigneeLabel)
 		pickAssigneeLabel.snp.makeConstraints { make in
-			make.top.equalTo(xpPointsTextfield.snp.bottom).offset(42.0)
+			make.top.equalTo(xpPointsTextField.snp.bottom).offset(42.0)
 			make.left.right.equalToSuperview()
 		}
 		
@@ -132,7 +141,42 @@ final class AddTaskViewController: UIViewController {
 			make.top.equalTo(assigneePicker.snp.bottom).offset(128.0)
 			make.height.equalTo(48.0)
 			make.left.right.equalToSuperview().inset(16.0)
+		}
+		
+		view.addSubview(cancelButton)
+		cancelButton.snp.makeConstraints { make in
+			make.top.equalTo(doneButton.snp.bottom).offset(8.0)
+			make.height.equalTo(48.0)
+			make.left.right.equalToSuperview().inset(16.0)
 			make.bottom.equalToSuperview().inset(24.0)
 		}
+	}
+	
+	private func setupBindings() {
+		let input = AddTaskPresenterInput(
+			nameText: nameTextField.rx.text.asDriverOnErrorJustComplete(),
+			xpPoints: xpPointsTextField.rx.text.asDriverOnErrorJustComplete().map{ $0 != nil ? Int($0!) : nil },
+			assignedMember: assigneePicker.rx.itemSelected.map { [members] in members[$0.row] }.asDriverOnErrorJustComplete(),
+			addButtonPressed: ControlEvent<Task>(
+				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField] _ in
+					return Task(
+						taskID: 1,
+						name: nameTextField.text!,
+						description: "",
+						xpPoints: Int(xpPointsTextField.text!)!,
+						executingMemberID: nil,
+						assignmentDate: nil,
+						dueDate: nil,
+						completed: false
+					)
+			 }),
+			cancelButtonPressed: cancelButton.rx.tap
+		)
+		
+		let output = presenter.transform(input: input)
+		
+		output.isAddButtonEnabled
+			.drive(doneButton.rx.isEnabled)
+			.disposed(by: disposeBag)
 	}
 }

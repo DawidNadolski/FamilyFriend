@@ -15,9 +15,9 @@ final class MemberDetailsViewController: UIViewController {
 	// TODO: Replace with real data
 	private let member = Member(id: 1, name: "Dawid Nadolski", avatarURL: nil)
 	private let memberActiveTasks: [Task] = [
-		.init(taskID: 1, name: "Zmywanie naczyń", description: "", xpPoints: 30),
-		.init(taskID: 2, name: "Odkurzanie", description: "", xpPoints: 45),
-		.init(taskID: 3, name: "Umycie kurzy", description: "", xpPoints: 60)
+		.init(taskID: 1, name: "Zmywanie naczyń", description: "", xpPoints: 30, executingMemberID: 1, assignmentDate: Date(), dueDate: Date(), completed: false),
+		.init(taskID: 2, name: "Odkurzanie", description: "", xpPoints: 45, executingMemberID: 1, assignmentDate: Date(), dueDate: Date(), completed: false),
+		.init(taskID: 3, name: "Umycie kurzy", description: "", xpPoints: 60, executingMemberID: 1, assignmentDate: Date(), dueDate: Date(), completed: false)
 	]
 	
 	private let avatarImageView: UIImageView = {

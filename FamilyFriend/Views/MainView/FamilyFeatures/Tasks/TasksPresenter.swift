@@ -23,7 +23,7 @@ struct TasksPresenterOutput {
 final class TasksPresenter: TasksPresenting {
 	
 	struct Context {
-		let toAddTask: Binder<Void>
+		let tasksViewRoutes: TasksViewRoutes
 	}
 	
 	private let context: Context
@@ -37,7 +37,7 @@ final class TasksPresenter: TasksPresenting {
 	func transform(input: TasksPresenterInput) {
 		input.addTaskButtonPressed
 			.asDriverOnErrorJustComplete()
-			.drive(context.toAddTask)
+			.drive(context.tasksViewRoutes.toAddTask)
 			.disposed(by: disposeBag)
 	}
 }

@@ -13,13 +13,9 @@ final class TasksViewController: UIViewController {
 	
 	private let tableView = UITableView()
 	private let member: Member = .init(id: 1, name: "Dawid Nadolski", avatarURL: nil)
-	private let tasks: [Task] = [
-		.init(taskID: 1, name: "Zmywanie naczyń", description: "", xpPoints: 30),
-		.init(taskID: 2, name: "Odkurzanie", description: "", xpPoints: 45),
-		.init(taskID: 3, name: "Umycie kurzy", description: "", xpPoints: 60)
-	]
-	
 	private let addTaskBarButton = UIBarButtonItem(systemItem: .add)
+	
+	private var tasks: [Task] = []
 	
 	init(presenter: TasksPresenting) {
 		self.presenter = presenter
@@ -33,6 +29,11 @@ final class TasksViewController: UIViewController {
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		fetchData()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +71,30 @@ final class TasksViewController: UIViewController {
 		navigationItem.rightBarButtonItem = addTaskBarButton
 		navigationItem.title = "Tasks"
 		navigationController?.isNavigationBarHidden = false
+	}
+	
+	private func fetchData() {
+		let url = URL(string: "http://localhost:8080/tasks")!
+		
+		URLSession.shared.dataTask(with: url) { data, response, error in
+			guard let data = data else {
+				print(error?.localizedDescription ?? "Unknown error.")
+				return
+			}
+			
+			let decoder = JSONDecoder()
+			
+			if let tasks = try? decoder.decode([Task].self, from: data) {
+				DispatchQueue.main.async {
+					self.tasks = tasks
+					self.tableView.reloadData()
+					print("Loaded \(tasks.count) tasks.")
+				}
+			} else {
+				print("Unable to parse JSON response.")
+			}
+		}
+		.resume()
 	}
 }
 

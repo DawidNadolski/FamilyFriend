@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Task {
+struct Task: Codable {
 	let taskID: Int
 	let name: String
 	let description: String?
 	let xpPoints: Int
-	let executingMemberID: Int? = nil
-	let assignmentDate: Date? = Date()
-	let dueDate: Date? = nil
-	let completed: Bool = false
+	let executingMemberID: Int?
+	let assignmentDate: Date?
+	let dueDate: Date?
+	let completed: Bool
 }
