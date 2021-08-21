@@ -160,13 +160,10 @@ final class AddTaskViewController: UIViewController {
 			addButtonPressed: ControlEvent<Task>(
 				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField] _ in
 					return Task(
-						taskID: 1,
+						taskID: UUID(),
 						name: nameTextField.text!,
-						description: "",
 						xpPoints: Int(xpPointsTextField.text!)!,
 						executingMemberID: nil,
-						assignmentDate: nil,
-						dueDate: nil,
 						completed: false
 					)
 			 }),

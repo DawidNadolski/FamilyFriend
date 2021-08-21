@@ -8,12 +8,9 @@
 import Foundation
 
 struct Task: Codable {
-	let taskID: Int
+	let taskID: UUID?
 	let name: String
-	let description: String?
 	let xpPoints: Int
 	let executingMemberID: Int?
-	let assignmentDate: Date?
-	let dueDate: Date?
 	let completed: Bool
 }
