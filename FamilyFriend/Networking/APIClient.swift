@@ -13,8 +13,6 @@ enum NetworkError: Error {
 	case jsonDecodingError
 }
 
-typealias CompletionHandler<T> = (Result<T, NetworkError>)
-
 final class APIClient {
 	
 	private let baseURL: URL
