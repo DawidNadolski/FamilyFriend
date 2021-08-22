@@ -83,19 +83,8 @@ extension MainConnector: MainViewRoutes {
 	
 	var toTasksFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			let presenter = TasksPresenter(
-				context: .init(
-					toAddTask: Binder(connector) { connector, _ in
-						let addTaskViewController = AddTaskViewController()
-						addTaskViewController.modalPresentationStyle = .overCurrentContext
-						addTaskViewController.modalTransitionStyle = .crossDissolve
-						let modal = DraggableModal(embeddedViewController: addTaskViewController)
-						connector.mainViewController.present(modal, animated: true)
-					}
-				)
-			)
-			let tasksViewController = TasksViewController(presenter: presenter)
-			connector.push(viewController: tasksViewController)
+			let tasksConnector = TasksConnector()
+			connector.push(viewController: tasksConnector.connect())
 		}
 	}
 }

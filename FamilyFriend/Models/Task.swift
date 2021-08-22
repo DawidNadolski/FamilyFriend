@@ -7,13 +7,11 @@
 
 import Foundation
 
-struct Task {
-	let taskID: Int
+struct Task: Codable, Equatable {
+	
+	let taskID: UUID?
 	let name: String
-	let description: String?
 	let xpPoints: Int
-	let executingMemberID: Int? = nil
-	let assignmentDate: Date? = Date()
-	let dueDate: Date? = nil
-	let completed: Bool = false
+	let executingMemberID: Int?
+	let completed: Bool
 }
