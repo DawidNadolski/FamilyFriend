@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Task: Codable {
+struct Task: Codable, Equatable {
+	
 	let taskID: UUID?
 	let name: String
 	let xpPoints: Int

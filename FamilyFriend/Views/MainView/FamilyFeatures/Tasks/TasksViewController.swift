@@ -5,6 +5,7 @@
 //  Created by Dawid Nadolski on 11/07/2021.
 //
 
+import RxSwift
 import RxCocoa
 
 final class TasksViewController: UIViewController {
@@ -14,6 +15,8 @@ final class TasksViewController: UIViewController {
 	private let tableView = UITableView()
 	private let member: Member = .init(id: 1, name: "Dawid Nadolski", avatarURL: nil)
 	private let addTaskBarButton = UIBarButtonItem(systemItem: .add)
+	private let disposeBag = DisposeBag()
+	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
 	
 	private var tasks: [Task] = []
 	
@@ -44,6 +47,9 @@ final class TasksViewController: UIViewController {
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
+		view.addSubview(activityIndicatorView)
+		activityIndicatorView.center = view.center
+		
 		view.addSubview(tableView)
 		tableView.snp.makeConstraints { make in
 			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8.0)
@@ -64,7 +70,19 @@ final class TasksViewController: UIViewController {
 			addTaskButtonPressed: addTaskBarButton.rx.tap.asControlEvent()
 		)
 		
-		presenter.transform(input: input)
+		let output = presenter.transform(input: input)
+		
+		output.fetchedTasks
+			.drive { [weak self] fetchedTasks in
+				self?.tasks = fetchedTasks
+				self?.tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
+
+		output
+			.isFetchingData
+			.drive(activityIndicatorView.rx.isAnimating)
+			.disposed(by: disposeBag)
 	}
 	
 	private func setupNavigationBar() {
@@ -74,27 +92,16 @@ final class TasksViewController: UIViewController {
 	}
 	
 	private func fetchData() {
-		let url = URL(string: "http://localhost:8080/tasks")!
 		
-		URLSession.shared.dataTask(with: url) { data, response, error in
-			guard let data = data else {
-				print(error?.localizedDescription ?? "Unknown error.")
-				return
+		let service = FamilyFriendService()
+		
+		service.getTasks()
+			.asDriverOnErrorJustComplete()
+			.drive { tasks in
+				self.tasks = tasks
+				self.tableView.reloadData()
 			}
-			
-			let decoder = JSONDecoder()
-			
-			if let tasks = try? decoder.decode([Task].self, from: data) {
-				DispatchQueue.main.async {
-					self.tasks = tasks
-					self.tableView.reloadData()
-					print("Loaded \(tasks.count) tasks.")
-				}
-			} else {
-				print("Unable to parse JSON response.")
-			}
-		}
-		.resume()
+			.disposed(by: disposeBag)
 	}
 }
 
