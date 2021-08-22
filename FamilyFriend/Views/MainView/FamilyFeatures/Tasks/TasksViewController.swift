@@ -5,6 +5,7 @@
 //  Created by Dawid Nadolski on 11/07/2021.
 //
 
+import RxSwift
 import RxCocoa
 
 final class TasksViewController: UIViewController {
@@ -13,13 +14,11 @@ final class TasksViewController: UIViewController {
 	
 	private let tableView = UITableView()
 	private let member: Member = .init(id: 1, name: "Dawid Nadolski", avatarURL: nil)
-	private let tasks: [Task] = [
-		.init(taskID: 1, name: "Zmywanie naczyń", description: "", xpPoints: 30),
-		.init(taskID: 2, name: "Odkurzanie", description: "", xpPoints: 45),
-		.init(taskID: 3, name: "Umycie kurzy", description: "", xpPoints: 60)
-	]
-	
 	private let addTaskBarButton = UIBarButtonItem(systemItem: .add)
+	private let disposeBag = DisposeBag()
+	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+	
+	private var tasks: [Task] = []
 	
 	init(presenter: TasksPresenting) {
 		self.presenter = presenter
@@ -35,6 +34,11 @@ final class TasksViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		fetchData()
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		setupNavigationBar()
@@ -42,6 +46,9 @@ final class TasksViewController: UIViewController {
 	
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
+		
+		view.addSubview(activityIndicatorView)
+		activityIndicatorView.center = view.center
 		
 		view.addSubview(tableView)
 		tableView.snp.makeConstraints { make in
@@ -63,13 +70,38 @@ final class TasksViewController: UIViewController {
 			addTaskButtonPressed: addTaskBarButton.rx.tap.asControlEvent()
 		)
 		
-		presenter.transform(input: input)
+		let output = presenter.transform(input: input)
+		
+		output.fetchedTasks
+			.drive { [weak self] fetchedTasks in
+				self?.tasks = fetchedTasks
+				self?.tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
+
+		output
+			.isFetchingData
+			.drive(activityIndicatorView.rx.isAnimating)
+			.disposed(by: disposeBag)
 	}
 	
 	private func setupNavigationBar() {
 		navigationItem.rightBarButtonItem = addTaskBarButton
 		navigationItem.title = "Tasks"
 		navigationController?.isNavigationBarHidden = false
+	}
+	
+	private func fetchData() {
+		
+		let service = FamilyFriendService()
+		
+		service.getTasks()
+			.asDriverOnErrorJustComplete()
+			.drive { tasks in
+				self.tasks = tasks
+				self.tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
 	}
 }
 
