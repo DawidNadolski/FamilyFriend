@@ -9,7 +9,13 @@ import RxSwift
 
 protocol FamilyFriendAPI {
 	func getTasks() -> Observable<[Task]>
-	func saveTask(task: Task)
+	func saveTask(_ task: Task)
+	func getShoppingLists() -> Observable<[ShoppingList]>
+	func saveShoppingList(_ list: ShoppingList)
+	func deleteShoppingList(_ list: ShoppingList)
+	func getShoppingListComponents() -> Observable<[ShoppingListComponent]>
+	func saveShoppingListComponent(_ component: ShoppingListComponent)
+	func deleteShoppingListComponent(_ component: ShoppingListComponent)
 }
 
 final class FamilyFriendService: FamilyFriendAPI {
@@ -24,7 +30,32 @@ final class FamilyFriendService: FamilyFriendAPI {
 		return client.send(apiRequest: GetTasksRequest())
 	}
 	
-	func saveTask(task: Task) {
+	func saveTask(_ task: Task) {
 		client.send(apiRequest: SaveTaskRequest(), body: task)
+	}
+	
+	func getShoppingLists() -> Observable<[ShoppingList]> {
+		return client.send(apiRequest: GetShoppingListsRequest())
+	}
+	
+	func saveShoppingList(_ list: ShoppingList) {
+		client.send(apiRequest: SaveShoppingListRequest(), body: list)
+	}
+	
+	func deleteShoppingList(_ list: ShoppingList) {
+		// TODO: Consider removin associated list components
+		client.send(apiRequest: DeleteShoppingListRequest(), body: list)
+	}
+	
+	func getShoppingListComponents() -> Observable<[ShoppingListComponent]> {
+		return client.send(apiRequest: GetShoppingListComponentsRequest())
+	}
+	
+	func saveShoppingListComponent(_ component: ShoppingListComponent) {
+		client.send(apiRequest: SaveShoppingListComponentRequest(), body: component)
+	}
+	
+	func deleteShoppingListComponent(_ component: ShoppingListComponent) {
+		client.send(apiRequest: DeletingShoppingListComponentRequest(), body: component)
 	}
 }

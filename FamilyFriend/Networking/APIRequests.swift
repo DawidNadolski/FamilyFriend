@@ -63,4 +63,45 @@ final class SaveTaskRequest: APIRequest {
 	var parameters: [String : String] = [:]
 }
 
+final class GetShoppingListsRequest: APIRequest {
+	
+	var method: RequestType = .GET
+	var path: String = "shoppingLists"
+	var parameters: [String : String] = [:]
+}
+
+final class SaveShoppingListRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "shoppingList"
+	var parameters: [String : String] = [:]
+}
+
+final class DeleteShoppingListRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "deleteShoppingList"
+	var parameters: [String : String] = [:]
+}
+
+final class GetShoppingListComponentsRequest: APIRequest {
+	
+	var method: RequestType = .GET
+	var path: String = "shoppingListComponents"
+	var parameters: [String : String] = [:]
+}
+
+final class SaveShoppingListComponentRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "shoppingListComponent"
+	var parameters: [String : String] = [:]
+}
+
+final class DeletingShoppingListComponentRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "deleteShoppingListComponent"
+	var parameters: [String : String] = [:]
+}
 

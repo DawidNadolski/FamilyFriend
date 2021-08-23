@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct ShoppingList {
+struct ShoppingList: Codable, Equatable {
+	let id: UUID
 	let name: String
 }

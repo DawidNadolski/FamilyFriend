@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ShoppingListComponent {
+struct ShoppingListComponent: Codable, Equatable {
+	let id: UUID?
+	let listId: UUID
 	let name: String
-	let listName: String
-	let isBought: Bool = false
 }
