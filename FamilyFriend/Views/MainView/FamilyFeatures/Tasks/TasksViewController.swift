@@ -79,8 +79,7 @@ final class TasksViewController: UIViewController {
 			}
 			.disposed(by: disposeBag)
 
-		output
-			.isFetchingData
+		output.isFetchingData
 			.drive(activityIndicatorView.rx.isAnimating)
 			.disposed(by: disposeBag)
 	}

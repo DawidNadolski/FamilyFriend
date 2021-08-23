@@ -76,7 +76,7 @@ extension MainConnector: MainViewRoutes {
 	
 	var toShoppingListsFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			let shoppingListsConnector = ShoppingListsConnector()
+			let shoppingListsConnector = ShoppingListsConnector(service: FamilyFriendService())
 			connector.push(viewController: shoppingListsConnector.connect())
 		}
 	}
