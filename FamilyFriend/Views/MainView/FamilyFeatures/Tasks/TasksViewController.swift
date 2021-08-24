@@ -13,10 +13,10 @@ final class TasksViewController: UIViewController {
 	private let presenter: TasksPresenting
 	
 	private let tableView = UITableView()
-	private let member: Member = .init(id: 1, name: "Dawid Nadolski", avatarURL: nil)
 	private let addTaskBarButton = UIBarButtonItem(systemItem: .add)
-	private let disposeBag = DisposeBag()
 	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+	private let selectedTask = BehaviorSubject<Task?>(value: nil)
+	private let disposeBag = DisposeBag()
 	
 	private var tasks: [Task] = []
 	
@@ -67,7 +67,8 @@ final class TasksViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = TasksPresenterInput(
-			addTaskButtonPressed: addTaskBarButton.rx.tap.asControlEvent()
+			addTaskButtonPressed: addTaskBarButton.rx.tap.asControlEvent(),
+			taskSelected: ControlEvent(events: selectedTask)
 		)
 		
 		let output = presenter.transform(input: input)
@@ -115,8 +116,16 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(for: indexPath) as TaskCell
 		let task = tasks[indexPath.row]
 		
-		cell.update(with: task, for: member)
+		cell.update(with: task)
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let task = tasks[indexPath.row]
+		
+		if !task.completed {
+			selectedTask.onNext(task)
+		}
 	}
 }

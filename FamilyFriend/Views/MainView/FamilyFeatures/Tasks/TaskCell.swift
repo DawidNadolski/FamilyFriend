@@ -43,10 +43,40 @@ final class TaskCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func update(with task: Task, for member: Member? = nil) {
+	func update(with task: Task) {
 		nameLabel.text = task.name
-		assigneeLabel.text = member != nil ? member!.name : ""
+		assigneeLabel.text = task.executingMemberName
 		xpPointsLabel.text = "\(task.xpPoints) XP"
+		
+		if task.completed {
+			markTaskAsCompleted(task)
+		}
+	}
+	
+	private func markTaskAsCompleted(_ task: Task) {
+		let attributedNameText = NSMutableAttributedString(string: "\(task.name)")
+		attributedNameText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: 1.5,
+			range: NSMakeRange(0, attributedNameText.length)
+		)
+		nameLabel.attributedText = attributedNameText
+		
+		let attributedXpPointsText = NSMutableAttributedString(string: "\(task.xpPoints) XP")
+		attributedXpPointsText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: 2,
+			range: NSMakeRange(0, attributedXpPointsText.length)
+		)
+		xpPointsLabel.attributedText = attributedXpPointsText
+		
+		let attributedAssigneeText = NSMutableAttributedString(string: "\(task.executingMemberName)")
+		attributedAssigneeText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: 2,
+			range: NSMakeRange(0, attributedAssigneeText.length)
+		)
+		assigneeLabel.attributedText = attributedAssigneeText
 	}
 	
 	private func setupUI() {

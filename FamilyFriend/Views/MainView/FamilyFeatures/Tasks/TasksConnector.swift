@@ -12,6 +12,7 @@ protocol TasksConnecting: Connecting { }
 
 protocol TasksViewRoutes {
 	var toAddTask: Binder<Void> { get }
+	var toCompleteTask: Binder<Task?> { get }
 }
 
 final class TasksConnector: TasksConnecting {
@@ -54,6 +55,34 @@ extension TasksConnector: TasksViewRoutes {
 			let modal = DraggableModal(embeddedViewController: viewController)
 			
 			connector.present(viewController: modal)
+		}
+	}
+	
+	var toCompleteTask: Binder<Task?> {
+		Binder(self) { connector, task in
+			guard let task = task else {
+				return
+			}
+			
+			let onYes: Binder<Void> = Binder(connector) { connector, task in
+				connector.tasksViewController.dismiss(animated: true)
+			}
+			
+			let onNo: Binder<Void> = Binder(connector) { connector, _ in
+				connector.tasksViewController.dismiss(animated: true)
+			}
+			
+			let presenter = ConfirmActionPresenter(context: .init(onYes: onYes, onNo: onNo))
+			let viewController = ConfirmActionViewController(
+				presenter: presenter,
+				title: "Did you complete the task?",
+				yesButtonTitle: "Yes",
+				noButtonTitle: "No"
+			)
+			viewController.modalPresentationStyle = .overCurrentContext
+			viewController.modalTransitionStyle = .crossDissolve
+			
+			connector.present(viewController: viewController)
 		}
 	}
 }
