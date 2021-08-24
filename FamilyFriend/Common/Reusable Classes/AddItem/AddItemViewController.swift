@@ -7,7 +7,6 @@
 
 import RxCocoa
 import RxSwift
-import UIKit
 
 final class AddItemViewController: UIViewController {
 	
@@ -92,12 +91,12 @@ final class AddItemViewController: UIViewController {
 	private func setupBindings() {
 		let input = AddItemPresenterInput(
 			textFieldText: textField.rx.text.asDriverOnErrorJustComplete(),
-			onNoButtonTapped: noButton.rx.tap,
 			onYesButtonTapped: ControlEvent<String>(
 				events: yesButton.rx.tap
 					.mapToVoid()
 					.withLatestFrom(textField.rx.text.compactMap { $0 } )
-			)
+			),
+			onNoButtonTapped: noButton.rx.tap
 		)
 		
 		let output = presenter.transform(input: input)

@@ -14,8 +14,8 @@ protocol AddItemPresenting {
 
 struct AddItemPresenterInput {
 	let textFieldText: Driver<String?>
-	let onNoButtonTapped: ControlEvent<Void>
 	let onYesButtonTapped: ControlEvent<String>
+	let onNoButtonTapped: ControlEvent<Void>
 }
 
 struct AddItemPresenterOutput {
