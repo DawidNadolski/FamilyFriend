@@ -41,7 +41,7 @@ extension TasksConnector: TasksViewRoutes {
 	var toAddTask: Binder<Void> {
 		Binder(self) { connector, _ in
 			let onAddTask: Binder<Task> = Binder(connector) { connector, task in
-				connector.service.saveTask(task: task)
+				connector.service.saveTask(task)
 				connector.tasksViewController.dismiss(animated: true)
 			}
 			

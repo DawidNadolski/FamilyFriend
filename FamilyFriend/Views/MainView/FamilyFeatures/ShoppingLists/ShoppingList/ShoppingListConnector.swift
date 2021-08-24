@@ -17,16 +17,22 @@ protocol ShoppingListViewRoutes {
 final class ShoppingListConnector: ShoppingListConnecting {
 	
 	private let shoppingList: ShoppingList
+	private let service: FamilyFriendAPI
 	
 	private weak var shoppingListViewController: ShoppingListViewController!
 	
-	init(shoppingList: ShoppingList) {
+	init(shoppingList: ShoppingList, service: FamilyFriendAPI) {
 		self.shoppingList = shoppingList
+		self.service = service
 	}
 	
 	func connect() -> UIViewController {
 		let presenter = ShoppingListPresenter(
-			context: .init(shoppingListViewRoutes: self)
+			context: .init(
+				shoppingList: shoppingList,
+				shoppingListViewRoutes: self,
+				service: service
+			)
 		)
 		let shoppingListViewController = ShoppingListViewController(presenter: presenter, shoppingList: shoppingList)
 		self.shoppingListViewController = shoppingListViewController
@@ -55,7 +61,9 @@ extension ShoppingListConnector: ShoppingListViewRoutes {
 				connector.shoppingListViewController.dismiss(animated: true)
 			}
 			
-			let onYes: Binder<String> = Binder(connector) { connector, listName in
+			let onYes: Binder<String> = Binder(connector) { connector, componentName in
+				let component = ShoppingListComponent(id: UUID(), listId: connector.shoppingList.id, name: componentName)
+				connector.service.saveShoppingListComponent(component)
 				connector.shoppingListViewController.dismiss(animated: true)
 			}
 			
