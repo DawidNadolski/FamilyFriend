@@ -9,9 +9,10 @@ import Foundation
 
 struct Task: Codable, Equatable {
 	
-	let taskID: UUID?
+	let id: UUID
 	let name: String
 	let xpPoints: Int
-	let executingMemberID: Int?
+	let assignedMemberId: UUID
+	let assignedMemberName: String
 	let completed: Bool
 }

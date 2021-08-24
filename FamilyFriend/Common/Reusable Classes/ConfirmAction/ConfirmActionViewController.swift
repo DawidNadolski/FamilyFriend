@@ -1,19 +1,18 @@
 //
-//  AddItemViewController.swift
+//  ConfirmActionViewController.swift
 //  FamilyFriend
 //
-//  Created by Dawid Nadolski on 15/08/2021.
+//  Created by Dawid Nadolski on 24/08/2021.
 //
 
-import RxCocoa
 import RxSwift
+import RxCocoa
 
-final class AddItemViewController: UIViewController {
+final class ConfirmActionViewController: UIViewController {
 	
-	private let presenter: AddItemPresenting
+	private let presenter: ConfirmActionPresenting
 
 	private let containerView = TileView()
-	private let textField = makeTextField()
 	private let disposeBag = DisposeBag()
 	
 	private let titleLabel: UILabel = {
@@ -34,7 +33,7 @@ final class AddItemViewController: UIViewController {
 		return button
 	}()
 
-	init(presenter: AddItemPresenting, title: String, yesButtonTitle: String, noButtonTitle: String) {
+	init(presenter: ConfirmActionPresenting, title: String, yesButtonTitle: String, noButtonTitle: String) {
 		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
 		setupUI(title: title, yesButtonTitle: yesButtonTitle, noButtonTitle: noButtonTitle)
@@ -60,18 +59,11 @@ final class AddItemViewController: UIViewController {
 			make.top.equalToSuperview().offset(16.0)
 			make.left.right.equalToSuperview()
 		}
-		
-		containerView.addSubview(textField)
-		textField.snp.makeConstraints { make in
-			make.height.equalTo(48.0)
-			make.top.equalTo(titleLabel.snp.bottom).offset(24.0)
-			make.left.right.equalToSuperview().inset(16.0)
-		}
 
 		containerView.addSubview(yesButton)
 		yesButton.setTitle(yesButtonTitle, for: .normal)
 		yesButton.snp.makeConstraints { make in
-			make.top.equalTo(textField.snp.bottom).offset(32.0)
+			make.top.equalTo(titleLabel.snp.bottom).offset(32.0)
 			make.left.right.equalToSuperview().inset(16.0)
 			make.height.equalTo(48.0)
 			make.centerX.equalToSuperview()
@@ -89,20 +81,11 @@ final class AddItemViewController: UIViewController {
 	}
 
 	private func setupBindings() {
-		let input = AddItemPresenterInput(
-			textFieldText: textField.rx.text.asDriverOnErrorJustComplete(),
-			onYesButtonTapped: ControlEvent<String>(
-				events: yesButton.rx.tap
-					.mapToVoid()
-					.withLatestFrom(textField.rx.text.compactMap { $0 } )
-			),
+		let input = ConfirmActionInput(
+			onYesButtonTapped: yesButton.rx.tap,
 			onNoButtonTapped: noButton.rx.tap
 		)
 		
-		let output = presenter.transform(input: input)
-		
-		output.isYesButtonEnabled
-			.drive(yesButton.rx.isEnabled)
-			.disposed(by: disposeBag)
+		presenter.transform(input: input)
 	}
 }

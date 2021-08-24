@@ -14,6 +14,7 @@ protocol TasksPresenting {
 
 struct TasksPresenterInput {
 	let addTaskButtonPressed: ControlEvent<Void>
+	let taskSelected: ControlEvent<Task?>
 }
 
 struct TasksPresenterOutput {
@@ -44,6 +45,11 @@ final class TasksPresenter: TasksPresenting {
 		input.addTaskButtonPressed
 			.asDriverOnErrorJustComplete()
 			.drive(context.tasksViewRoutes.toAddTask)
+			.disposed(by: disposeBag)
+		
+		input.taskSelected
+			.asDriverOnErrorJustComplete()
+			.drive(context.tasksViewRoutes.toCompleteTask)
 			.disposed(by: disposeBag)
 		
 		let output = TasksPresenterOutput(

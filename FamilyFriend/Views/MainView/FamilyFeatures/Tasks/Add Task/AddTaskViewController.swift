@@ -13,16 +13,19 @@ final class AddTaskViewController: UIViewController {
 	private let presenter: AddTaskPresenting
 	
 	private let nameTextField = makeTextField()
-	private let xpPointsTextField = makeTextField()
+	private let pickerViewTopSeparator = makeSeparatorView()
+	private let pickerViewBottomSeparator = makeSeparatorView()
+	private let assigneePicker = UIPickerView()
+	private let selectedMember = BehaviorRelay<Member?>(value: nil)
 	private let disposeBag = DisposeBag()
 	
 	// TODO: Get rid of mock data
 	private let members: [Member] = [
-		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
-		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
-		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
-		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
-		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
+		.init(id: UUID(), name: "Dawid Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Mateusz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Grażyna Nadolska", avatarURL: nil),
+		.init(id: UUID(), name: "Grzegorz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Agata Nadolska", avatarURL: nil)
 	]
 	
 	private let titleLabel: UILabel = {
@@ -50,6 +53,13 @@ final class AddTaskViewController: UIViewController {
 		return label
 	}()
 	
+	private let xpPointsTextField: UITextField = {
+		let textField = makeTextField()
+		textField.keyboardType = .numberPad
+		textField.addDoneButtonToKeyboard()
+		return textField
+	}()
+	
 	private let pickAssigneeLabel: UILabel = {
 		let label = UILabel()
 		label.textAlignment = .center
@@ -59,14 +69,10 @@ final class AddTaskViewController: UIViewController {
 		return label
 	}()
 	
-	private let assigneePicker: UIPickerView = {
-		let pickerView = UIPickerView()
-		return pickerView
-	}()
-	
 	private let doneButton: UIButton = {
 		let button = makeRoundedPrimaryButton()
 		button.setTitle("Done", for: .normal)
+		button.setTitleColor(.white, for: .disabled)
 		return button
 	}()
 	
@@ -75,12 +81,13 @@ final class AddTaskViewController: UIViewController {
 		button.setTitle("Cancel", for: .normal)
 		return button
 	}()
-	
+		
 	init(presenter: AddTaskPresenting) {
 		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
 		setupUI()
 		setupBindings()
+		setupPickerView()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -125,20 +132,34 @@ final class AddTaskViewController: UIViewController {
 		
 		view.addSubview(pickAssigneeLabel)
 		pickAssigneeLabel.snp.makeConstraints { make in
-			make.top.equalTo(xpPointsTextField.snp.bottom).offset(42.0)
+			make.top.equalTo(xpPointsTextField.snp.bottom).offset(36.0)
 			make.left.right.equalToSuperview()
+		}
+		
+		view.addSubview(pickerViewTopSeparator)
+		pickerViewTopSeparator.snp.makeConstraints { make in
+			make.top.equalTo(pickAssigneeLabel.snp.bottom).offset(12.0)
+			make.height.equalTo(1.0)
+			make.left.right.equalToSuperview().inset(4.0)
 		}
 		
 		view.addSubview(assigneePicker)
 		assigneePicker.snp.makeConstraints { make in
-			make.top.equalTo(pickAssigneeLabel.snp.bottom).offset(12)
-			make.height.equalTo(42.0)
-			make.left.right.equalToSuperview().inset(8.0)
+			make.top.equalTo(pickerViewTopSeparator.snp.bottom)
+			make.height.equalTo(128.0)
+			make.left.right.equalToSuperview()
+		}
+		
+		view.addSubview(pickerViewBottomSeparator)
+		pickerViewBottomSeparator.snp.makeConstraints { make in
+			make.top.equalTo(assigneePicker.snp.bottom)
+			make.height.equalTo(1.0)
+			make.left.right.equalToSuperview().inset(4.0)
 		}
 		
 		view.addSubview(doneButton)
 		doneButton.snp.makeConstraints { make in
-			make.top.equalTo(assigneePicker.snp.bottom).offset(128.0)
+			make.top.equalTo(pickerViewBottomSeparator.snp.bottom).offset(24.0)
 			make.height.equalTo(48.0)
 			make.left.right.equalToSuperview().inset(16.0)
 		}
@@ -154,16 +175,17 @@ final class AddTaskViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = AddTaskPresenterInput(
-			nameText: nameTextField.rx.text.asDriverOnErrorJustComplete(),
-			xpPoints: xpPointsTextField.rx.text.asDriverOnErrorJustComplete().map{ $0 != nil ? Int($0!) : nil },
-			assignedMember: assigneePicker.rx.itemSelected.map { [members] in members[$0.row] }.asDriverOnErrorJustComplete(),
+			nameText: nameTextField.rx.text.orEmpty.distinctUntilChanged().asObservable(),
+			xpPoints: xpPointsTextField.rx.text.orEmpty.distinctUntilChanged().asObservable(),
+			assignedMember: selectedMember.asObservable(),
 			addButtonPressed: ControlEvent<Task>(
-				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField] _ in
+				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField, selectedMember] _ in
 					return Task(
-						taskID: UUID(),
+						id: UUID(),
 						name: nameTextField.text!,
 						xpPoints: Int(xpPointsTextField.text!)!,
-						executingMemberID: nil,
+						assignedMemberId: selectedMember.value!.id,
+						assignedMemberName: selectedMember.value!.name,
 						completed: false
 					)
 			 }),
@@ -173,7 +195,36 @@ final class AddTaskViewController: UIViewController {
 		let output = presenter.transform(input: input)
 		
 		output.isAddButtonEnabled
-			.drive(doneButton.rx.isEnabled)
+			.drive { [weak self] in self?.switchDoneButtonEnabledState(to: $0) }
 			.disposed(by: disposeBag)
+	}
+	
+	private func setupPickerView() {
+		assigneePicker.dataSource = self
+		assigneePicker.delegate = self
+	}
+	
+	private func switchDoneButtonEnabledState(to isEnabled: Bool) {
+		doneButton.isEnabled = isEnabled
+		doneButton.backgroundColor = isEnabled ? Assets.Colors.action.color : Assets.Colors.iron.color.withAlphaComponent(0.5)
+	}
+}
+
+extension AddTaskViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		1
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		members.count
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		members[row].name
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		selectedMember.accept(members[row])
 	}
 }
