@@ -12,11 +12,11 @@ final class MembersViewController: UIViewController {
 		
 	// TODO: Get rid of mock data
 	private let members: [Member] = [
-		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
-		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
-		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
-		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
-		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
+		.init(id: UUID(), name: "Dawid Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Mateusz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Grażyna Nadolska", avatarURL: nil),
+		.init(id: UUID(), name: "Grzegorz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Agata Nadolska", avatarURL: nil)
 	]
 	
 	private let tableView = UITableView()

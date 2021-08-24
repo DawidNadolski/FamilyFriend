@@ -8,8 +8,7 @@
 import Foundation
 
 struct Member {
-	// TODO: Change id to UUID
-	let id: Int
+	let id: UUID
 	let name: String
 	let avatarURL: URL?
 }

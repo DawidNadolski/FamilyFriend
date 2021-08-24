@@ -13,11 +13,11 @@ final class MemberDetailsViewController: UIViewController {
 	private let tableView = UITableView()
 	
 	// TODO: Replace with real data
-	private let member = Member(id: 1, name: "Dawid Nadolski", avatarURL: nil)
+	private let member = Member(id: UUID(), name: "Dawid Nadolski", avatarURL: nil)
 	private let memberActiveTasks: [Task] = [
-		.init(taskID: UUID(), name: "Zmywanie naczyń", xpPoints: 30, executingMemberID: 1, completed: false),
-		.init(taskID: UUID(), name: "Odkurzanie", xpPoints: 45, executingMemberID: 1, completed: false),
-		.init(taskID: UUID(), name: "Umycie kurzy", xpPoints: 60, executingMemberID: 1, completed: false)
+		.init(id: UUID(), name: "Zmywanie naczyń", xpPoints: 30, executingMemberId: UUID(), executingMemberName: "Dawid", completed: false),
+		.init(id: UUID(), name: "Odkurzanie", xpPoints: 45, executingMemberId: UUID(), executingMemberName: "Dawid", completed: false),
+		.init(id: UUID(), name: "Umycie kurzy", xpPoints: 60, executingMemberId: UUID(), executingMemberName: "Dawid", completed: false)
 	]
 	
 	private let avatarImageView: UIImageView = {
