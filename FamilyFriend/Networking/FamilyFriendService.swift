@@ -43,7 +43,6 @@ final class FamilyFriendService: FamilyFriendAPI {
 	}
 	
 	func deleteShoppingList(_ list: ShoppingList) {
-		// TODO: Consider removin associated list components
 		client.send(apiRequest: DeleteShoppingListRequest(), body: list)
 	}
 	

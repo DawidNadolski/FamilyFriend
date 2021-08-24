@@ -8,7 +8,7 @@
 import Foundation
 
 struct ShoppingListComponent: Codable, Equatable {
-	let id: UUID?
+	let id: UUID
 	let listId: UUID
 	let name: String
 }

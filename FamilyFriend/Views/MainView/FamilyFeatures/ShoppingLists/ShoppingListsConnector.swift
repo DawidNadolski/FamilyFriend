@@ -20,7 +20,7 @@ final class ShoppingListsConnector: ShoppingListsConnecting {
 	
 	private weak var shoppingListsViewController: ShoppingListsViewController!
 	
-	init(service: FamilyFriendAPI) {
+	init(service: FamilyFriendAPI = FamilyFriendService()) {
 		self.service = service
 	}
 	
