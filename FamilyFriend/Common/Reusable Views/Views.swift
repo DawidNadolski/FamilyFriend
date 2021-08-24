@@ -22,8 +22,6 @@ let makeRoundedSecondaryButton: () -> UIButton = {
 	roundedButton.layer.cornerRadius = 24.0
 	roundedButton.titleLabel?.font = FontFamily.SFProText.bold.font(size: 15.0)
 	roundedButton.setTitleColor(Assets.Colors.action.color, for: .normal)
-	roundedButton.layer.borderColor = Assets.Colors.action.color.withAlphaComponent(0.5).cgColor
-	roundedButton.layer.borderWidth = 1.0
 	return roundedButton
 }
 
@@ -32,9 +30,9 @@ let makeTextField: () -> UITextField = {
 	textField.backgroundColor = Assets.Colors.backgroundInteractive.color
 	textField.textColor = Assets.Colors.textPrimary.color
 	textField.font = FontFamily.SFProText.regular.font(size: 17.0)
-	textField.layer.cornerRadius = 24.0
+	textField.layer.cornerRadius = 12.0
 	textField.layer.borderColor = Assets.Colors.action.color.withAlphaComponent(0.5).cgColor
-	textField.layer.borderWidth = 1.0
+	textField.layer.borderWidth = 0.5
 	let padding = CGFloat(16.0)
 	textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: textField.frame.size.height))
 	textField.leftViewMode = .always
@@ -54,6 +52,11 @@ let makeAlertWithForm: (_ title: String, _ message: String?) -> UIAlertControlle
 		textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: textField.frame.size.height))
 		textField.leftViewMode = .always
 	}
-	
 	return alert
+}
+
+let makeSeparatorView: () -> UIView = {
+	let view = UIView()
+	view.backgroundColor = Assets.Colors.textPrimary.color.withAlphaComponent(0.1)
+	return view
 }

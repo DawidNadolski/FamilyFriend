@@ -13,9 +13,9 @@ protocol AddTaskPresenting {
 }
 
 struct AddTaskPresenterInput {
-	let nameText: Driver<String?>
-	let xpPoints: Driver<Int?>
-	let assignedMember: Driver<Member?>
+	let nameText: Observable<String>
+	let xpPoints: Observable<String>
+	let assignedMemberId: Observable<Int?>
 	let addButtonPressed: ControlEvent<Task>
 	let cancelButtonPressed: ControlEvent<Void>
 }
@@ -33,6 +33,7 @@ final class AddTaskPresenter: AddTaskPresenting {
 	
 	private let context: Context
 	
+	private let addButtonEnabledSubject = BehaviorSubject<Bool>(value: false)
 	private let disposeBag = DisposeBag()
 	
 	init(context: Context) {
@@ -50,19 +51,28 @@ final class AddTaskPresenter: AddTaskPresenting {
 			.drive(context.onCancel)
 			.disposed(by: disposeBag)
 		
-		let isAddButtonEnabled = Observable
-			.combineLatest(input.nameText.asObservable(), input.xpPoints.asObservable())
-			.map { name, xpPoints -> Bool in
-				guard
-					let name = name,
-					let _ = xpPoints
-				else {
-					return false
-				}
-				return !name.isEmpty
-			}
-			.asDriverOnErrorJustComplete()
+		Observable.combineLatest(
+			input.nameText,
+			input.xpPoints,
+			input.assignedMemberId
+		)
+		.asDriverOnErrorJustComplete()
+		.drive(validateInputBinder)
+		.disposed(by: disposeBag)
 		
-		return AddTaskPresenterOutput(isAddButtonEnabled: isAddButtonEnabled)
+		return AddTaskPresenterOutput(isAddButtonEnabled: addButtonEnabledSubject.asDriverOnErrorJustComplete())
+	}
+	
+	private var validateInputBinder: Binder<(String, String, Int?)> {
+		Binder(self) { presenter, input in
+			let (name, xpPoints, memberId) = input
+
+			guard memberId != nil, Int(xpPoints) != nil
+			else {
+				presenter.addButtonEnabledSubject.onNext(false)
+				return
+			}
+			presenter.addButtonEnabledSubject.onNext(name != "")
+		}
 	}
 }
