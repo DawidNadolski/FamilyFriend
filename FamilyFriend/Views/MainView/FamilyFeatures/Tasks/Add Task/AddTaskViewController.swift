@@ -16,16 +16,16 @@ final class AddTaskViewController: UIViewController {
 	private let pickerViewTopSeparator = makeSeparatorView()
 	private let pickerViewBottomSeparator = makeSeparatorView()
 	private let assigneePicker = UIPickerView()
-	private let selectedMemberId = BehaviorRelay<Int?>(value: nil)
+	private let selectedMember = BehaviorRelay<Member?>(value: nil)
 	private let disposeBag = DisposeBag()
 	
 	// TODO: Get rid of mock data
 	private let members: [Member] = [
-		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
-		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
-		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
-		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
-		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
+		.init(id: UUID(), name: "Dawid Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Mateusz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Grażyna Nadolska", avatarURL: nil),
+		.init(id: UUID(), name: "Grzegorz Nadolski", avatarURL: nil),
+		.init(id: UUID(), name: "Agata Nadolska", avatarURL: nil)
 	]
 	
 	private let titleLabel: UILabel = {
@@ -177,14 +177,15 @@ final class AddTaskViewController: UIViewController {
 		let input = AddTaskPresenterInput(
 			nameText: nameTextField.rx.text.orEmpty.distinctUntilChanged().asObservable(),
 			xpPoints: xpPointsTextField.rx.text.orEmpty.distinctUntilChanged().asObservable(),
-			assignedMemberId: selectedMemberId.asObservable(),
+			assignedMember: selectedMember.asObservable(),
 			addButtonPressed: ControlEvent<Task>(
-				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField, selectedMemberId] _ in
+				events: doneButton.rx.tap.map { [nameTextField, xpPointsTextField, selectedMember] _ in
 					return Task(
-						taskID: UUID(),
+						id: UUID(),
 						name: nameTextField.text!,
 						xpPoints: Int(xpPointsTextField.text!)!,
-						executingMemberID: selectedMemberId.value!,
+						executingMemberId: selectedMember.value!.id,
+						executingMemberName: selectedMember.value!.name,
 						completed: false
 					)
 			 }),
@@ -224,6 +225,6 @@ extension AddTaskViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		selectedMemberId.accept(members[row].id)
+		selectedMember.accept(members[row])
 	}
 }

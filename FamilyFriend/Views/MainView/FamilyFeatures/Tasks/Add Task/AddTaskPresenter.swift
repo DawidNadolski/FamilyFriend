@@ -15,7 +15,7 @@ protocol AddTaskPresenting {
 struct AddTaskPresenterInput {
 	let nameText: Observable<String>
 	let xpPoints: Observable<String>
-	let assignedMemberId: Observable<Int?>
+	let assignedMember: Observable<Member?>
 	let addButtonPressed: ControlEvent<Task>
 	let cancelButtonPressed: ControlEvent<Void>
 }
@@ -54,7 +54,7 @@ final class AddTaskPresenter: AddTaskPresenting {
 		Observable.combineLatest(
 			input.nameText,
 			input.xpPoints,
-			input.assignedMemberId
+			input.assignedMember
 		)
 		.asDriverOnErrorJustComplete()
 		.drive(validateInputBinder)
@@ -63,11 +63,11 @@ final class AddTaskPresenter: AddTaskPresenting {
 		return AddTaskPresenterOutput(isAddButtonEnabled: addButtonEnabledSubject.asDriverOnErrorJustComplete())
 	}
 	
-	private var validateInputBinder: Binder<(String, String, Int?)> {
+	private var validateInputBinder: Binder<(String, String, Member?)> {
 		Binder(self) { presenter, input in
-			let (name, xpPoints, memberId) = input
+			let (name, xpPoints, member) = input
 
-			guard memberId != nil, Int(xpPoints) != nil
+			guard member != nil, Int(xpPoints) != nil
 			else {
 				presenter.addButtonEnabledSubject.onNext(false)
 				return
