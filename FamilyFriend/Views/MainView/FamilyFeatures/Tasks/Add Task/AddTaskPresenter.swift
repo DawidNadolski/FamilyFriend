@@ -67,12 +67,16 @@ final class AddTaskPresenter: AddTaskPresenting {
 		Binder(self) { presenter, input in
 			let (name, xpPoints, member) = input
 
-			guard member != nil, Int(xpPoints) != nil
+			guard
+				name != "",
+				member != nil,
+				Int(xpPoints) != nil
 			else {
 				presenter.addButtonEnabledSubject.onNext(false)
 				return
 			}
-			presenter.addButtonEnabledSubject.onNext(name != "")
+			
+			presenter.addButtonEnabledSubject.onNext(true)
 		}
 	}
 }

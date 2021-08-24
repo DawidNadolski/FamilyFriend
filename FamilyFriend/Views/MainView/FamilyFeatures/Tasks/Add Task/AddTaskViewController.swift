@@ -184,8 +184,8 @@ final class AddTaskViewController: UIViewController {
 						id: UUID(),
 						name: nameTextField.text!,
 						xpPoints: Int(xpPointsTextField.text!)!,
-						executingMemberId: selectedMember.value!.id,
-						executingMemberName: selectedMember.value!.name,
+						assignedMemberId: selectedMember.value!.id,
+						assignedMemberName: selectedMember.value!.name,
 						completed: false
 					)
 			 }),
@@ -195,7 +195,7 @@ final class AddTaskViewController: UIViewController {
 		let output = presenter.transform(input: input)
 		
 		output.isAddButtonEnabled
-			.drive { [weak self] in self?.switchDoneButtonState(to: $0) }
+			.drive { [weak self] in self?.switchDoneButtonEnabledState(to: $0) }
 			.disposed(by: disposeBag)
 	}
 	
@@ -204,7 +204,7 @@ final class AddTaskViewController: UIViewController {
 		assigneePicker.delegate = self
 	}
 	
-	private func switchDoneButtonState(to isEnabled: Bool) {
+	private func switchDoneButtonEnabledState(to isEnabled: Bool) {
 		doneButton.isEnabled = isEnabled
 		doneButton.backgroundColor = isEnabled ? Assets.Colors.action.color : Assets.Colors.iron.color.withAlphaComponent(0.5)
 	}

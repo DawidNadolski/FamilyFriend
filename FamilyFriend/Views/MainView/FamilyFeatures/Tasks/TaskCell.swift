@@ -45,19 +45,21 @@ final class TaskCell: UITableViewCell {
 	
 	func update(with task: Task) {
 		nameLabel.text = task.name
-		assigneeLabel.text = task.executingMemberName
+		assigneeLabel.text = task.assignedMemberName
 		xpPointsLabel.text = "\(task.xpPoints) XP"
 		
-		if task.completed {
+		if true {
 			markTaskAsCompleted(task)
 		}
 	}
 	
 	private func markTaskAsCompleted(_ task: Task) {
+		let strikeWidth = 1.5
+		
 		let attributedNameText = NSMutableAttributedString(string: "\(task.name)")
 		attributedNameText.addAttribute(
 			NSAttributedString.Key.strikethroughStyle,
-			value: 1.5,
+			value: strikeWidth,
 			range: NSMakeRange(0, attributedNameText.length)
 		)
 		nameLabel.attributedText = attributedNameText
@@ -65,15 +67,15 @@ final class TaskCell: UITableViewCell {
 		let attributedXpPointsText = NSMutableAttributedString(string: "\(task.xpPoints) XP")
 		attributedXpPointsText.addAttribute(
 			NSAttributedString.Key.strikethroughStyle,
-			value: 2,
+			value: strikeWidth,
 			range: NSMakeRange(0, attributedXpPointsText.length)
 		)
 		xpPointsLabel.attributedText = attributedXpPointsText
 		
-		let attributedAssigneeText = NSMutableAttributedString(string: "\(task.executingMemberName)")
+		let attributedAssigneeText = NSMutableAttributedString(string: "\(task.assignedMemberName)")
 		attributedAssigneeText.addAttribute(
 			NSAttributedString.Key.strikethroughStyle,
-			value: 2,
+			value: strikeWidth,
 			range: NSMakeRange(0, attributedAssigneeText.length)
 		)
 		assigneeLabel.attributedText = attributedAssigneeText

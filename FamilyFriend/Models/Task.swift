@@ -12,7 +12,7 @@ struct Task: Codable, Equatable {
 	let id: UUID
 	let name: String
 	let xpPoints: Int
-	let executingMemberId: UUID
-	let executingMemberName: String
+	let assignedMemberId: UUID
+	let assignedMemberName: String
 	let completed: Bool
 }
