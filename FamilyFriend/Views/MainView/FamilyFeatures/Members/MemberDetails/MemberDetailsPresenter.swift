@@ -35,7 +35,6 @@ final class MemberDetailsPresenter: MemberDetailsPresenting {
 	}
 	
 	func transform() -> MemberDetailsPresenterOutput {
-		
 		let memberActiveTasks = fetchedTasksSubject
 			.asDriverOnErrorJustComplete()
 			.map { [context] in
