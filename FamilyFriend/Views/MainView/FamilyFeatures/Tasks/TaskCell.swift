@@ -48,7 +48,7 @@ final class TaskCell: UITableViewCell {
 		assigneeLabel.text = task.assignedMemberName
 		xpPointsLabel.text = "\(task.xpPoints) XP"
 		
-		if true {
+		if task.completed {
 			markTaskAsCompleted(task)
 		}
 	}

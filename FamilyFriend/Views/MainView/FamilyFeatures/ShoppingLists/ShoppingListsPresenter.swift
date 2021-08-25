@@ -19,8 +19,8 @@ struct ShoppingListsPresentingInput {
 }
 
 struct ShoppingListsPresentingOutput {
-	let fetchedLists: Driver<[ShoppingList]>
 	let isFetchingData: Driver<Bool>
+	let fetchedLists: Driver<[ShoppingList]>
 }
 
 final class ShoppingListsPresenter: ShoppingListsPresenting {
@@ -61,8 +61,8 @@ final class ShoppingListsPresenter: ShoppingListsPresenting {
 			.disposed(by: disposeBag)
 		
 		let output = ShoppingListsPresentingOutput(
-			fetchedLists: shoppingListsSubject.asDriverOnErrorJustComplete(),
-			isFetchingData: isFetchingDataSubject.asDriverOnErrorJustComplete()
+			isFetchingData: isFetchingDataSubject.asDriverOnErrorJustComplete(),
+			fetchedLists: shoppingListsSubject.asDriverOnErrorJustComplete()
 		)
 		
 		return output

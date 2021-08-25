@@ -19,15 +19,6 @@ final class AddTaskViewController: UIViewController {
 	private let selectedMember = BehaviorRelay<Member?>(value: nil)
 	private let disposeBag = DisposeBag()
 	
-	// TODO: Get rid of mock data
-	private let members: [Member] = [
-		.init(id: UUID(), name: "Dawid Nadolski", avatarURL: nil),
-		.init(id: UUID(), name: "Mateusz Nadolski", avatarURL: nil),
-		.init(id: UUID(), name: "Grażyna Nadolska", avatarURL: nil),
-		.init(id: UUID(), name: "Grzegorz Nadolski", avatarURL: nil),
-		.init(id: UUID(), name: "Agata Nadolska", avatarURL: nil)
-	]
-	
 	private let titleLabel: UILabel = {
 		let label = UILabel()
 		label.textAlignment = .center
@@ -81,6 +72,8 @@ final class AddTaskViewController: UIViewController {
 		button.setTitle("Cancel", for: .normal)
 		return button
 	}()
+	
+	private let members = [Member]()
 		
 	init(presenter: AddTaskPresenting) {
 		self.presenter = presenter

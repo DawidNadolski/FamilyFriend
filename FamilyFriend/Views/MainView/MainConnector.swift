@@ -55,16 +55,8 @@ final class MainConnector: MainComponentsConnecting {
 extension MainConnector: MainViewRoutes {
 	var toMembersFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			let presenter = MembersPresenter(
-				context: .init(
-					toMemberDetails: Binder(connector) { connector, member in
-						let memberDetailsViewController = MemberDetailsViewController()
-						connector.push(viewController: memberDetailsViewController)
-					}
-				)
-			)
-			let membersViewController = MembersViewController(presenter: presenter)
-			connector.push(viewController: membersViewController)
+			let membersConnector = MembersConnector()
+			connector.push(viewController: membersConnector.connect())
 		}
 	}
 	
