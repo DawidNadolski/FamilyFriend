@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Member {
+struct Member: Codable, Equatable {
 	let id: UUID
+	let familyId: UUID
 	let name: String
-	let avatarURL: URL?
 }

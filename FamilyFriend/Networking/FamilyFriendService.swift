@@ -8,6 +8,7 @@
 import RxSwift
 
 protocol FamilyFriendAPI {
+	func getMembers() -> Observable<[Member]>
 	func getTasks() -> Observable<[Task]>
 	func saveTask(_ task: Task)
 	func getShoppingLists() -> Observable<[ShoppingList]>
@@ -24,6 +25,10 @@ final class FamilyFriendService: FamilyFriendAPI {
 
 	init(client: APIClient = APIClient()) {
 		self.client = client
+	}
+	
+	func getMembers() -> Observable<[Member]> {
+		return client.send(apiRequest: GetMembersRequest())
 	}
 	
 	func getTasks() -> Observable<[Task]> {

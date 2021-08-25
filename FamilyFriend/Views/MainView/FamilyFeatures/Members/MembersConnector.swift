@@ -5,19 +5,49 @@
 //  Created by Dawid Nadolski on 28/07/2021.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
-protocol MembersComponentsConnecting: Connecting {
-	func connectMemberDetails() -> UIViewController
+protocol MembersViewConnecting: Connecting { }
+
+protocol MembersViewRoutes: Connecting {
+	var toMemberDetails: Binder<Member> { get }
 }
 
-final class MembersConnector: MembersComponentsConnecting {
+final class MembersConnector: MembersViewConnecting {
+	
+	private weak var membersViewController: MembersViewController!
 	
 	func connect() -> UIViewController {
-		UIViewController()
+		let presenter = MembersPresenter(context: .init(membersViewRoutes: self, service: FamilyFriendService()))
+		let viewController = MembersViewController(presenter: presenter)
+		membersViewController = viewController
+		
+		return viewController
 	}
 	
-	func connectMemberDetails() -> UIViewController {
-		UIViewController()
+	private func push(viewController: UIViewController, completion: @escaping () -> Void = {}) {
+		guard let navigationController = membersViewController.navigationController else {
+			assertionFailure("Couldn't find navigation controller")
+			return
+		}
+		
+		navigationController.pushViewController(viewController, animated: true)
+	}
+}
+
+extension MembersConnector: MembersViewRoutes {
+	
+	var toMemberDetails: Binder<Member> {
+		Binder(self) { connector, member in
+			let presenter = MemberDetailsPresenter(
+				context: .init(
+					member: member,
+					service: FamilyFriendService()
+				)
+			)
+			let viewController = MemberDetailsViewController(presenter: presenter, member: member)
+			connector.push(viewController: viewController)
+		}
 	}
 }

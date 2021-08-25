@@ -50,7 +50,13 @@ extension TasksConnector: TasksViewRoutes {
 				connector.tasksViewController.dismiss(animated: true)
 			}
 			
-			let presenter = AddTaskPresenter(context: .init(onAddTask: onAddTask, onCancel: onCancel))
+			let presenter = AddTaskPresenter(
+				context: .init(
+					onAddTask: onAddTask,
+					onCancel: onCancel,
+					service: FamilyFriendService()
+				)
+			)
 			let viewController = AddTaskViewController(presenter: presenter)
 			let modal = DraggableModal(embeddedViewController: viewController)
 			
@@ -60,7 +66,7 @@ extension TasksConnector: TasksViewRoutes {
 	
 	var toCompleteTask: Binder<Task?> {
 		Binder(self) { connector, task in
-			guard let task = task else {
+			guard task != nil else {
 				return
 			}
 			

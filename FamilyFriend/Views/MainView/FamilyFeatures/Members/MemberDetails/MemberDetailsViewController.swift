@@ -5,20 +5,18 @@
 //  Created by Dawid Nadolski on 31/07/2021.
 //
 
-import UIKit
+import RxSwift
 
 final class MemberDetailsViewController: UIViewController {
 	
+	private let presenter: MemberDetailsPresenting
+	private let member: Member
+	
 	private let containerView = TileView()
 	private let tableView = UITableView()
+	private let disposeBag = DisposeBag()
 	
-	// TODO: Replace with real data
-	private let member = Member(id: UUID(), name: "Dawid Nadolski", avatarURL: nil)
-	private let memberActiveTasks: [Task] = [
-		.init(id: UUID(), name: "Zmywanie naczyń", xpPoints: 30, assignedMemberId: UUID(), assignedMemberName: "Dawid", completed: false),
-		.init(id: UUID(), name: "Odkurzanie", xpPoints: 45, assignedMemberId: UUID(), assignedMemberName: "Dawid", completed: false),
-		.init(id: UUID(), name: "Umycie kurzy", xpPoints: 60, assignedMemberId: UUID(), assignedMemberName: "Dawid", completed: false)
-	]
+	private var memberActiveTasks = [Task]()
 	
 	private let avatarImageView: UIImageView = {
 		let imageView = UIImageView()
@@ -37,9 +35,10 @@ final class MemberDetailsViewController: UIViewController {
 		return label
 	}()
 	
-	init() {
+	init(presenter: MemberDetailsPresenting, member: Member) {
+		self.presenter = presenter
+		self.member = member
 		super.init(nibName: nil, bundle: nil)
-		
 		setupUI()
 		setupTableView()
 		setupBindings()
@@ -95,7 +94,13 @@ final class MemberDetailsViewController: UIViewController {
 	}
 	
 	private func setupBindings() {
+		let output = presenter.transform()
 		
+		output.memberActiveTasks
+			.drive { [weak self] fetchedTasks in
+				self?.memberActiveTasks = fetchedTasks
+			}
+			.disposed(by: disposeBag)
 	}
 	
 	private func setupNavigationBar() {
@@ -119,6 +124,7 @@ extension MemberDetailsViewController: UITableViewDelegate, UITableViewDataSourc
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		HeaderLabelView(header: "Active tasks", backgroundColor: Assets.Colors.backgroundWarm.color)
+		let headerTitle = memberActiveTasks == [] ? "" : "Active tasks"
+		return HeaderLabelView(header: headerTitle, backgroundColor: Assets.Colors.backgroundWarm.color)
 	}
 }

@@ -22,6 +22,7 @@ struct AddTaskPresenterInput {
 
 struct AddTaskPresenterOutput {
 	let isAddButtonEnabled: Driver<Bool>
+	let fetchedMembers: Driver<[Member]>
 }
 
 final class AddTaskPresenter: AddTaskPresenting {
@@ -29,11 +30,13 @@ final class AddTaskPresenter: AddTaskPresenting {
 	struct Context {
 		let onAddTask: Binder<Task>
 		let onCancel: Binder<Void>
+		let service: FamilyFriendAPI
 	}
 	
 	private let context: Context
 	
 	private let addButtonEnabledSubject = BehaviorSubject<Bool>(value: false)
+	private let fetchedMembersSubject = BehaviorSubject<[Member]>(value: [])
 	private let disposeBag = DisposeBag()
 	
 	init(context: Context) {
@@ -41,6 +44,8 @@ final class AddTaskPresenter: AddTaskPresenting {
 	}
 	
 	func transform(input: AddTaskPresenterInput) -> AddTaskPresenterOutput {
+		fetchData()
+		
 		input.addButtonPressed
 			.asDriver()
 			.drive(context.onAddTask)
@@ -60,7 +65,10 @@ final class AddTaskPresenter: AddTaskPresenting {
 		.drive(validateInputBinder)
 		.disposed(by: disposeBag)
 		
-		return AddTaskPresenterOutput(isAddButtonEnabled: addButtonEnabledSubject.asDriverOnErrorJustComplete())
+		return AddTaskPresenterOutput(
+			isAddButtonEnabled: addButtonEnabledSubject.asDriverOnErrorJustComplete(),
+			fetchedMembers: fetchedMembersSubject.asDriverOnErrorJustComplete()
+		)
 	}
 	
 	private var validateInputBinder: Binder<(String, String, Member?)> {
@@ -78,5 +86,13 @@ final class AddTaskPresenter: AddTaskPresenting {
 			
 			presenter.addButtonEnabledSubject.onNext(true)
 		}
+	}
+	
+	private func fetchData() {
+		context.service
+			.getMembers()
+			.asDriverOnErrorJustComplete()
+			.drive(fetchedMembersSubject)
+			.disposed(by: disposeBag)
 	}
 }
