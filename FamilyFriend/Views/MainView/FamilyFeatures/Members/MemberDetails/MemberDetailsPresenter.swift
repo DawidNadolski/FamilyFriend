@@ -35,6 +35,8 @@ final class MemberDetailsPresenter: MemberDetailsPresenting {
 	}
 	
 	func transform() -> MemberDetailsPresenterOutput {
+		fetchData()
+		
 		let memberActiveTasks = fetchedTasksSubject
 			.asDriverOnErrorJustComplete()
 			.map { [context] in
@@ -60,6 +62,5 @@ final class MemberDetailsPresenter: MemberDetailsPresenting {
 				isFetchingDataSubject.onNext(false)
 			}
 			.disposed(by: disposeBag)
-
 	}
 }

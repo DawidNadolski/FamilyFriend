@@ -99,6 +99,7 @@ final class MemberDetailsViewController: UIViewController {
 		output.memberActiveTasks
 			.drive { [weak self] fetchedTasks in
 				self?.memberActiveTasks = fetchedTasks
+				self?.tableView.reloadData()
 			}
 			.disposed(by: disposeBag)
 	}
