@@ -73,7 +73,7 @@ final class AddTaskViewController: UIViewController {
 		return button
 	}()
 	
-	private let members = [Member]()
+	private var members = [Member]()
 		
 	init(presenter: AddTaskPresenting) {
 		self.presenter = presenter
@@ -187,6 +187,14 @@ final class AddTaskViewController: UIViewController {
 		
 		let output = presenter.transform(input: input)
 		
+		output.fetchedMembers
+			.drive { [weak self] fetchedMembers in
+				self?.members = fetchedMembers
+				self?.selectedMember.accept(fetchedMembers.first)
+				self?.assigneePicker.reloadAllComponents()
+			}
+			.disposed(by: disposeBag)
+
 		output.isAddButtonEnabled
 			.drive { [weak self] in self?.switchDoneButtonEnabledState(to: $0) }
 			.disposed(by: disposeBag)
