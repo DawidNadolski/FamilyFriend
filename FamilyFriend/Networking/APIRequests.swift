@@ -49,6 +49,13 @@ extension APIRequest {
 	}
 }
 
+final class GetMembersRequest: APIRequest {
+	
+	var method: RequestType = .GET
+	var path: String = "members"
+	var parameters: [String : String] = [:]
+}
+
 final class GetTasksRequest: APIRequest {
 	
 	var method: RequestType = .GET
