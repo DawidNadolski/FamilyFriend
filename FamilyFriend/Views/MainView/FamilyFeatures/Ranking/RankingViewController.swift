@@ -5,38 +5,93 @@
 //  Created by Dawid Nadolski on 11/07/2021.
 //
 
-import UIKit
+import RxSwift
 
 final class RankingViewController: UIViewController {
 	
-	let containerView = TileView()
+	private let presenter: RankingPresenting
+	
+	private let tableView = UITableView()
+	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+	private let disposeBag = DisposeBag()
 	
 	private let imageView: UIImageView = {
 		let imageView = UIImageView(image: UIImage(systemName: "list.number"))
 		return imageView
 	}()
 	
-	init() {
+	private var rankingPositions = [RankingPosition]()
+	
+	init(presenter: RankingPresenting) {
+		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
 		setupUI()
+		setupTableView()
+		setupBindings()
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		setupNavigationBar()
+	}
+	
 	private func setupUI() {
-		view.addSubview(containerView)
-		containerView.backgroundColor = .white
-		containerView.snp.makeConstraints { make in
-			make.top.bottom.equalToSuperview()
-			make.left.right.equalToSuperview().inset(16.0)
-		}
+		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
-		containerView.addSubview(imageView)
-		imageView.snp.makeConstraints { make in
-			make.top.left.bottom.equalToSuperview().inset(8.0)
-			make.size.equalTo(64.0)
+		view.addSubview(activityIndicatorView)
+		activityIndicatorView.center = view.center
+		
+		view.addSubview(tableView)
+		tableView.snp.makeConstraints { make in
+			make.edges.equalToSuperview()
 		}
+	}
+	
+	private func setupBindings() {
+		let output = presenter.transform()
+		
+		output.rankingPositions
+			.drive { [weak self] positions in
+				self?.rankingPositions = positions
+				self?.tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
+		
+		output.isFetchingData
+			.drive(activityIndicatorView.rx.isAnimating)
+			.disposed(by: disposeBag)
+	}
+	
+	private func setupTableView() {
+		tableView.delegate = self
+		tableView.dataSource = self
+		tableView.register(RankingCell.self)
+		tableView.backgroundColor = Assets.Colors.backgroundWarm.color
+		tableView.separatorStyle = .none
+	}
+	
+	private func setupNavigationBar() {
+		navigationItem.title = "Ranking"
+		navigationController?.isNavigationBarHidden = false
+	}
+}
+
+extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		rankingPositions.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(for: indexPath) as RankingCell
+		let position = rankingPositions[indexPath.row]
+		
+		cell.update(with: position)
+		
+		return cell
 	}
 }
