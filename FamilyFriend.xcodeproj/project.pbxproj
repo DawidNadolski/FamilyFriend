@@ -14,6 +14,10 @@
 		6F0734B226D55C9C000914CE /* ConfirmActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734B126D55C9C000914CE /* ConfirmActionViewController.swift */; };
 		6F0734B726D55D0E000914CE /* ConfirmActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734B626D55D0E000914CE /* ConfirmActionPresenter.swift */; };
 		6F0734C226D592BC000914CE /* MemberDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734C126D592BC000914CE /* MemberDetailsPresenter.swift */; };
+		6F0734D326D6F488000914CE /* RankingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734D226D6F488000914CE /* RankingPresenter.swift */; };
+		6F0734D826D6F491000914CE /* RankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734D726D6F491000914CE /* RankingCell.swift */; };
+		6F0734DD26D6F537000914CE /* RankingPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734DC26D6F537000914CE /* RankingPosition.swift */; };
+		6F0734E826D73633000914CE /* CALayer+applyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734E726D73633000914CE /* CALayer+applyShadow.swift */; };
 		6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F19F7CC2698ACF500C2FD61 /* TileView.swift */; };
 		6F29D42F26C954390017D012 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29D42E26C954390017D012 /* AddItemViewController.swift */; };
 		6F367CDC26C9750E00EE48E0 /* ShoppingListConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F367CDB26C9750E00EE48E0 /* ShoppingListConnector.swift */; };
@@ -123,6 +127,10 @@
 		6F0734B126D55C9C000914CE /* ConfirmActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmActionViewController.swift; sourceTree = "<group>"; };
 		6F0734B626D55D0E000914CE /* ConfirmActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmActionPresenter.swift; sourceTree = "<group>"; };
 		6F0734C126D592BC000914CE /* MemberDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailsPresenter.swift; sourceTree = "<group>"; };
+		6F0734D226D6F488000914CE /* RankingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPresenter.swift; sourceTree = "<group>"; };
+		6F0734D726D6F491000914CE /* RankingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCell.swift; sourceTree = "<group>"; };
+		6F0734DC26D6F537000914CE /* RankingPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPosition.swift; sourceTree = "<group>"; };
+		6F0734E726D73633000914CE /* CALayer+applyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+applyShadow.swift"; sourceTree = "<group>"; };
 		6F19F7CC2698ACF500C2FD61 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		6F29D42E26C954390017D012 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		6F367CDB26C9750E00EE48E0 /* ShoppingListConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListConnector.swift; sourceTree = "<group>"; };
@@ -417,9 +425,10 @@
 		6F51F36E26B0AF7D0026B9E0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6F51F36F26B0AF890026B9E0 /* Member.swift */,
+				6F0734DC26D6F537000914CE /* RankingPosition.swift */,
 				6FD04A5A26C9256A00F67EC7 /* ShoppingList.swift */,
 				6FD04A5B26C9256A00F67EC7 /* ShoppingListComponent.swift */,
-				6F51F36F26B0AF890026B9E0 /* Member.swift */,
 				6F51F39D26B5AC220026B9E0 /* Task.swift */,
 			);
 			path = Models;
@@ -521,6 +530,7 @@
 				6F51F42326B9E1390026B9E0 /* UIViewController+ChildViewControllers.swift */,
 				6F51F37926B1D0E80026B9E0 /* UITableView+ReusableView.swift */,
 				6F4DAC1126D4682A0051F5E2 /* UITextField+DoneButton.swift */,
+				6F0734E726D73633000914CE /* CALayer+applyShadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,6 +553,8 @@
 			isa = PBXGroup;
 			children = (
 				6F4F98E426C91D4300B79890 /* RankingViewController.swift */,
+				6F0734D226D6F488000914CE /* RankingPresenter.swift */,
+				6F0734D726D6F491000914CE /* RankingCell.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -869,6 +881,7 @@
 				6FFDE470269B52F500AC8428 /* TasksViewController.swift in Sources */,
 				6F51F37526B0B0EB0026B9E0 /* MemberCell.swift in Sources */,
 				6F4DABDD26D13F880051F5E2 /* FamilyFriendService.swift in Sources */,
+				6F0734E826D73633000914CE /* CALayer+applyShadow.swift in Sources */,
 				6F29D42F26C954390017D012 /* AddItemViewController.swift in Sources */,
 				6F4F98DE26C91D2400B79890 /* InitialConnector.swift in Sources */,
 				6F51F3A326B5AE2B0026B9E0 /* MemberTaskCell.swift in Sources */,
@@ -901,14 +914,17 @@
 				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
 				6FD04A6D26C925A400F67EC7 /* ShoppingListPresenter.swift in Sources */,
 				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
+				6F0734D326D6F488000914CE /* RankingPresenter.swift in Sources */,
 				6F0734B226D55C9C000914CE /* ConfirmActionViewController.swift in Sources */,
 				6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */,
 				6F51F41526B9DF280026B9E0 /* AddTaskViewController.swift in Sources */,
+				6F0734D826D6F491000914CE /* RankingCell.swift in Sources */,
 				6F4F98D226C91CF900B79890 /* SignInViewController.swift in Sources */,
 				6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */,
 				6F3EF22F2696489300371FF7 /* SceneDelegate.swift in Sources */,
 				6FD04A5D26C9256A00F67EC7 /* ShoppingListComponent.swift in Sources */,
 				6F51F37026B0AF890026B9E0 /* Member.swift in Sources */,
+				6F0734DD26D6F537000914CE /* RankingPosition.swift in Sources */,
 				6FD04A6426C9258400F67EC7 /* ShoppingListsPresenter.swift in Sources */,
 				6F51F37A26B1D0E80026B9E0 /* UITableView+ReusableView.swift in Sources */,
 				6F4F98D726C91D1400B79890 /* SignUpViewController.swift in Sources */,
