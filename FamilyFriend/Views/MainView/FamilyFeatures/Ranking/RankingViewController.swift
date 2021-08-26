@@ -15,11 +15,6 @@ final class RankingViewController: UIViewController {
 	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
 	private let disposeBag = DisposeBag()
 	
-	private let imageView: UIImageView = {
-		let imageView = UIImageView(image: UIImage(systemName: "list.number"))
-		return imageView
-	}()
-	
 	private var rankingPositions = [RankingPosition]()
 	
 	init(presenter: RankingPresenting) {

@@ -13,16 +13,22 @@ final class RankingCell: UITableViewCell {
 	
 	private let positionLabel: UILabel = {
 		let label = UILabel()
+		label.textColor = Assets.Colors.textPrimary.color
+		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
 	}()
 	
 	private let memberNameLabel: UILabel = {
 		let label = UILabel()
+		label.textColor = Assets.Colors.textPrimary.color
+		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
 	}()
 	
 	private let pointsLabel: UILabel = {
 		let label = UILabel()
+		label.textColor = Assets.Colors.textPrimary.color
+		label.font = FontFamily.SFProText.semibold.font(size: 17.0)
 		return label
 	}()
 	

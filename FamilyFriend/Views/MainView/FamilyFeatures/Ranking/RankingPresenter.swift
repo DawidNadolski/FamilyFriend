@@ -66,7 +66,6 @@ final class RankingPresenter: RankingPresenting {
 	}
 	
 	private func calculateRankingPositions(from tasks: [Task]) -> [RankingPosition] {
-		
 		var membersPoints = [String : Int]()
 		for task in tasks {
 			let points = membersPoints[task.assignedMemberName] ?? 0
