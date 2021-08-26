@@ -62,7 +62,8 @@ extension MainConnector: MainViewRoutes {
 	
 	var toRankingFeature: Binder<Void> {
 		return Binder(self) { connector, _ in
-			
+			let presenter = RankingPresenter(context: .init(service: FamilyFriendService()))
+			connector.push(viewController: RankingViewController(presenter: presenter))
 		}
 	}
 	

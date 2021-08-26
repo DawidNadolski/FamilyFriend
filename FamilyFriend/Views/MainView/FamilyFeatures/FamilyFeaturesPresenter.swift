@@ -30,6 +30,7 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	}
 	
 	private let context: Context
+	
 	private let disposeBag = DisposeBag()
 	
 	init(context: Context) {
@@ -40,46 +41,22 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 		
 		input.membersFeatureSelected
 			.asDriver()
-			.drive(membersFeatureBinder)
+			.drive(context.mainViewRoutes.toMembersFeature)
 			.disposed(by: disposeBag)
 		
 		input.rankingFeatureSelected
 			.asDriver()
-			.drive(rankingFeatureBinder)
+			.drive(context.mainViewRoutes.toRankingFeature)
 			.disposed(by: disposeBag)
 		
 		input.shoppingListFeatureSelected
 			.asDriver()
-			.drive(shoppingListFeatureBinder)
+			.drive(context.mainViewRoutes.toShoppingListsFeature)
 			.disposed(by: disposeBag)
 		
 		input.tasksFeatureSelected
 			.asDriver()
-			.drive(tasksFeatureBinder)
+			.drive(context.mainViewRoutes.toTasksFeature)
 			.disposed(by: disposeBag)
-	}
-	
-	private var membersFeatureBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			presenter.context.mainViewRoutes.toMembersFeature.onNext(())
-		}
-	}
-	
-	private var rankingFeatureBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			print("Ranking feature selected!")
-		}
-	}
-	
-	private var shoppingListFeatureBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			presenter.context.mainViewRoutes.toShoppingListsFeature.onNext(())
-		}
-	}
-	
-	private var tasksFeatureBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			presenter.context.mainViewRoutes.toTasksFeature.onNext(())
-		}
 	}
 }
