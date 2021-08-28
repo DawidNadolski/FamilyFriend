@@ -18,6 +18,21 @@
 		6F0734D826D6F491000914CE /* RankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734D726D6F491000914CE /* RankingCell.swift */; };
 		6F0734DD26D6F537000914CE /* RankingPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734DC26D6F537000914CE /* RankingPosition.swift */; };
 		6F0734E826D73633000914CE /* CALayer+applyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0734E726D73633000914CE /* CALayer+applyShadow.swift */; };
+		6F07350426D98233000914CE /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07350326D98233000914CE /* SignUpPresenter.swift */; };
+		6F07350926D9ACD7000914CE /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07350826D9ACD7000914CE /* SignInPresenter.swift */; };
+		6F07350F26D9B03D000914CE /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07350E26D9B03D000914CE /* UserCredentials.swift */; };
+		6F07351426D9B0FF000914CE /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07351326D9B0FF000914CE /* UserSession.swift */; };
+		6F07352426D9B13E000914CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07352326D9B13E000914CE /* User.swift */; };
+		6F07352926D9BD4E000914CE /* SignUpConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07352826D9BD4E000914CE /* SignUpConnector.swift */; };
+		6F07353226D9BFA3000914CE /* SetupFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07353126D9BFA3000914CE /* SetupFamilyViewController.swift */; };
+		6F07353926D9C143000914CE /* SetupFamilyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07353826D9C143000914CE /* SetupFamilyPresenter.swift */; };
+		6F07354426D9C152000914CE /* SetupFamilyConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07354326D9C152000914CE /* SetupFamilyConnector.swift */; };
+		6F07354926D9E129000914CE /* SignInConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07354826D9E129000914CE /* SignInConnector.swift */; };
+		6F07354E26DA75B3000914CE /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07354D26DA75B3000914CE /* JoinFamilyViewController.swift */; };
+		6F07355326DA7681000914CE /* JoinFamilyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07355226DA7681000914CE /* JoinFamilyPresenter.swift */; };
+		6F07355826DA77D0000914CE /* CreateFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07355726DA77D0000914CE /* CreateFamilyViewController.swift */; };
+		6F07355D26DA77F8000914CE /* CreateFamilyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07355C26DA77F8000914CE /* CreateFamilyPresenter.swift */; };
+		6F07356226DA85E9000914CE /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07356126DA85E9000914CE /* Family.swift */; };
 		6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F19F7CC2698ACF500C2FD61 /* TileView.swift */; };
 		6F29D42F26C954390017D012 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29D42E26C954390017D012 /* AddItemViewController.swift */; };
 		6F367CDC26C9750E00EE48E0 /* ShoppingListConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F367CDB26C9750E00EE48E0 /* ShoppingListConnector.swift */; };
@@ -131,6 +146,21 @@
 		6F0734D726D6F491000914CE /* RankingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCell.swift; sourceTree = "<group>"; };
 		6F0734DC26D6F537000914CE /* RankingPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPosition.swift; sourceTree = "<group>"; };
 		6F0734E726D73633000914CE /* CALayer+applyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+applyShadow.swift"; sourceTree = "<group>"; };
+		6F07350326D98233000914CE /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
+		6F07350826D9ACD7000914CE /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
+		6F07350E26D9B03D000914CE /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
+		6F07351326D9B0FF000914CE /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		6F07352326D9B13E000914CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6F07352826D9BD4E000914CE /* SignUpConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpConnector.swift; sourceTree = "<group>"; };
+		6F07353126D9BFA3000914CE /* SetupFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFamilyViewController.swift; sourceTree = "<group>"; };
+		6F07353826D9C143000914CE /* SetupFamilyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFamilyPresenter.swift; sourceTree = "<group>"; };
+		6F07354326D9C152000914CE /* SetupFamilyConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFamilyConnector.swift; sourceTree = "<group>"; };
+		6F07354826D9E129000914CE /* SignInConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInConnector.swift; sourceTree = "<group>"; };
+		6F07354D26DA75B3000914CE /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
+		6F07355226DA7681000914CE /* JoinFamilyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyPresenter.swift; sourceTree = "<group>"; };
+		6F07355726DA77D0000914CE /* CreateFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFamilyViewController.swift; sourceTree = "<group>"; };
+		6F07355C26DA77F8000914CE /* CreateFamilyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFamilyPresenter.swift; sourceTree = "<group>"; };
+		6F07356126DA85E9000914CE /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
 		6F19F7CC2698ACF500C2FD61 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		6F29D42E26C954390017D012 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		6F367CDB26C9750E00EE48E0 /* ShoppingListConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListConnector.swift; sourceTree = "<group>"; };
@@ -281,6 +311,46 @@
 			path = ConfirmAction;
 			sourceTree = "<group>";
 		};
+		6F07350D26D9B029000914CE /* Networking Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F07350E26D9B03D000914CE /* UserCredentials.swift */,
+				6F07351326D9B0FF000914CE /* UserSession.swift */,
+				6F07352326D9B13E000914CE /* User.swift */,
+			);
+			path = "Networking Models";
+			sourceTree = "<group>";
+		};
+		6F07352D26D9BE36000914CE /* SetupFamilyView */ = {
+			isa = PBXGroup;
+			children = (
+				6F07353726D9C0D2000914CE /* CreateFamilyView */,
+				6F07353626D9C0C9000914CE /* JoinFamilyView */,
+				6F07353126D9BFA3000914CE /* SetupFamilyViewController.swift */,
+				6F07353826D9C143000914CE /* SetupFamilyPresenter.swift */,
+				6F07354326D9C152000914CE /* SetupFamilyConnector.swift */,
+			);
+			path = SetupFamilyView;
+			sourceTree = "<group>";
+		};
+		6F07353626D9C0C9000914CE /* JoinFamilyView */ = {
+			isa = PBXGroup;
+			children = (
+				6F07354D26DA75B3000914CE /* JoinFamilyViewController.swift */,
+				6F07355226DA7681000914CE /* JoinFamilyPresenter.swift */,
+			);
+			path = JoinFamilyView;
+			sourceTree = "<group>";
+		};
+		6F07353726D9C0D2000914CE /* CreateFamilyView */ = {
+			isa = PBXGroup;
+			children = (
+				6F07355726DA77D0000914CE /* CreateFamilyViewController.swift */,
+				6F07355C26DA77F8000914CE /* CreateFamilyPresenter.swift */,
+			);
+			path = CreateFamilyView;
+			sourceTree = "<group>";
+		};
 		6F19F7CA2698ACE300C2FD61 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				6F19F7CA2698ACE300C2FD61 /* Common */,
+				6F07350D26D9B029000914CE /* Networking Models */,
 				6F51F36E26B0AF7D0026B9E0 /* Models */,
 				6F4DABCE26D13B330051F5E2 /* Networking */,
 				6F8FF0972698A56200BB185D /* Resources */,
@@ -397,6 +468,7 @@
 		6F4F987E26C7CC5900B79890 /* InitialView */ = {
 			isa = PBXGroup;
 			children = (
+				6F07352D26D9BE36000914CE /* SetupFamilyView */,
 				6F4F989526C7CE6B00B79890 /* SignInView */,
 				6F4F98A126C7CE8100B79890 /* SignUpView */,
 				6F4F98DB26C91D2400B79890 /* InitialConnector.swift */,
@@ -410,6 +482,8 @@
 			isa = PBXGroup;
 			children = (
 				6F4F98D126C91CF900B79890 /* SignInViewController.swift */,
+				6F07350826D9ACD7000914CE /* SignInPresenter.swift */,
+				6F07354826D9E129000914CE /* SignInConnector.swift */,
 			);
 			path = SignInView;
 			sourceTree = "<group>";
@@ -418,6 +492,8 @@
 			isa = PBXGroup;
 			children = (
 				6F4F98D626C91D1400B79890 /* SignUpViewController.swift */,
+				6F07350326D98233000914CE /* SignUpPresenter.swift */,
+				6F07352826D9BD4E000914CE /* SignUpConnector.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -430,6 +506,7 @@
 				6FD04A5A26C9256A00F67EC7 /* ShoppingList.swift */,
 				6FD04A5B26C9256A00F67EC7 /* ShoppingListComponent.swift */,
 				6F51F39D26B5AC220026B9E0 /* Task.swift */,
+				6F07356126DA85E9000914CE /* Family.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -864,13 +941,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F51F3EC26B609480026B9E0 /* Fonts.swift in Sources */,
+				6F07352926D9BD4E000914CE /* SignUpConnector.swift in Sources */,
 				6F0734B726D55D0E000914CE /* ConfirmActionPresenter.swift in Sources */,
+				6F07350F26D9B03D000914CE /* UserCredentials.swift in Sources */,
 				6F05BAF126AB2F260013FCF8 /* FamilySummaryPresenter.swift in Sources */,
 				6FD04A6F26C925A400F67EC7 /* ComponentCell.swift in Sources */,
 				6FD04A6E26C925A400F67EC7 /* ShoppingListViewController.swift in Sources */,
 				6F8FF06D2698992500BB185D /* MainViewController.swift in Sources */,
 				6F4DABD826D13DAD0051F5E2 /* APIClient.swift in Sources */,
 				6F4F98E026C91D2400B79890 /* InitialViewController.swift in Sources */,
+				6F07350926D9ACD7000914CE /* SignInPresenter.swift in Sources */,
+				6F07353926D9C143000914CE /* SetupFamilyPresenter.swift in Sources */,
 				6F51F39E26B5AC220026B9E0 /* Task.swift in Sources */,
 				6F48E8C626C9569F004AC8BD /* AddItemPresenter.swift in Sources */,
 				6F4F98DF26C91D2400B79890 /* InitialPresenter.swift in Sources */,
@@ -882,6 +963,7 @@
 				6F51F37526B0B0EB0026B9E0 /* MemberCell.swift in Sources */,
 				6F4DABDD26D13F880051F5E2 /* FamilyFriendService.swift in Sources */,
 				6F0734E826D73633000914CE /* CALayer+applyShadow.swift in Sources */,
+				6F07352426D9B13E000914CE /* User.swift in Sources */,
 				6F29D42F26C954390017D012 /* AddItemViewController.swift in Sources */,
 				6F4F98DE26C91D2400B79890 /* InitialConnector.swift in Sources */,
 				6F51F3A326B5AE2B0026B9E0 /* MemberTaskCell.swift in Sources */,
@@ -892,6 +974,8 @@
 				6F51F40426B997AC0026B9E0 /* TaskCell.swift in Sources */,
 				6F4F98B526C7F4A900B79890 /* UINavigationBar+Appearance.swift in Sources */,
 				6F51F40926B9B9A60026B9E0 /* TasksPresenter.swift in Sources */,
+				6F07351426D9B0FF000914CE /* UserSession.swift in Sources */,
+				6F07354426D9C152000914CE /* SetupFamilyConnector.swift in Sources */,
 				6F4DAC1226D4682A0051F5E2 /* UITextField+DoneButton.swift in Sources */,
 				6F51F43726BC5A8A0026B9E0 /* Views.swift in Sources */,
 				6F51F41F26B9E0FD0026B9E0 /* UIView+RoundCorners.swift in Sources */,
@@ -900,24 +984,32 @@
 				6F3EF22D2696489300371FF7 /* AppDelegate.swift in Sources */,
 				6FF28204269B42DC000EFCF7 /* FamilySummaryViewController.swift in Sources */,
 				6F0734C226D592BC000914CE /* MemberDetailsPresenter.swift in Sources */,
+				6F07355326DA7681000914CE /* JoinFamilyPresenter.swift in Sources */,
 				6FD04A5C26C9256A00F67EC7 /* ShoppingList.swift in Sources */,
 				6F367D0226CABA0E00EE48E0 /* TasksConnector.swift in Sources */,
 				6FD04A6526C9258400F67EC7 /* ShoppingListsViewController.swift in Sources */,
+				6F07354926D9E129000914CE /* SignInConnector.swift in Sources */,
 				6F51F39426B5A1980026B9E0 /* MemberDetailsViewController.swift in Sources */,
+				6F07350426D98233000914CE /* SignUpPresenter.swift in Sources */,
 				6F367CDC26C9750E00EE48E0 /* ShoppingListConnector.swift in Sources */,
+				6F07355826DA77D0000914CE /* CreateFamilyViewController.swift in Sources */,
 				6FF281DA2698C3EA000EFCF7 /* StackView+ViewControllers.swift in Sources */,
+				6F07354E26DA75B3000914CE /* JoinFamilyViewController.swift in Sources */,
 				6F51F36A26B0AB8A0026B9E0 /* MembersPresenter.swift in Sources */,
 				6FFDE48C26AB138F00AC8428 /* FamilyFeaturesPresenter.swift in Sources */,
 				6F4F987A26C7CA2700B79890 /* RootConnector.swift in Sources */,
 				6FFDE47A269B54CA00AC8428 /* FeatureTileView.swift in Sources */,
 				6F51F42C26B9E4300026B9E0 /* AddTaskPresenter.swift in Sources */,
 				6F19F7CD2698ACF500C2FD61 /* TileView.swift in Sources */,
+				6F07353226D9BFA3000914CE /* SetupFamilyViewController.swift in Sources */,
 				6FD04A6D26C925A400F67EC7 /* ShoppingListPresenter.swift in Sources */,
 				6FF281BF2698BF04000EFCF7 /* Assets.swift in Sources */,
 				6F0734D326D6F488000914CE /* RankingPresenter.swift in Sources */,
+				6F07356226DA85E9000914CE /* Family.swift in Sources */,
 				6F0734B226D55C9C000914CE /* ConfirmActionViewController.swift in Sources */,
 				6FF04F8226AB1AE80019B38C /* MainConnector.swift in Sources */,
 				6F51F41526B9DF280026B9E0 /* AddTaskViewController.swift in Sources */,
+				6F07355D26DA77F8000914CE /* CreateFamilyPresenter.swift in Sources */,
 				6F0734D826D6F491000914CE /* RankingCell.swift in Sources */,
 				6F4F98D226C91CF900B79890 /* SignInViewController.swift in Sources */,
 				6F05BAFC26AB3D770013FCF8 /* Protocols.swift in Sources */,
