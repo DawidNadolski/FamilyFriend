@@ -8,6 +8,8 @@
 import RxSwift
 
 protocol FamilyFriendAPI {
+	func signUp(with userCredentials: UserCredentials, completion: @escaping CompletionHandler<UserSession>)
+	func signIn(with userCredentials: UserCredentials, completion: @escaping CompletionHandler<UserSession>)
 	func getMembers() -> Observable<[Member]>
 	func getTasks() -> Observable<[Task]>
 	func saveTask(_ task: Task)
@@ -25,6 +27,14 @@ final class FamilyFriendService: FamilyFriendAPI {
 
 	init(client: APIClient = APIClient()) {
 		self.client = client
+	}
+	
+	func signUp(with userCredentials: UserCredentials, completion: @escaping CompletionHandler<UserSession>) {
+		client.send(apiRequest: SignUpRequest(), body: userCredentials, completion: completion)
+	}
+	
+	func signIn(with userCredentials: UserCredentials, completion: @escaping CompletionHandler<UserSession>) {
+		client.send(apiRequest: SignInRequest(), body: userCredentials, completion: completion)
 	}
 	
 	func getMembers() -> Observable<[Member]> {
