@@ -19,7 +19,7 @@ final class SignUpConnector: SignUpConnecting {
 	
 	private weak var signUpViewController: SignUpViewController!
 	
-	init(service: FamilyFriendAPI) {
+	init(service: FamilyFriendAPI = FamilyFriendService()) {
 		self.service = service
 	}
 	

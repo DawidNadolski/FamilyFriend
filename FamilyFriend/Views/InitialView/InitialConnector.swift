@@ -41,14 +41,14 @@ extension InitialConnector: InitialViewRoutes {
 	
 	var toSignIn: Binder<Void> {
 		Binder(self) { connector, _ in
-			let signInConnector = SignInConnector(service: FamilyFriendService())
+			let signInConnector = SignInConnector()
 			connector.push(viewController: signInConnector.connect())
 		}
 	}
 	
 	var toSignUp: Binder<Void> {
 		Binder(self) { connector, _ in
-			let signUpConnector = SignUpConnector(service: FamilyFriendService())
+			let signUpConnector = SignUpConnector()
 			connector.push(viewController: signUpConnector.connect())
 		}
 	}

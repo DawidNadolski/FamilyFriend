@@ -75,8 +75,8 @@ final class APIClient {
 			} else {
 				if let data = data {
 					let decoder = JSONDecoder()
-					if let item = try? decoder.decode(UserSession.self, from: data) {
-						completion(.success(item))
+					if let session = try? decoder.decode(UserSession.self, from: data) {
+						completion(.success(session))
 					} else {
 						completion(.failure(NetworkError.jsonDecodingError))
 					}

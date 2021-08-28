@@ -14,6 +14,12 @@ final class JoinFamilyViewController: UIViewController {
 	
 	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
 	private let disposeBag = DisposeBag()
+	
+	private let memberNameTextField: UITextField = {
+		let textfield = makeTextField()
+		textfield.placeholder = "Enter your name"
+		return textfield
+	}()
 
 	private let familyIdTextField: UITextField = {
 		let textfield = makeTextField()
@@ -52,11 +58,18 @@ final class JoinFamilyViewController: UIViewController {
 
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
+		
+		view.addSubview(memberNameTextField)
+		memberNameTextField.snp.makeConstraints { make in
+			make.height.equalTo(48.0)
+			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24.0)
+			make.left.right.equalToSuperview().inset(16.0)
+		}
 
 		view.addSubview(familyIdTextField)
 		familyIdTextField.snp.makeConstraints { make in
 			make.height.equalTo(48.0)
-			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24.0)
+			make.top.equalTo(memberNameTextField.snp.bottom).offset(24.0)
 			make.left.right.equalToSuperview().inset(16.0)
 		}
 
@@ -83,11 +96,12 @@ final class JoinFamilyViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = JoinFamilyPresenterInput(
+			memberNameText: memberNameTextField.rx.text.orEmpty.distinctUntilChanged(),
 			familyIdText: familyIdTextField.rx.text.orEmpty.distinctUntilChanged(),
 			familyPasswordText: familyPasswordTextfield.rx.text.orEmpty.distinctUntilChanged(),
 			joinFamilyButtonPressed: ControlEvent(
-				events: joinFamilyButton.rx.tap.map { [familyIdTextField, familyPasswordTextfield] in
-					(familyIdTextField.text!, familyPasswordTextfield.text!)
+				events: joinFamilyButton.rx.tap.map { [memberNameTextField ,familyIdTextField, familyPasswordTextfield] in
+					(memberNameTextField.text! ,familyIdTextField.text!, familyPasswordTextfield.text!)
 				}
 			)
 		)

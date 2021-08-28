@@ -13,9 +13,10 @@ protocol JoinFamilyPresenting {
 }
 
 struct JoinFamilyPresenterInput {
+	let memberNameText: Observable<String>
 	let familyIdText: Observable<String>
 	let familyPasswordText: Observable<String>
-	let joinFamilyButtonPressed: ControlEvent<(String, String)>
+	let joinFamilyButtonPressed: ControlEvent<(String, String, String)>
 }
 
 struct JoinFamilyPresenterOutput {
@@ -43,6 +44,7 @@ final class JoinFamilyPresenter: JoinFamilyPresenting {
 	
 	func transform(_ input: JoinFamilyPresenterInput) -> JoinFamilyPresenterOutput {
 		Observable.combineLatest(
+			input.memberNameText,
 			input.familyIdText,
 			input.familyPasswordText
 		)
@@ -64,11 +66,11 @@ final class JoinFamilyPresenter: JoinFamilyPresenting {
 		return output
 	}
 	
-	private var validateCredentials: Binder<(String, String)> {
+	private var validateCredentials: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			let (familyId, password) = credentials
+			let (memberName, familyId, password) = credentials
 			
-			guard !familyId.isEmpty, !password.isEmpty else {
+			guard !memberName.isEmpty, !familyId.isEmpty, !password.isEmpty else {
 				presenter.isJoinFamilyButtonEnabledSubject.onNext(false)
 				return
 			}
@@ -76,9 +78,9 @@ final class JoinFamilyPresenter: JoinFamilyPresenting {
 		}
 	}
 	
-	private var joinFamilyBinder: Binder<(String, String)> {
+	private var joinFamilyBinder: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			let (familyId, password) = credentials
+			let (memberName, familyId, password) = credentials
 			
 			presenter.isFetchingDataSubject.onNext(true)
 			// TODO: Check whether family exists and either show alert or go to mainview

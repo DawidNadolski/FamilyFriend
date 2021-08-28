@@ -14,10 +14,16 @@ final class CreateFamilyViewController: UIViewController {
 	
 	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
 	private let disposeBag = DisposeBag()
+	
+	private let memberNameTextField: UITextField = {
+		let textfield = makeTextField()
+		textfield.placeholder = "Enter your name"
+		return textfield
+	}()
 
 	private let familyNameTextField: UITextField = {
 		let textfield = makeTextField()
-		textfield.placeholder = "Family name"
+		textfield.placeholder = "Set family name"
 		return textfield
 	}()
 	
@@ -51,11 +57,18 @@ final class CreateFamilyViewController: UIViewController {
 
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
+		
+		view.addSubview(memberNameTextField)
+		memberNameTextField.snp.makeConstraints { make in
+			make.height.equalTo(48.0)
+			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24.0)
+			make.left.right.equalToSuperview().inset(16.0)
+		}
 
 		view.addSubview(familyNameTextField)
 		familyNameTextField.snp.makeConstraints { make in
 			make.height.equalTo(48.0)
-			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24.0)
+			make.top.equalTo(memberNameTextField.snp.bottom).offset(24.0)
 			make.left.right.equalToSuperview().inset(16.0)
 		}
 		
@@ -82,11 +95,12 @@ final class CreateFamilyViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = CreateFamilyPresenterInput(
+			memberNameText: memberNameTextField.rx.text.orEmpty.distinctUntilChanged(),
 			familyNameText: familyNameTextField.rx.text.orEmpty.distinctUntilChanged(),
 			familyPasswordText: familyPasswordTextField.rx.text.orEmpty.distinctUntilChanged(),
 			createFamilyButtonPressed: ControlEvent(
-				events: createFamilyButton.rx.tap.map { [familyNameTextField, familyPasswordTextField] _ in
-					(familyNameTextField.text!, familyPasswordTextField.text!)
+				events: createFamilyButton.rx.tap.map { [memberNameTextField , familyNameTextField, familyPasswordTextField] _ in
+					(memberNameTextField.text! , familyNameTextField.text!, familyPasswordTextField.text!)
 				}
 			)
 		)

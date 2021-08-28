@@ -13,9 +13,10 @@ protocol CreateFamilyPresenting {
 }
 
 struct CreateFamilyPresenterInput {
+	let memberNameText: Observable<String>
 	let familyNameText: Observable<String>
 	let familyPasswordText: Observable<String>
-	let createFamilyButtonPressed: ControlEvent<(String, String)>
+	let createFamilyButtonPressed: ControlEvent<(String, String, String)>
 }
 
 struct CreateFamilyPresenterOutput {
@@ -41,6 +42,7 @@ final class CreateFamilyPresenter: CreateFamilyPresenting {
 	
 	func transform(_ input: CreateFamilyPresenterInput) -> CreateFamilyPresenterOutput {
 		Observable.combineLatest(
+			input.memberNameText,
 			input.familyNameText,
 			input.familyPasswordText
 		)
@@ -61,11 +63,11 @@ final class CreateFamilyPresenter: CreateFamilyPresenting {
 		return output
 	}
 	
-	private var validateCredentials: Binder<(String, String)> {
+	private var validateCredentials: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			let (familyId, password) = credentials
+			let (memberName, familyId, password) = credentials
 			
-			guard !familyId.isEmpty, password.count >= 8 else {
+			guard !memberName.isEmpty, !familyId.isEmpty, password.count >= 8 else {
 				presenter.isCreateFamilyButtonEnabledSubject.onNext(false)
 				return
 			}
@@ -73,11 +75,11 @@ final class CreateFamilyPresenter: CreateFamilyPresenting {
 		}
 	}
 	
-	private var createFamilyBinder: Binder<(String, String)> {
+	private var createFamilyBinder: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			// TODO: Create new family and go to main view
-			let (name, password) = credentials
-			let family = Family(id: UUID(), name: name, password: password)
+			// TODO: Create new family and member and go to main view
+			let (memberName, familyName, password) = credentials
+			let family = Family(id: UUID(), name: familyName, password: password)
 			presenter.isFetchingDataSubject.onNext(true)
 		}
 	}
