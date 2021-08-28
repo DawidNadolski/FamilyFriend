@@ -49,6 +49,20 @@ extension APIRequest {
 	}
 }
 
+final class SignUpRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "users/signup"
+	var parameters: [String : String] = [:]
+}
+
+final class SignInRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "users/login"
+	var parameters: [String : String] = [:]
+}
+
 final class GetMembersRequest: APIRequest {
 	
 	var method: RequestType = .GET
