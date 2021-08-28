@@ -49,7 +49,7 @@ extension SignUpConnector: SignUpViewRoutes {
 	
 	var toSetupFamily: Binder<UserSession> {
 		Binder(self) { connector, _ in
-			let setupFamilyConnector = SetupFamilyConnector(service: connector.service)
+			let setupFamilyConnector = SetupFamilyConnector()
 			connector.push(viewController: setupFamilyConnector.connect())
 		}
 	}

@@ -87,22 +87,32 @@ final class SignInPresenter: SignInPresenting {
 						
 			let credentials = UserCredentials(username: username, password: password)
 			
-			presenter.isFetchingDataSubject.onNext(true)
-			presenter.context.service
-				.signUp(with: credentials) { [weak self] result in
-					switch result {
-					case .success(let session):
-						self?.isFetchingDataSubject.onNext(false)
-						self?.signUp(with: session)
-					case .failure(let error):
-						self?.isFetchingDataSubject.onNext(false)
-						self?.errorSubject.onNext(error)
-					}
-				}
+			// TODO: Resolve logging in
+//			presenter.context.service
+//				.signUp(with: credentials) { [weak self] result in
+//					switch result {
+//					case .success(let session):
+//						self?.isFetchingDataSubject.onNext(false)
+//						self?.signIn(with: session)
+//					case .failure(let error):
+//						self?.isFetchingDataSubject.onNext(false)
+//						self?.errorSubject.onNext(error)
+//					}
+//				}
+			
+			presenter.signIn(with: UserSession(token: "", user: User(username: "", id: UUID(), updatedAt: "", createdAt: "")))
 		}
 	}
 	
-	private func signUp(with session: UserSession) {
+	private func signIn(with session: UserSession) {
+		// TODO: Check whether member with user ID exists and go to setup or main view
 		
+		let memberExist = false
+		
+		if memberExist {
+			context.signInViewRoutes.toMainView
+		} else {
+			context.signInViewRoutes.toSetupFamily.onNext(session)
+		}
 	}
 }

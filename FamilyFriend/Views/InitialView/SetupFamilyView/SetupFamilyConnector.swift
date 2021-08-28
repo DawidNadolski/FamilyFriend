@@ -20,7 +20,7 @@ final class SetupFamilyConnector: SetupFamilyConnecting {
 	
 	private weak var setupFamilyViewController: SetupFamilyViewController!
 	
-	init(service: FamilyFriendAPI) {
+	init(service: FamilyFriendAPI = FamilyFriendService()) {
 		self.service = service
 	}
 	

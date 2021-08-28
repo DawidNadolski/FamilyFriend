@@ -10,7 +10,8 @@ import RxCocoa
 protocol SignInConnecting: Connecting { }
 
 protocol SignInViewRoutes {
-	var toSetupFamily: Binder<Void> { get }
+	var toSetupFamily: Binder<UserSession> { get }
+	var toMainView: Binder<(Family, Member)> { get }
 }
 
 final class SignInConnector: SignInConnecting {
@@ -35,21 +36,27 @@ final class SignInConnector: SignInConnecting {
 		return viewController
 	}
 	
-	private func present(viewController: UIViewController, completion: @escaping () -> Void = {}) {
-		signInViewController.present(viewController, animated: true, completion: completion)
+	private func push(viewController: UIViewController, completion: @escaping () -> Void = {}) {
+		guard let navigationController = signInViewController.navigationController else {
+			assertionFailure("Couldn't find navigation controller")
+			return
+		}
+		
+		navigationController.pushViewController(viewController, animated: true)
 	}
 }
 
 extension SignInConnector: SignInViewRoutes {
 	
-	var toSetupFamily: Binder<Void> {
-		Binder(self) { connector, _ in
-			
+	var toSetupFamily: Binder<UserSession> {
+		Binder(self) { connector, session in
+			let setupFamilyConnector = SetupFamilyConnector()
+			connector.push(viewController: setupFamilyConnector.connect())
 		}
 	}
 	
-	var toMainView: Binder<Void> {
-		Binder(self) { connector, _ in
+	var toMainView: Binder<(Family, Member)> {
+		Binder(self) { connector, familyData in
 			
 		}
 	}
