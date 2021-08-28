@@ -26,7 +26,7 @@ final class RootConnector: RootConnecting {
 	
 	func connect() -> UIViewController {
 		// TODO: Check propperly whether user is logged in
-		let isUserLoggedIn = true
+		let isUserLoggedIn = false
 		if isUserLoggedIn {
 			return connectMainView()
 		} else {
