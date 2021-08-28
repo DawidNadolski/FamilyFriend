@@ -48,8 +48,8 @@ final class SignUpConnector: SignUpConnecting {
 extension SignUpConnector: SignUpViewRoutes {
 	
 	var toSetupFamily: Binder<UserSession> {
-		Binder(self) { connector, _ in
-			let setupFamilyConnector = SetupFamilyConnector()
+		Binder(self) { connector, session in
+			let setupFamilyConnector = SetupFamilyConnector(session: session)
 			connector.push(viewController: setupFamilyConnector.connect())
 		}
 	}

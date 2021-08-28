@@ -17,11 +17,13 @@ protocol SetupFamilyViewRoutes {
 final class SetupFamilyConnector: SetupFamilyConnecting {
 	
 	private let service: FamilyFriendAPI
+	private let session: UserSession
 	
 	private weak var setupFamilyViewController: SetupFamilyViewController!
 	
-	init(service: FamilyFriendAPI = FamilyFriendService()) {
+	init(service: FamilyFriendAPI = FamilyFriendService(), session: UserSession) {
 		self.service = service
+		self.session = session
 	}
 	
 	func connect() -> UIViewController {

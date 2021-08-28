@@ -50,7 +50,7 @@ extension SignInConnector: SignInViewRoutes {
 	
 	var toSetupFamily: Binder<UserSession> {
 		Binder(self) { connector, session in
-			let setupFamilyConnector = SetupFamilyConnector()
+			let setupFamilyConnector = SetupFamilyConnector(session: session)
 			connector.push(viewController: setupFamilyConnector.connect())
 		}
 	}
