@@ -18,18 +18,21 @@ final class SetupFamilyConnector: SetupFamilyConnecting {
 	
 	private let service: FamilyFriendAPI
 	private let session: UserSession
+	private let rootRoutes: RootRoutes
 	
 	private weak var setupFamilyViewController: SetupFamilyViewController!
 	
-	init(service: FamilyFriendAPI = FamilyFriendService(), session: UserSession) {
+	init(service: FamilyFriendAPI = FamilyFriendService(), session: UserSession, rootRoutes: RootRoutes) {
 		self.service = service
 		self.session = session
+		self.rootRoutes = rootRoutes
 	}
 	
 	func connect() -> UIViewController {
 		let presenter = SetupFamilyPresenter(
 			context: .init(
-				setupFamilyViewRoutes: self
+				setupFamilyViewRoutes: self,
+				userSession: session
 			)
 		)
 		let viewController = SetupFamilyViewController(presenter: presenter)
@@ -52,7 +55,7 @@ extension SetupFamilyConnector: SetupFamilyViewRoutes {
 	var toJoinFamily: Binder<Void> {
 		Binder(self) { connector, _ in
 			let presenter = JoinFamilyPresenter(
-				context: .init(service: FamilyFriendService())
+				context: .init(service: FamilyFriendService(), rootRoutes: connector.rootRoutes)
 			)
 			connector.push(viewController: JoinFamilyViewController(presenter: presenter))
 		}
@@ -61,7 +64,7 @@ extension SetupFamilyConnector: SetupFamilyViewRoutes {
 	var toCreateFamily: Binder<Void> {
 		Binder(self) { connector, _ in
 			let presenter = CreateFamilyPresenter(
-				context: .init(service: FamilyFriendService())
+				context: .init(service: FamilyFriendService(), session: connector.session, rootRoutes: connector.rootRoutes)
 			)
 			connector.push(viewController: CreateFamilyViewController(presenter: presenter))
 		}

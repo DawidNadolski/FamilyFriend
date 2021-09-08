@@ -21,6 +21,7 @@ final class SetupFamilyPresenter: SetupFamilyPresenting {
 	
 	struct Context {
 		let setupFamilyViewRoutes: SetupFamilyViewRoutes
+		let userSession: UserSession
 	}
 	
 	private let context: Context

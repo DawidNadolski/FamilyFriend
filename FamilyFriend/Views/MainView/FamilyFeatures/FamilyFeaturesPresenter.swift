@@ -26,7 +26,7 @@ struct FamilyFeaturesPresenterOutput {
 final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 	
 	struct Context {
-		let mainViewRoutes: MainViewRoutes
+		let familyFeaturesViewRoutes: FamilyFeaturesViewRoutes
 	}
 	
 	private let context: Context
@@ -41,22 +41,22 @@ final class FamilyFeaturesPresenter: FamilyFeaturesPresenting {
 		
 		input.membersFeatureSelected
 			.asDriver()
-			.drive(context.mainViewRoutes.toMembersFeature)
+			.drive(context.familyFeaturesViewRoutes.toMembersFeature)
 			.disposed(by: disposeBag)
 		
 		input.rankingFeatureSelected
 			.asDriver()
-			.drive(context.mainViewRoutes.toRankingFeature)
+			.drive(context.familyFeaturesViewRoutes.toRankingFeature)
 			.disposed(by: disposeBag)
 		
 		input.shoppingListFeatureSelected
 			.asDriver()
-			.drive(context.mainViewRoutes.toShoppingListsFeature)
+			.drive(context.familyFeaturesViewRoutes.toShoppingListsFeature)
 			.disposed(by: disposeBag)
 		
 		input.tasksFeatureSelected
 			.asDriver()
-			.drive(context.mainViewRoutes.toTasksFeature)
+			.drive(context.familyFeaturesViewRoutes.toTasksFeature)
 			.disposed(by: disposeBag)
 	}
 }

@@ -26,6 +26,7 @@ final class MembersPresenter: MembersPresenting {
 	struct Context {
 		let membersViewRoutes: MembersViewRoutes
 		let service: FamilyFriendAPI
+		let family: Family
 	}
 	
 	private let isFetchingDataSubject = BehaviorSubject<Bool>(value: false)
@@ -57,6 +58,8 @@ final class MembersPresenter: MembersPresenting {
 		isFetchingDataSubject.onNext(true)
 		context.service
 			.getMembers()
+			.map { [context] in $0.filter { $0.family.id == context.family.id } }
+			.map { $0.map { Member(from: $0) } }
 			.asDriverOnErrorJustComplete()
 			.drive { [fetchedMembersSubject] fetchedMembers in
 				fetchedMembersSubject.onNext(fetchedMembers)

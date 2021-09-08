@@ -10,7 +10,6 @@ import Foundation
 protocol APIRequest {
 	var method: RequestType { get }
 	var path: String { get }
-	var parameters: [String : String] { get }
 }
 
 public enum RequestType: String {
@@ -21,15 +20,11 @@ public enum RequestType: String {
 extension APIRequest {
 	
 	func request(with baseURL: URL) -> URLRequest {
-		guard var components = URLComponents(
+		guard let components = URLComponents(
 			url: baseURL.appendingPathComponent(path),
 			resolvingAgainstBaseURL: false)
 		else {
 			fatalError("Unable to create URL components")
-		}
-		
-		components.queryItems = parameters.map {
-			URLQueryItem(name: $0, value: $1)
 		}
 		
 		guard let url = components.url else {
@@ -53,76 +48,99 @@ final class SignUpRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "users/signup"
-	var parameters: [String : String] = [:]
 }
 
 final class SignInRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "users/login"
-	var parameters: [String : String] = [:]
+}
+
+final class GetFamiliesRequest: APIRequest {
+	var method: RequestType = .GET
+	var path: String = "families"
+}
+
+final class SaveFamilyRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "family"
 }
 
 final class GetMembersRequest: APIRequest {
 	
 	var method: RequestType = .GET
 	var path: String = "members"
-	var parameters: [String : String] = [:]
+}
+
+final class SaveMemberRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "member"
+}
+
+final class DeleteMemberRequest: APIRequest {
+	var method: RequestType = .POST
+	var path: String = "deleteMember"
 }
 
 final class GetTasksRequest: APIRequest {
 	
 	var method: RequestType = .GET
 	var path: String = "tasks"
-	var parameters: [String : String] = [:]
 }
 
 final class SaveTaskRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "task"
-	var parameters: [String : String] = [:]
+}
+
+final class CompleteTaskRequest: APIRequest {
+	
+	var method: RequestType = .POST
+	var path: String = "completeTask"
+}
+
+
+final class DeleteTaskRequest: APIRequest {
+	var method: RequestType = .POST
+	var path: String = "deleteTask"
 }
 
 final class GetShoppingListsRequest: APIRequest {
 	
 	var method: RequestType = .GET
 	var path: String = "shoppingLists"
-	var parameters: [String : String] = [:]
 }
 
 final class SaveShoppingListRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "shoppingList"
-	var parameters: [String : String] = [:]
 }
 
 final class DeleteShoppingListRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "deleteShoppingList"
-	var parameters: [String : String] = [:]
 }
 
 final class GetShoppingListComponentsRequest: APIRequest {
 	
 	var method: RequestType = .GET
 	var path: String = "shoppingListComponents"
-	var parameters: [String : String] = [:]
 }
 
 final class SaveShoppingListComponentRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "shoppingListComponent"
-	var parameters: [String : String] = [:]
 }
 
 final class DeletingShoppingListComponentRequest: APIRequest {
 	
 	var method: RequestType = .POST
 	var path: String = "deleteShoppingListComponent"
-	var parameters: [String : String] = [:]
 }
 

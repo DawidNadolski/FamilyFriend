@@ -13,21 +13,25 @@ final class ShoppingListViewController: UIViewController {
 	private let presenter: ShoppingListPresenting
 	private let shoppingList: ShoppingList
 	
+	private weak var addedComponent: BehaviorSubject<ShoppingListComponent?>!
+	
 	private let tableView = UITableView()
 	private let addComponentBarButton = UIBarButtonItem(systemItem: .add)
 	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
-	private let selectedComponent = BehaviorSubject<ShoppingListComponent?>(value: nil)
 	private let deletedComponent = BehaviorSubject<ShoppingListComponent?>(value: nil)
 	private let disposeBag = DisposeBag()
 	
 	private var components = [ShoppingListComponent]()
 	
-	init(presenter: ShoppingListPresenting, shoppingList: ShoppingList) {
+	init(
+		presenter: ShoppingListPresenting,
+		shoppingList: ShoppingList,
+		addedComponent: BehaviorSubject<ShoppingListComponent?>
+	) {
 		self.presenter = presenter
 		self.shoppingList = shoppingList
-		
+		self.addedComponent = addedComponent
 		super.init(nibName: nil, bundle: nil)
-		
 		setupUI()
 		setupTableView()
 		setupBindings()
@@ -66,8 +70,8 @@ final class ShoppingListViewController: UIViewController {
 	private func setupBindings() {
 		let input = ShoppingListPresenterInput(
 			addComponentButtonPressed: addComponentBarButton.rx.tap,
-			componentSelected: ControlEvent(events: selectedComponent),
-			componentDeleted: ControlEvent(events: deletedComponent)
+			componentDeleted: ControlEvent(events: deletedComponent),
+			componentAdded: ControlEvent(events: addedComponent)
 		)
 		
 		let output = presenter.transform(input: input)
@@ -85,9 +89,11 @@ final class ShoppingListViewController: UIViewController {
 	}
 	
 	private func setupNavigationBar() {
-		navigationItem.rightBarButtonItem = addComponentBarButton
 		navigationItem.title = shoppingList.name
+		navigationItem.rightBarButtonItem = addComponentBarButton
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 
@@ -104,11 +110,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 		cell.update(with: component)
 		
 		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let component = components[indexPath.row]
-		selectedComponent.onNext(component)
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

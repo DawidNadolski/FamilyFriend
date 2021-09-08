@@ -21,6 +21,7 @@ final class RankingPresenter: RankingPresenting {
 		
 	struct Context {
 		let service: FamilyFriendAPI
+		let family: Family
 	}
 	
 	private let context: Context
@@ -35,7 +36,7 @@ final class RankingPresenter: RankingPresenting {
 	}
 	
 	func transform() -> RankingPresenterOutput {
-		fetchCompletedTasks()
+		fetchTasks()
 		
 		let output = RankingPresenterOutput(
 			isFetchingData: isFetchingDataSubject.asDriverOnErrorJustComplete(),
@@ -45,18 +46,14 @@ final class RankingPresenter: RankingPresenting {
 		return output
 	}
 	
-	private func fetchCompletedTasks() {
-		isFetchingDataSubject.onNext(true)
-		return context.service
-			.getTasks()
-			.asDriverOnErrorJustComplete()
-			.map { $0.filter { $0.completed } }
-			.drive { [fetchedCompletedTasksSubject] tasks in
-				fetchedCompletedTasksSubject.onNext(tasks)
-			} onCompleted: { [isFetchingDataSubject] in
-				isFetchingDataSubject.onNext(false)
-			}
-			.disposed(by: disposeBag)
+	private func fetchTasks() {
+		Observable.combineLatest(
+			context.service.getMembers().map { $0.map { Member(from: $0) } },
+			context.service.getTasks().map { $0.map { Task(from: $0) } }.map { $0.filter { $0.completed } }
+		)
+		.asDriverOnErrorJustComplete()
+		.drive(familyTasksBinder)
+		.disposed(by: disposeBag)
 	}
 	
 	private func rankingPositions() -> Driver<[RankingPosition]> {
@@ -78,5 +75,19 @@ final class RankingPresenter: RankingPresenting {
 		}
 		
 		return membersPositions
+	}
+	
+	private var familyTasksBinder: Binder<([Member], [Task])> {
+		Binder(self) { presenter, items in
+			let (members, tasks) = items
+			let membersIds = members.map { $0.id }
+			var familyTasks = [Task]()
+			for task in tasks {
+				if membersIds.contains(task.assignedMemberId) {
+					familyTasks.append(task)
+				}
+			}
+			presenter.fetchedCompletedTasksSubject.onNext(familyTasks)
+		}
 	}
 }

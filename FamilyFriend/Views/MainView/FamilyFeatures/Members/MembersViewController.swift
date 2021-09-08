@@ -80,6 +80,8 @@ final class MembersViewController: UIViewController {
 	private func setupNavigationBar() {
 		navigationItem.title = "Members"
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 

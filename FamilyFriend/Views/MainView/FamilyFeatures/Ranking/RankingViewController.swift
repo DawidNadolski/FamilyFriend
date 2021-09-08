@@ -72,6 +72,8 @@ final class RankingViewController: UIViewController {
 	private func setupNavigationBar() {
 		navigationItem.title = "Ranking"
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 

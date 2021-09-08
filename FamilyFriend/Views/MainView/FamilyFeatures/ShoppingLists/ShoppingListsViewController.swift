@@ -11,6 +11,7 @@ import RxCocoa
 final class ShoppingListsViewController: UIViewController {
 		
 	private let presenter: ShoppingListsPresenting
+	private weak var addedList: BehaviorSubject<ShoppingList?>!
 	
 	private let tableView = UITableView()
 	private let addListBarButton = UIBarButtonItem(systemItem: .add)
@@ -21,8 +22,9 @@ final class ShoppingListsViewController: UIViewController {
 	
 	private var lists: [ShoppingList] = []
 	
-	init(presenter: ShoppingListsPresenting) {
+	init(presenter: ShoppingListsPresenting, addedList: BehaviorSubject<ShoppingList?>) {
 		self.presenter = presenter
+		self.addedList = addedList
 		super.init(nibName: nil, bundle: nil)
 		
 		setupUI()
@@ -53,9 +55,10 @@ final class ShoppingListsViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = ShoppingListsPresentingInput(
+			addListPressed: addListBarButton.rx.tap,
 			listSelected: ControlEvent(events: selectedList),
 			listDeleted: ControlEvent(events: deletedList),
-			addListPressed: addListBarButton.rx.tap
+			listAdded: ControlEvent(events: addedList)
 		)
 		
 		let output = presenter.transform(input: input)
@@ -84,6 +87,8 @@ final class ShoppingListsViewController: UIViewController {
 		navigationItem.title = "Lists"
 		navigationItem.rightBarButtonItem = addListBarButton
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 

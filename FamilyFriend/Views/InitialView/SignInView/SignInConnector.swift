@@ -17,11 +17,13 @@ protocol SignInViewRoutes {
 final class SignInConnector: SignInConnecting {
 	
 	private let service: FamilyFriendAPI
+	private let rootRoutes: RootRoutes
 	
 	private weak var signInViewController: SignInViewController!
 	
-	init(service: FamilyFriendAPI = FamilyFriendService()) {
+	init(service: FamilyFriendAPI = FamilyFriendService(), rootRoutes: RootRoutes) {
 		self.service = service
+		self.rootRoutes = rootRoutes
 	}
 	
 	func connect() -> UIViewController {
@@ -50,14 +52,15 @@ extension SignInConnector: SignInViewRoutes {
 	
 	var toSetupFamily: Binder<UserSession> {
 		Binder(self) { connector, session in
-			let setupFamilyConnector = SetupFamilyConnector(session: session)
+			let setupFamilyConnector = SetupFamilyConnector(session: session, rootRoutes: connector.rootRoutes)
 			connector.push(viewController: setupFamilyConnector.connect())
 		}
 	}
 	
 	var toMainView: Binder<(Family, Member)> {
 		Binder(self) { connector, familyData in
-			
+			let (family, member) = familyData
+			connector.rootRoutes.onFinishConfiguringFamily.onNext((family, member))
 		}
 	}
 }

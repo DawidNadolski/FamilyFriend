@@ -16,10 +16,22 @@ protocol MembersViewRoutes: Connecting {
 
 final class MembersConnector: MembersViewConnecting {
 	
+	private let family: Family
+	
 	private weak var membersViewController: MembersViewController!
 	
+	init(family: Family) {
+		self.family = family
+	}
+	
 	func connect() -> UIViewController {
-		let presenter = MembersPresenter(context: .init(membersViewRoutes: self, service: FamilyFriendService()))
+		let presenter = MembersPresenter(
+			context: .init(
+				membersViewRoutes: self,
+				service: FamilyFriendService(),
+				family: family
+			)
+		)
 		let viewController = MembersViewController(presenter: presenter)
 		membersViewController = viewController
 		

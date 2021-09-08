@@ -12,28 +12,10 @@ final class MemberDetailsViewController: UIViewController {
 	private let presenter: MemberDetailsPresenting
 	private let member: Member
 	
-	private let containerView = TileView()
 	private let tableView = UITableView()
 	private let disposeBag = DisposeBag()
 	
 	private var memberActiveTasks = [Task]()
-	
-	private let avatarImageView: UIImageView = {
-		let imageView = UIImageView()
-		imageView.backgroundColor = Assets.Colors.backgroundCool.color
-		imageView.layer.cornerRadius = 12.0
-		imageView.image = UIImage(systemName: "photo")
-		imageView.tintColor = Assets.Colors.backgroundWarm.color
-		return imageView
-	}()
-	
-	private let joinedDateLabel: UILabel = {
-		let label = UILabel()
-		label.textColor = Assets.Colors.textPrimary.color
-		label.font = FontFamily.SFProText.regular.font(size: 10.0)
-		label.text = "Joined on 24th April 2021"
-		return label
-	}()
 	
 	init(presenter: MemberDetailsPresenting, member: Member) {
 		self.presenter = presenter
@@ -57,30 +39,9 @@ final class MemberDetailsViewController: UIViewController {
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
-		view.addSubview(containerView)
-		containerView.backgroundColor = .white
-		containerView.snp.makeConstraints { make in
-			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16.0)
-			make.left.right.equalToSuperview().inset(16.0)
-		}
-		
-		containerView.addSubview(avatarImageView)
-		avatarImageView.snp.makeConstraints { make in
-			make.top.equalToSuperview().offset(8.0)
-			make.size.equalTo(94.0)
-			make.centerX.equalToSuperview()
-		}
-		
-		containerView.addSubview(joinedDateLabel)
-		joinedDateLabel.snp.makeConstraints { make in
-			make.top.equalTo(avatarImageView.snp.bottom).offset(4.0)
-			make.centerX.equalToSuperview()
-			make.bottom.equalToSuperview().inset(16.0)
-		}
-		
 		view.addSubview(tableView)
 		tableView.snp.makeConstraints { make in
-			make.top.equalTo(containerView.snp.bottom).offset(20.0)
+			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8.0)
 			make.left.bottom.right.equalToSuperview()
 		}
 	}
@@ -106,6 +67,9 @@ final class MemberDetailsViewController: UIViewController {
 	
 	private func setupNavigationBar() {
 		navigationItem.title = member.name
+		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 

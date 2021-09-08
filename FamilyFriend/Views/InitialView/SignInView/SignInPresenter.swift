@@ -87,32 +87,65 @@ final class SignInPresenter: SignInPresenting {
 						
 			let credentials = UserCredentials(username: username, password: password)
 			
-			// TODO: Resolve logging in
-//			presenter.context.service
-//				.signUp(with: credentials) { [weak self] result in
-//					switch result {
-//					case .success(let session):
-//						self?.isFetchingDataSubject.onNext(false)
-//						self?.signIn(with: session)
-//					case .failure(let error):
-//						self?.isFetchingDataSubject.onNext(false)
-//						self?.errorSubject.onNext(error)
-//					}
-//				}
-			
-			presenter.signIn(with: UserSession(token: "", user: User(username: "", id: UUID(), updatedAt: "", createdAt: "")))
-		}
+			presenter.isFetchingDataSubject.onNext(true)
+			presenter.context.service
+				.signIn(with: credentials) { [weak self] result in
+					switch result {
+					case .success(let session):
+						self?.isFetchingDataSubject.onNext(false)
+						DispatchQueue.main.async {
+							self?.signIn(with: session)
+						}
+					case .failure(let error):
+						self?.isFetchingDataSubject.onNext(false)
+						self?.errorSubject.onNext(error)
+					}
+				}
+			}
 	}
 	
 	private func signIn(with session: UserSession) {
-		// TODO: Check whether member with user ID exists and go to setup or main view
-		
-		let memberExist = false
-		
-		if memberExist {
-			context.signInViewRoutes.toMainView
-		} else {
+		context.service.getMembers()
+			.asDriverOnErrorJustComplete()
+			.map { $0.map { Member(from: $0) } }
+			.drive { [weak self] fetchedMembers in
+				var foundMember: Member? = nil
+				for member in fetchedMembers {
+					if member.id == session.user.id {
+						foundMember = member
+						break
+					}
+				}
+				self?.handleUserMembership(member: foundMember, in: session)
+			}
+			.disposed(by: disposeBag)
+	}
+	
+	private func handleUserMembership(member: Member?, in session: UserSession) {
+		guard let member = member else {
 			context.signInViewRoutes.toSetupFamily.onNext(session)
+			return
 		}
+		
+		findFamily(for: member)
+			.compactMap { $0 }
+			.drive { [context] family in
+				context.signInViewRoutes.toMainView.onNext((family, member))
+			}
+			.disposed(by: disposeBag)
+	}
+	
+	private func findFamily(for member: Member) -> Driver<Family?> {
+		context.service.getFamilies()
+			.asDriverOnErrorJustComplete()
+			.map { fetchedFamilies in
+				var foundFamily: Family? = nil
+				for family in fetchedFamilies {
+					if family.id == member.familyId {
+						foundFamily = family
+					}
+				}
+				return foundFamily
+			}
 	}
 }

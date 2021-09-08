@@ -31,6 +31,7 @@ final class AddTaskPresenter: AddTaskPresenting {
 		let onAddTask: Binder<Task>
 		let onCancel: Binder<Void>
 		let service: FamilyFriendAPI
+		let family: Family
 	}
 	
 	private let context: Context
@@ -91,6 +92,8 @@ final class AddTaskPresenter: AddTaskPresenting {
 	private func fetchData() {
 		context.service
 			.getMembers()
+			.map { [context] in $0.filter { $0.family.id == context.family.id } }
+			.map { $0.map { Member(from: $0) } }
 			.asDriverOnErrorJustComplete()
 			.drive(fetchedMembersSubject)
 			.disposed(by: disposeBag)
