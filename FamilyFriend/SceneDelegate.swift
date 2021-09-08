@@ -22,11 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func showRootView(window: UIWindow?) {
 		guard let window = window else { return }
 		
-		// TODO: Move this to factory
-		let rootConnector = RootConnector(context: .init())
-		let rootViewController = UINavigationController(rootViewController: rootConnector.connect())
+		let rootConnector = RootConnector(window: window)
 				
-		window.rootViewController = rootViewController
+		window.rootViewController = rootConnector.connect()
 		window.makeKeyAndVisible()
 	}
 }

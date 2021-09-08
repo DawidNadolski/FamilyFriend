@@ -43,10 +43,51 @@ final class TaskCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func update(with task: Task, for member: Member? = nil) {
+	func update(with task: Task, isTaskAssignedToYou: Bool) {
 		nameLabel.text = task.name
-		assigneeLabel.text = member != nil ? member!.name : ""
+		assigneeLabel.text = task.assignedMemberName
 		xpPointsLabel.text = "\(task.xpPoints) XP"
+		
+		
+		if isTaskAssignedToYou {
+			markTaskAsYours(task)
+		}
+		
+		if task.completed {
+			markTaskAsCompleted(task)
+		}
+	}
+	
+	private func markTaskAsYours(_ task: Task) {
+		assigneeLabel.textColor = Assets.Colors.action.color
+	}
+	
+	private func markTaskAsCompleted(_ task: Task) {
+		let strikeWidth = 1.5
+		
+		let attributedNameText = NSMutableAttributedString(string: "\(task.name)")
+		attributedNameText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: strikeWidth,
+			range: NSMakeRange(0, attributedNameText.length)
+		)
+		nameLabel.attributedText = attributedNameText
+		
+		let attributedXpPointsText = NSMutableAttributedString(string: "\(task.xpPoints) XP")
+		attributedXpPointsText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: strikeWidth,
+			range: NSMakeRange(0, attributedXpPointsText.length)
+		)
+		xpPointsLabel.attributedText = attributedXpPointsText
+		
+		let attributedAssigneeText = NSMutableAttributedString(string: "\(task.assignedMemberName)")
+		attributedAssigneeText.addAttribute(
+			NSAttributedString.Key.strikethroughStyle,
+			value: strikeWidth,
+			range: NSMakeRange(0, attributedAssigneeText.length)
+		)
+		assigneeLabel.attributedText = attributedAssigneeText
 	}
 	
 	private func setupUI() {

@@ -5,25 +5,26 @@
 //  Created by Dawid Nadolski on 11/07/2021.
 //
 
+import RxSwift
 import RxCocoa
 
 final class ShoppingListsViewController: UIViewController {
-	
-	// TODO: Get rid of mock data
-	private let lists: [ShoppingList] = [
-		.init(name: "Groceries"),
-		.init(name: "Clothings"),
-		.init(name: "Fruits")
-	]
+		
+	private let presenter: ShoppingListsPresenting
+	private weak var addedList: BehaviorSubject<ShoppingList?>!
 	
 	private let tableView = UITableView()
-	private let selectedList = BehaviorRelay<ShoppingList?>(value: nil)
 	private let addListBarButton = UIBarButtonItem(systemItem: .add)
+	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+	private let selectedList = BehaviorSubject<ShoppingList?>(value: nil)
+	private let deletedList = BehaviorSubject<ShoppingList?>(value: nil)
+	private let disposeBag = DisposeBag()
 	
-	private let presenter: ShoppingListsPresenting
+	private var lists: [ShoppingList] = []
 	
-	init(presenter: ShoppingListsPresenting) {
+	init(presenter: ShoppingListsPresenting, addedList: BehaviorSubject<ShoppingList?>) {
 		self.presenter = presenter
+		self.addedList = addedList
 		super.init(nibName: nil, bundle: nil)
 		
 		setupUI()
@@ -42,6 +43,9 @@ final class ShoppingListsViewController: UIViewController {
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
+		view.addSubview(activityIndicatorView)
+		activityIndicatorView.center = view.center
+		
 		view.addSubview(tableView)
 		tableView.snp.makeConstraints { make in
 			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8.0)
@@ -51,11 +55,24 @@ final class ShoppingListsViewController: UIViewController {
 	
 	private func setupBindings() {
 		let input = ShoppingListsPresentingInput(
+			addListPressed: addListBarButton.rx.tap,
 			listSelected: ControlEvent(events: selectedList),
-			addListPressed: addListBarButton.rx.tap
+			listDeleted: ControlEvent(events: deletedList),
+			listAdded: ControlEvent(events: addedList)
 		)
 		
-		presenter.transform(input: input)
+		let output = presenter.transform(input: input)
+		
+		output.fetchedLists
+			.drive { [weak self, tableView] fetchedLists in
+				self?.lists = fetchedLists
+				tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
+
+		output.isFetchingData
+			.drive(activityIndicatorView.rx.isAnimating)
+			.disposed(by: disposeBag)
 	}
 	
 	private func setupTableView() {
@@ -67,9 +84,11 @@ final class ShoppingListsViewController: UIViewController {
 	}
 	
 	private func setupNavigationBar() {
-		navigationItem.title = "Shopping lists"
+		navigationItem.title = "Lists"
 		navigationItem.rightBarButtonItem = addListBarButton
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 
@@ -90,6 +109,14 @@ extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSourc
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let list = lists[indexPath.row]
-		selectedList.accept(list)
+		selectedList.onNext(list)
+	}
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			let removedList = lists.remove(at: indexPath.row)
+			deletedList.onNext(removedList)
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
 	}
 }

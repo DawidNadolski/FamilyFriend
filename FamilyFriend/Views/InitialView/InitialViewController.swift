@@ -23,7 +23,7 @@ final class InitialViewController: UIViewController {
 
 	private let secondaryTextLabel: UILabel = {
 		let label = UILabel()
-		label.text = "This text will be replaced with some secondary text with encouraging to login or signup"
+		label.text = "Manage your family chores in a fun way and compete with other members by completing custom tasks"
 		label.textColor = Assets.Colors.textSecondary.color
 		label.textAlignment = .center
 		label.numberOfLines = 0
@@ -32,14 +32,14 @@ final class InitialViewController: UIViewController {
 	}()
 	
 	private let signInButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedPrimaryButton()
 		button.setTitle("Sign in", for: .normal)
 		button.backgroundColor = Assets.Colors.action.color
 		return button
 	}()
 	
 	private let signUpButton: UIButton = {
-		let button = makeRoundedButton()
+		let button = makeRoundedSecondaryButton()
 		button.setTitle("Sign up", for: .normal)
 		button.setTitleColor(Assets.Colors.action.color, for: .normal)
 		button.backgroundColor = Assets.Colors.backgroundInteractive.color
@@ -76,7 +76,7 @@ final class InitialViewController: UIViewController {
 		view.addSubview(secondaryTextLabel)
 		secondaryTextLabel.snp.makeConstraints { make in
 			make.top.equalTo(titleLabel.snp.bottom).offset(24.0)
-			make.left.right.equalToSuperview().inset(60.0)
+			make.left.right.equalToSuperview().inset(48.0)
 		}
 
 		view.addSubview(signInButton)

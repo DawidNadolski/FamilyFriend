@@ -8,23 +8,21 @@
 import UIKit
 
 final class TileView: UIView {
-	
-	init() {
+
+	init(backgroundColor: UIColor = UIColor.white, cornerRadius: CGFloat = 16.0) {
 		super.init(frame: .zero)
-		setupUI()
+		setupUI(backgroundColor: backgroundColor, cornerRadius: cornerRadius)
 	}
-	
+
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
-	private func setupUI() {
+
+	private func setupUI(backgroundColor: UIColor, cornerRadius: CGFloat) {
 		clipsToBounds = true
-		layer.cornerRadius = 16.0
-		layer.backgroundColor = UIColor.white.cgColor
-		layer.shadowRadius = 5.0
-		layer.shadowOffset = CGSize(width: 0.0, height: 4.0)
-		layer.shadowColor = Assets.Colors.textPrimary.color.cgColor
-		layer.shadowOpacity = 0.05
+		layer.cornerRadius = cornerRadius
+		layer.backgroundColor = backgroundColor.cgColor
+		layer.applyShadow(alpha: 0.05, y: 4.0, blur: 20.0)
 	}
 }
+

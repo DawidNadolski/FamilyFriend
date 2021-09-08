@@ -50,7 +50,8 @@ final class FeatureTileView: UIView {
 		let label = UILabel()
 		label.text = secondaryText
 		label.textColor = Assets.Colors.textSecondary.color
-		label.font = FontFamily.SFProText.regular.font(size: 13.0)
+		label.font = FontFamily.SFProText.regular.font(size: 12.0)
+		label.numberOfLines = 0
 		return label
 	}()
 	
@@ -86,7 +87,7 @@ final class FeatureTileView: UIView {
 		addSubview(primaryTextLabel)
 		primaryTextLabel.snp.makeConstraints { make in
 			make.top.equalToSuperview().offset(12.0)
-			make.left.equalTo(imageView.snp.right).offset(8.0)
+			make.left.equalTo(imageView.snp.right).offset(12.0)
 			make.right.equalToSuperview().inset(8.0)
 		}
 		
@@ -106,7 +107,7 @@ extension FeatureTileView {
 			case .ranking:
 				return UIImage(systemName: "list.number")
 			case .members:
-				return UIImage(systemName: "person")
+				return UIImage(systemName: "person.3")
 			case .tasks:
 				return UIImage(systemName: "checkmark.circle")
 			case .shoppingList:
@@ -130,13 +131,13 @@ extension FeatureTileView {
 	private func getSecondaryText(for feature: FamilyFeature) -> String {
 		switch feature {
 			case .ranking:
-				return "Secondary text"
+				return "Complete tasks to gain points and shiny up the family ranking"
 			case .members:
-				return "Secondary text"
+				return "See members of your family and their detailed information"
 			case .tasks:
-				return "Secondary text"
+				return "Create and explore tasks for you and other members"
 			case .shoppingList:
-				return "Secondary text"
+				return "Create shared shopping lists to make sure everything is in stock"
 		}
 	}
 }

@@ -22,4 +22,18 @@ extension UINavigationBarAppearance {
 		
 		return appearance
 	}
+	
+	static var standard: UINavigationBarAppearance {
+		let appearance = UINavigationBarAppearance()
+		let textAttributes: [NSAttributedString.Key: Any] = [
+			.foregroundColor: Assets.Colors.textPrimary.color,
+			.font: FontFamily.SFProText.bold.font(size: 17.0)
+		]
+		
+		appearance.configureWithOpaqueBackground()
+		appearance.backgroundColor = .white
+		appearance.titleTextAttributes = textAttributes
+		
+		return appearance
+	}
 }

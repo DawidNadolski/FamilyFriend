@@ -44,7 +44,7 @@ final class ComponentCell: UITableViewCell {
 		
 		containerView.addSubview(nameLabel)
 		nameLabel.snp.makeConstraints { make in
-			make.left.right.equalToSuperview().inset(8.0)
+			make.left.right.equalToSuperview().inset(12.0)
 			make.centerY.equalToSuperview()
 		}
 	}

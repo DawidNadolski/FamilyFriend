@@ -5,24 +5,19 @@
 //  Created by Dawid Nadolski on 11/07/2021.
 //
 
-import UIKit
+import RxSwift
 import RxCocoa
 
 final class MembersViewController: UIViewController {
-		
-	// TODO: Get rid of mock data
-	private let members: [Member] = [
-		.init(id: 1, name: "Dawid Nadolski", avatarURL: nil),
-		.init(id: 2, name: "Mateusz Nadolski", avatarURL: nil),
-		.init(id: 3, name: "Grażyna Nadolska", avatarURL: nil),
-		.init(id: 4, name: "Grzegorz Nadolski", avatarURL: nil),
-		.init(id: 5, name: "Agata Nadolska", avatarURL: nil)
-	]
-	
-	private let tableView = UITableView()
-	private let selectedMember = BehaviorRelay<Member?>(value: nil)
 	
 	private let presenter: MembersPresenting
+	
+	private let tableView = UITableView()
+	private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+	private let selectedMember = BehaviorRelay<Member?>(value: nil)
+	private let disposeBag = DisposeBag()
+		
+	private var members = [Member]()
 	
 	init(presenter: MembersPresenting) {
 		self.presenter = presenter
@@ -44,6 +39,9 @@ final class MembersViewController: UIViewController {
 	private func setupUI() {
 		view.backgroundColor = Assets.Colors.backgroundWarm.color
 		
+		view.addSubview(activityIndicatorView)
+		activityIndicatorView.center = view.center
+		
 		view.addSubview(tableView)
 		tableView.snp.makeConstraints { make in
 			make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8.0)
@@ -56,7 +54,19 @@ final class MembersViewController: UIViewController {
 			memberSelected: ControlEvent(events: selectedMember)
 		)
 		
-		presenter.transform(input: input)
+		let output = presenter.transform(input: input)
+		
+		output.fetchedMembers
+			.drive { [weak self] fetchedMembers in
+				self?.members = fetchedMembers
+				self?.tableView.reloadData()
+			}
+			.disposed(by: disposeBag)
+		
+		output.isFetchingData
+			.drive(activityIndicatorView.rx.isAnimating)
+			.disposed(by: disposeBag)
+
 	}
 	
 	private func setupTableView() {
@@ -70,6 +80,8 @@ final class MembersViewController: UIViewController {
 	private func setupNavigationBar() {
 		navigationItem.title = "Members"
 		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.standardAppearance = .standard
+		navigationController?.navigationBar.tintColor = Assets.Colors.action.color.withAlphaComponent(0.7)
 	}
 }
 
