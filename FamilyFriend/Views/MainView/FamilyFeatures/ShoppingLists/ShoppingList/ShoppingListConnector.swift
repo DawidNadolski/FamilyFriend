@@ -21,6 +21,8 @@ final class ShoppingListConnector: ShoppingListConnecting {
 	
 	private weak var shoppingListViewController: ShoppingListViewController!
 	
+	private let addedComponentSubject = BehaviorSubject<ShoppingListComponent?>(value: nil)
+	
 	init(shoppingList: ShoppingList, service: FamilyFriendAPI) {
 		self.shoppingList = shoppingList
 		self.service = service
@@ -34,7 +36,11 @@ final class ShoppingListConnector: ShoppingListConnecting {
 				service: service
 			)
 		)
-		let shoppingListViewController = ShoppingListViewController(presenter: presenter, shoppingList: shoppingList)
+		let shoppingListViewController = ShoppingListViewController(
+			presenter: presenter,
+			shoppingList: shoppingList,
+			addedComponent: addedComponentSubject
+		)
 		self.shoppingListViewController = shoppingListViewController
 		return shoppingListViewController
 	}
@@ -63,6 +69,7 @@ extension ShoppingListConnector: ShoppingListViewRoutes {
 			
 			let onYes: Binder<String> = Binder(connector) { connector, componentName in
 				let component = ShoppingListComponent(id: UUID(), listId: connector.shoppingList.id, name: componentName)
+				connector.addedComponentSubject.onNext(component)
 				connector.service.saveShoppingListComponent(component)
 				connector.shoppingListViewController.dismiss(animated: true)
 			}

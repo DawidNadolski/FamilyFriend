@@ -25,10 +25,15 @@ struct JoinFamilyPresenterOutput {
 	let occurredError: Driver<Error?>
 }
 
+enum JoinFamilyErrors: Error {
+	case familyNotFound
+}
+
 final class JoinFamilyPresenter: JoinFamilyPresenting {
 	
 	struct Context {
 		let service: FamilyFriendAPI
+		let rootRoutes: RootRoutes
 	}
 	
 	private let context: Context
@@ -80,10 +85,34 @@ final class JoinFamilyPresenter: JoinFamilyPresenting {
 	
 	private var joinFamilyBinder: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			let (memberName, familyId, password) = credentials
+			let (memberName, familyIdText, password) = credentials
+			guard let familyId = UUID(uuidString: familyIdText) else {
+				fatalError("Couldn't recreate family ID")
+			}
+			let member = Member(id: UUID(), familyId: familyId, name: memberName)
+
 			
 			presenter.isFetchingDataSubject.onNext(true)
-			// TODO: Check whether family exists and either show alert or go to mainview
+			presenter.context.service.getFamilies()
+				.asDriverOnErrorJustComplete()
+				.map { fetchedFamilies -> Family? in
+					var correctFamily: Family? = nil
+					for family in fetchedFamilies {
+						if family.id == familyId && family.password == password {
+							correctFamily = family
+							break
+						}
+					}
+					return correctFamily
+				}
+				.drive { [weak self] family in
+					guard let family = family else {
+						self?.errorSubject.onNext(JoinFamilyErrors.familyNotFound)
+						return
+					}
+					self?.context.rootRoutes.onFinishConfiguringFamily.onNext((family, member))
+				}
+				.disposed(by: presenter.disposeBag)
 		}
 	}
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Family {
+struct Family: Codable, Equatable {
 	let id: UUID
 	let name: String
 	let password: String

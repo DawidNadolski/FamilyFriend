@@ -5,6 +5,7 @@
 //  Created by Dawid Nadolski on 15/08/2021.
 //
 
+import RxSwift
 import RxCocoa
 
 protocol ShoppingListsConnecting: Connecting { }
@@ -17,18 +18,25 @@ protocol ShoppingListsViewRoutes {
 final class ShoppingListsConnector: ShoppingListsConnecting {
 	
 	private let service: FamilyFriendAPI
+	private let family: Family
 	
 	private weak var shoppingListsViewController: ShoppingListsViewController!
 	
-	init(service: FamilyFriendAPI = FamilyFriendService()) {
+	private let addedListSubject = BehaviorSubject<ShoppingList?>(value: nil)
+	
+	init(service: FamilyFriendAPI = FamilyFriendService(), family: Family) {
 		self.service = service
+		self.family = family
 	}
 	
 	func connect() -> UIViewController {
 		let presenter = ShoppingListsPresenter(
-			context: .init(shoppingListsViewRoutes: self, service: service)
+			context: .init(
+				shoppingListsViewRoutes: self,
+				service: service,
+				family: family)
 		)
-		let shoppingListsViewController = ShoppingListsViewController(presenter: presenter)
+		let shoppingListsViewController = ShoppingListsViewController(presenter: presenter, addedList: addedListSubject)
 		self.shoppingListsViewController = shoppingListsViewController
 		return shoppingListsViewController
 	}
@@ -56,7 +64,8 @@ extension ShoppingListsConnector: ShoppingListsViewRoutes {
 			}
 			
 			let onYes: Binder<String> = Binder(connector) { connector, listName in
-				let shoppingList = ShoppingList(id: UUID(), name: listName)
+				let shoppingList = ShoppingList(id: UUID(), familyId: connector.family.id, name: listName)
+				connector.addedListSubject.onNext(shoppingList)
 				connector.service.saveShoppingList(shoppingList)
 				connector.shoppingListsViewController.dismiss(animated: true)
 			}

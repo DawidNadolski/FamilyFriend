@@ -18,16 +18,28 @@ protocol TasksViewRoutes {
 final class TasksConnector: TasksConnecting {
 	
 	private let service: FamilyFriendAPI
+	private let family: Family
+	private let member: Member
 	
 	private weak var tasksViewController: TasksViewController!
 	
-	init(service: FamilyFriendAPI = FamilyFriendService()) {
+	private let addedTaskSubject = BehaviorSubject<Task?>(value: nil)
+	private let completedTaskSubject = BehaviorSubject<Task?>(value: nil)
+	
+	init(service: FamilyFriendAPI = FamilyFriendService(), family: Family, member: Member) {
 		self.service = service
+		self.family = family
+		self.member = member
 	}
 	
 	func connect() -> UIViewController {
-		let presenter = TasksPresenter(context: .init(tasksViewRoutes: self, service: service))
-		let tasksViewController = TasksViewController(presenter: presenter)
+		let presenter = TasksPresenter(context: .init(tasksViewRoutes: self, service: service, member: member, family: family))
+		let tasksViewController = TasksViewController(
+			presenter: presenter,
+			member: member,
+			addedTask: addedTaskSubject,
+			completedTask: completedTaskSubject
+		)
 		self.tasksViewController = tasksViewController
 		return tasksViewController
 	}
@@ -42,6 +54,7 @@ extension TasksConnector: TasksViewRoutes {
 	var toAddTask: Binder<Void> {
 		Binder(self) { connector, _ in
 			let onAddTask: Binder<Task> = Binder(connector) { connector, task in
+				connector.addedTaskSubject.onNext(task)
 				connector.service.saveTask(task)
 				connector.tasksViewController.dismiss(animated: true)
 			}
@@ -54,7 +67,8 @@ extension TasksConnector: TasksViewRoutes {
 				context: .init(
 					onAddTask: onAddTask,
 					onCancel: onCancel,
-					service: FamilyFriendService()
+					service: FamilyFriendService(),
+					family: connector.family
 				)
 			)
 			let viewController = AddTaskViewController(presenter: presenter)
@@ -66,11 +80,13 @@ extension TasksConnector: TasksViewRoutes {
 	
 	var toCompleteTask: Binder<Task?> {
 		Binder(self) { connector, task in
-			guard task != nil else {
+			guard let task = task, !task.completed else {
 				return
 			}
 			
-			let onYes: Binder<Void> = Binder(connector) { connector, task in
+			let onYes: Binder<Void> = Binder(connector) { connector, _ in
+				connector.completedTaskSubject.onNext(task)
+				connector.service.completeTask(task)
 				connector.tasksViewController.dismiss(animated: true)
 			}
 			

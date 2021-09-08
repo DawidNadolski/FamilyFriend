@@ -99,22 +99,19 @@ final class SignUpPresenter: SignUpPresenting {
 						
 			let credentials = UserCredentials(username: username, password: password)
 			
-			// TODO: Resolve signing up
-//			presenter.isFetchingDataSubject.onNext(true)
-//			presenter.context.service
-//				.signUp(with: credentials) { [weak self] result in
-//					switch result {
-//						case .success(let session):
-//							self?.isFetchingDataSubject.onNext(false)
-//							self?.signUp(with: session)
-//						case .failure(let error):
-//							self?.isFetchingDataSubject.onNext(false)
-//							self?.errorSubject.onNext(error)
-//					}
-//				}
-			
-			presenter.signUp(with: UserSession(token: "", user: User(username: "", id: UUID(), updatedAt: "", createdAt: "")))
-		}
+			presenter.isFetchingDataSubject.onNext(true)
+			presenter.context.service
+				.signUp(with: credentials) { [weak self] result in
+					switch result {
+						case .success(let session):
+							self?.isFetchingDataSubject.onNext(false)
+							self?.signUp(with: session)
+						case .failure(let error):
+							self?.isFetchingDataSubject.onNext(false)
+							self?.errorSubject.onNext(error)
+					}
+				}
+			}
 	}
 	
 	private func signUp(with session: UserSession) {

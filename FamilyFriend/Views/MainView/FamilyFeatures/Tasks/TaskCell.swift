@@ -43,14 +43,23 @@ final class TaskCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func update(with task: Task) {
+	func update(with task: Task, isTaskAssignedToYou: Bool) {
 		nameLabel.text = task.name
 		assigneeLabel.text = task.assignedMemberName
 		xpPointsLabel.text = "\(task.xpPoints) XP"
 		
+		
+		if isTaskAssignedToYou {
+			markTaskAsYours(task)
+		}
+		
 		if task.completed {
 			markTaskAsCompleted(task)
 		}
+	}
+	
+	private func markTaskAsYours(_ task: Task) {
+		assigneeLabel.textColor = Assets.Colors.action.color
 	}
 	
 	private func markTaskAsCompleted(_ task: Task) {

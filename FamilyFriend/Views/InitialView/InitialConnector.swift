@@ -16,7 +16,13 @@ protocol InitialViewRoutes {
 
 final class InitialConnector: InitialConnecting {
 	
+	private let rootRoutes: RootRoutes
+	
 	private weak var initialViewController: InitialViewController!
+	
+	init(rootRoutes: RootRoutes) {
+		self.rootRoutes = rootRoutes
+	}
 	
 	func connect() -> UIViewController {
 		let presenter = InitialPresenter(
@@ -41,14 +47,14 @@ extension InitialConnector: InitialViewRoutes {
 	
 	var toSignIn: Binder<Void> {
 		Binder(self) { connector, _ in
-			let signInConnector = SignInConnector()
+			let signInConnector = SignInConnector(rootRoutes: connector.rootRoutes)
 			connector.push(viewController: signInConnector.connect())
 		}
 	}
 	
 	var toSignUp: Binder<Void> {
 		Binder(self) { connector, _ in
-			let signUpConnector = SignUpConnector()
+			let signUpConnector = SignUpConnector(rootRoutes: connector.rootRoutes)
 			connector.push(viewController: signUpConnector.connect())
 		}
 	}

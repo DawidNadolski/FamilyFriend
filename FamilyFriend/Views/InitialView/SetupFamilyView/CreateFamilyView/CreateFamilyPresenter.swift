@@ -28,6 +28,8 @@ final class CreateFamilyPresenter: CreateFamilyPresenting {
 	
 	struct Context {
 		let service: FamilyFriendAPI
+		let session: UserSession
+		let rootRoutes: RootRoutes
 	}
 	
 	private let context: Context
@@ -77,10 +79,14 @@ final class CreateFamilyPresenter: CreateFamilyPresenting {
 	
 	private var createFamilyBinder: Binder<(String, String, String)> {
 		Binder(self) { presenter, credentials in
-			// TODO: Create new family and member and go to main view
 			let (memberName, familyName, password) = credentials
 			let family = Family(id: UUID(), name: familyName, password: password)
-			presenter.isFetchingDataSubject.onNext(true)
+			let member = Member(id: presenter.context.session.user.id, familyId: family.id, name: memberName)
+			
+			presenter.context.service.saveFamily(family)
+			presenter.context.service.saveMember(member)
+						
+			presenter.context.rootRoutes.onFinishConfiguringFamily.onNext((family, member))
 		}
 	}
 }

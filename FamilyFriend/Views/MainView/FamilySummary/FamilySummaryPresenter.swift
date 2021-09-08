@@ -13,14 +13,14 @@ protocol FamilySummaryPresenting {
 }
 
 struct FamilySummaryPresenterInput {
-	let moreButtonTapped: ControlEvent<Void>
 	let settingsButtonTapped: ControlEvent<Void>
+	let memberDetailsButtonTapped: ControlEvent<Void>
 }
 
 final class FamilySummaryPresenter: FamilySummaryPresenting {
 	
 	struct Context {
-		
+		let familySummaryViewRoutes: FamilySummaryViewRoutes
 	}
 	
 	private let context: Context
@@ -31,26 +31,14 @@ final class FamilySummaryPresenter: FamilySummaryPresenting {
 	}
 	
 	func transform(input: FamilySummaryPresenterInput) {
-		input.moreButtonTapped
-			.asDriver()
-			.drive(moreButtonBinder)
-			.disposed(by: disposeBag)
-		
 		input.settingsButtonTapped
 			.asDriver()
-			.drive(settingsButtonBinder)
+			.drive(context.familySummaryViewRoutes.toSettings)
 			.disposed(by: disposeBag)
-	}
-	
-	private var moreButtonBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			print("More button tapped!")
-		}
-	}
-	
-	private var settingsButtonBinder: Binder<Void> {
-		Binder(self) { presenter, _ in
-			print("Settings button tapped!")
-		}
+		
+		input.memberDetailsButtonTapped
+			.asDriver()
+			.drive(context.familySummaryViewRoutes.toMemberDetails)
+			.disposed(by: disposeBag)
 	}
 }

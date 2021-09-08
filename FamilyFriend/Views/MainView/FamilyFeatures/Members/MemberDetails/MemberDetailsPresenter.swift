@@ -55,6 +55,7 @@ final class MemberDetailsPresenter: MemberDetailsPresenting {
 		isFetchingDataSubject.onNext(true)
 		context.service
 			.getTasks()
+			.map { $0.map { Task(from: $0) } }
 			.asDriverOnErrorJustComplete()
 			.drive { [fetchedTasksSubject] fetchedTasks in
 				fetchedTasksSubject.onNext(fetchedTasks)
